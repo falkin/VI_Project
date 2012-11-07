@@ -12,7 +12,7 @@
         // Create the data table.
         var data = new google.visualization.DataTable();
         data.addColumn('string', 'Topping');
-        data.addColumn('number', 'Number of pizza');
+        data.addColumn(' number', 'Number of pizza');
         data.addRows([
           ['Mushrooms', 3],
           ['Onions', 1],
@@ -26,6 +26,8 @@
                        'width':800,
 					    'is3D':true,
                        'height':600};
+                       
+                
 
         // Instantiate and draw our chart, passing in some options.
         var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
