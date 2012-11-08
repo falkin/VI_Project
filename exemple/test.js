@@ -14,7 +14,7 @@
         data.addColumn('string', 'Topping');
         data.addColumn(' number', 'Number of pizza');
         data.addRows([
-          ['Mushrooms', 3],
+          ['Mushrooms', 3 ],
           ['Onions', 1],
           ['Olives', 1],
           ['Zucchini', 1],
