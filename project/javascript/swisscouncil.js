@@ -20,8 +20,6 @@ $(function() {
 		}
 	});
 
-	$('#udclogo').html('<svg version="1.1" width="101.459996" height="64.390004" id="svg2" xml:space="preserve"></svg>');
-
 	var conciller = [{
 		"id" : 1353,
 		"updated" : "2012-11-10T17:42:13Z",
