@@ -7,7 +7,6 @@
 
 		<meta name="description" content="">
 		<meta name="author" content="Valentin Bourqui, Didier Crausaz">
-		<meta name="viewport" content="width=device-width; initial-scale=1.0">
 
 		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
 		<link rel="shortcut icon" href="/favicon.ico">
@@ -25,15 +24,15 @@
 		<!-- Include JVectorMap swiss map data -->
 		<script src="../javascript/lib/jquery-jvectormap-ch-merc-en.js"></script>
 
+		<script type="text/javascript" src="../javascript/date.js"></script>
+		<script type="text/javascript" src="../javascript/CouncilRequest.js"></script>
 		<script type="text/javascript" src="../javascript/swisscouncil.js"></script>
 
 		<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css" />
 		<script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
 		<script>
 			$(function() {
-				$("#check").button();
-				$("#format").buttonset();
-				$("#udclogo").load('../img/UDC_fr_pant_5f.svg');
+
 			});
 		</script>
 	</head>
@@ -52,6 +51,26 @@
 			</nav>
 
 			<div>
+				<div id="choice">
+					<label>Councils</label>
+					<input type = "checkbox"
+					id = "BR"
+					value = "small"
+					checked = "checked"/>
+					<label for = "sizeSmall">Federal Council</label>
+
+					<input type = "checkbox"
+					id = "CN"
+					value = "medium"
+					checked = "checked"/>
+					<label for = "sizeMed">National Council</label>
+
+					<input type = "checkbox"
+					id = "CE"
+					value = "large"
+					checked = "checked"/>
+					<label for = "sizeLarge">Council of States</label>
+				</div>
 				<div id="map">
 
 				</div>
