@@ -35,26 +35,52 @@
 				$("#format").buttonset();
 				$("#udclogo").load('../img/UDC_fr_pant_5f.svg');
 			});
+			
+jQuery.fn.resizehandle = function() {
+  return this.each(function() {
+    var me = jQuery(this);
+    me.after(
+      jQuery('<div class="resizehandle"></div>')
+      .bind('mousedown', function(e) {
+        var h = me.height();
+        var y = e.clientY;
+        var moveHandler = function(e) {
+          me
+          .height(Math.max(20,   e.clientY+h-y ));
+        };
+        var upHandler = function(e) {
+          jQuery('html')
+          .unbind('mousemove',moveHandler)
+          .unbind('mouseup',upHandler);
+        };
+        jQuery('html')
+        .bind('mousemove', moveHandler)
+        .bind('mouseup', upHandler);
+      })
+    );
+  });
+}
+
+
+$(document).ready(function(){
+  $("#map")
+  .resizehandle();
+});
 		</script>
 	</head>
 	<body>
 		<div>
 			<header>
-				<h1>index</h1>
+				<h1>Map</h1>
 			</header>
-			<nav>
-				<p>
-					<a href="/">Home</a>
-				</p>
-				<p>
-					<a href="/contact">Contact</a>
-				</p>
-			</nav>
+		
 
 			<div>
+				
 				<div id="map">
 
 				</div>
+				
 			</div>
 			<div id="format">
 				<input type="checkbox" id="check1" />
