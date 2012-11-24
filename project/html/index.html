@@ -7,8 +7,7 @@
 
 		<meta name="description" content="">
 		<meta name="author" content="Valentin Bourqui, Didier Crausaz">
-		<meta name="viewport" content="width=device-width; initial-scale=1.0">
-
+		<link href='http://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
 		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
 		<link rel="shortcut icon" href="/favicon.ico">
 		<link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -17,6 +16,7 @@
 		<link rel="stylesheet" href="../style/css/jquery-jvectormap-1.1.1.css" type="text/css" media="screen"/>
 
 		<link rel="stylesheet" href="../style/css/general.css" type="text/css" media="screen"/>
+	    <script src="../javascript/general/infoBulle.js"></script>
 
 		<!-- Include jQuery library -->
 		<script type="text/javascript" src="../javascript/lib/jquery-1.8.2.min.js"></script>
@@ -25,37 +25,51 @@
 		<!-- Include JVectorMap swiss map data -->
 		<script src="../javascript/lib/jquery-jvectormap-ch-merc-en.js"></script>
 
+		<script type="text/javascript" src="../javascript/date.js"></script>
+		<script type="text/javascript" src="../javascript/CouncilRequest.js"></script>
 		<script type="text/javascript" src="../javascript/swisscouncil.js"></script>
 
 		<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css" />
 		<script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
 		<script>
-			$(function() {
-				$("#check").button();
-				$("#format").buttonset();
-				$("#udclogo").load('../img/UDC_fr_pant_5f.svg');
-			});
-			
+
 jQuery.fn.resizehandle = function() {
   return this.each(function() {
     var me = jQuery(this);
     me.after(
-      jQuery('<div class="resizehandle"></div>')
-      .bind('mousedown', function(e) {
-        var h = me.height();
-        var y = e.clientY;
+       jQuery('<div class="resize"><div class="resizehandle"><div class="bt_resize" onmouseover="tooltip.show(\'Double clique \', 90);" onmouseout="tooltip.hide();"></div></div></div>')
+      .bind('dblclick', function(e) {
+        var h = me.width();
+        var y = e.clientX+20;
+      
+        var bigSize = e.clientX+h-y;
+        var initScale = $(".jvectormap-container").children("svg").children("g").attr("transform");
+        initScale = initScale.substring(6,11);
+      
         var moveHandler = function(e) {
-          me
-          .height(Math.max(20,   e.clientY+h-y ));
+          me.width(Math.max(400,   e.clientX+h-y ));
+
+                    
+          $(".jvectormap-container").children("svg").width(Math.max(20,   e.clientX+h-y ));
+          $(".resize").css("marginLeft",Math.max(20,   e.clientX+h-y ));
+          var a = $(".jvectormap-container").children("svg").children("g").attr("transform");
+          var b = a;
+		  a = a.substring(6,a.search("tran")-2);
+		  var newValue =  ((e.clientX+h-(y+40))/bigSize)*initScale;
+		  var b=b.replace(a,newValue); 
+		   $(".jvectormap-container").children("svg").children("g").attr("transform",b);
+      	  
         };
         var upHandler = function(e) {
           jQuery('html')
-          .unbind('mousemove',moveHandler)
-          .unbind('mouseup',upHandler);
+          .unbind('mouseup',upHandler)
+          .unbind('mousemove', moveHandler);
+          
         };
-        jQuery('html')
-        .bind('mousemove', moveHandler)
-        .bind('mouseup', upHandler);
+         jQuery('html').bind('mouseup',upHandler);
+         jQuery('html').bind('mousemove', moveHandler);
+        
+       
       })
     );
   });
@@ -63,34 +77,57 @@ jQuery.fn.resizehandle = function() {
 
 
 $(document).ready(function(){
-  $("#map")
-  .resizehandle();
+
+  $("#map").resizehandle();
+  $(".content").css("line-height","500px");
 });
 		</script>
 	</head>
 	<body>
-		<div>
-			<header>
-				<h1>Map</h1>
-			</header>
-		
-
-			<div>
-				
-				<div id="map">
-
+		<div class="innerBoder">
+			
+				<div>
+					<div id="choice">
+						
+						<label>Councils</label>
+						<input type="checkbox"
+						id = "BR"
+						value = "small"
+						checked = "checked"/>
+						<label for = "sizeSmall">Federal Council</label>
+	
+						<input type="checkbox"
+						id="CN"
+						value="medium"
+						checked="checked"/>
+						<label for = "sizeMed">National Council</label>
+	
+						<input type="checkbox"
+						id="CE"
+						value = "large"
+						checked = "checked"/>
+						<label for = "sizeLarge">Council of States</label>
+					</div>
+	            </div>
+	            <div class="content">
+					<div id="map"></div>
+					
 				</div>
-				
+			
+			
+
+
+			<div id="footer">
+			   <div class="footerBack">
+			   	
+			   <div class="footerInner">
+					<span class="bar">Le parlement et son histoire </span> 
+					<span class="bar">&copy; All rights reserved </span> 
+					<span class="bar">Par Valentin Bourqui et Didier Crausaz</span>
+					
+					<span class="barSpace">VI Project 2012</span>
+				</div>
 			</div>
-			<div id="format">
-				<input type="checkbox" id="check1" />
-				<label id="udclogo" for="check1"></label>
-			</div>
-			<footer>
-				<p>
-					&copy; All rights reserved
-				</p>
-			</footer>
 		</div>
 	</body>
 </html>
