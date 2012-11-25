@@ -51,6 +51,7 @@ body {
  margin:0px;
  padding:0px;
  height:-moz-calc(100% - 12px);
+ height:-webkit-calc(100% - 12px);
 }
 html{
   width: 100%;
@@ -68,8 +69,10 @@ html{
 	margin: 6px;
 	padding-left:50px;
 	padding-right:50px;
-	
+	max-height:-moz-calc(100% - 42px);
     height:-moz-calc(100% - 42px);
+    max-height:-webkit-calc(100% - 42px);
+    height:-webkit-calc(100% - 42px);
 }
 .bar {
 	background-image:url(../../img/lineBar.png);
@@ -86,21 +89,36 @@ html{
   
 }
 
+#header{
+	 background-image:url(../../img/backHeader.png);
+     background-repeat: repeat-x;
+     background-position:bottom;
+
+	 height				: 300px;
+	 text-align: center;	
+}
+.headerBack{
+	background-image:url(../../img/background.png);
+    background-repeat: repeat;
+    margin-bottom:10px;
+}
 #footer {
 	 background-image:url(../../img/backFooter.png);
      background-repeat: repeat-x;
 	 position			: fixed;
-	 bottom				: 6px;
-	 left				: 6px;
-	 right				: 6px;
-	 height				: 40px;
+	 bottom				: 0px;
+	 left				: 0px;
+	 right				: 0px;
+	 height				: 31px;
+	 border-bottom: 6px #353535 solid;
+	 border-left: 6px #353535 solid;
+	 border-right: 6px #353535 solid;
 	 text-align: center;
 }
 .footerBack{
 	background-image:url(../../img/background.png);
     background-repeat: repeat;
-    height:25px;
-    margin-top:15px;
+    margin-top:10px;
 }
 .footerInner{
 	text-align: center;
@@ -109,12 +127,14 @@ html{
 	margin-left:auto;
 	margin-right:auto;
 	font-size:10px;
-	padding-top:12px;
+	margin-top:3px;
+	padding-bottom:2px;
 	font-family: "Arimo",arial;	
 }
 
 .resize {
 	  height:-moz-calc(100% - 100px);
+	  height:-webkit-calc(100% - 100px);
 	  margin-left:60%;
 	  width:7%;
 	  background: transparent;
@@ -155,11 +175,32 @@ html{
    
 }
 
+.btCover{
+	width: 29px;
+	height: 5px;
+    background-image:url(../../img/btcover.png);
+    background-repeat:no-repeat;	
+    text-align: center;
+		margin-left:auto;
+	margin-right:auto;
+	cursor: pointer;
+}
 
+.btCover_header{
+	width: 29px;
+	height: 5px;
+    background-image:url(../../img/btcover.png);
+    background-repeat:no-repeat;	
+    text-align: center;
+		margin-left:auto;
+	margin-right:auto;
+	cursor: pointer;	
+}
 #tt {
  position:absolute;
  display:block;
  padding-bottom:10px;
+ text-align: center;
  }
  #tttop {
  display:block;
@@ -170,7 +211,7 @@ html{
  }
  #ttcont {
  display:block;
- padding:5px 5px 7px 7px;
+ padding:5px 7px 5px 7px;
  margin-left:5px;
  background:#000;
  color:white;
@@ -182,7 +223,7 @@ html{
 display:block;
 height:10px;
 margin-left:5px;
-background:url(../../img/bottomBulle.png) top right no-repeat;
+background:url(../../img/bottomBulle.png) top center no-repeat;
 overflow:hidden;
 
 }

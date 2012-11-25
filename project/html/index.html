@@ -47,7 +47,7 @@ jQuery.fn.resizehandle = function() {
         initScale = initScale.substring(6,11);
       
         var moveHandler = function(e) {
-          me.width(Math.max(400,   e.clientX+h-y ));
+          me.width(Math.max(500,   e.clientX+h-y ));
 
                     
           $(".jvectormap-container").children("svg").width(Math.max(20,   e.clientX+h-y ));
@@ -77,16 +77,72 @@ jQuery.fn.resizehandle = function() {
 
 
 $(document).ready(function(){
+  $(".btCover").click(function() {
+  	if($('#footer').css("height") == "31px"){
+  		$(".btCover").css("display","none");
+	  	$(".btCover").css("margin-top","14px");
+	  	$(".footerInner").css("display","none");
+	  	$('#footer').animate({  height:"19px"},600, function() {
+	     	$(".btCover").attr("onmouseover","tooltip.show('Montrer', 90);$('.btCover').css('background-image','url(\"../img/btshow_on.png\")');");
+	   		$(".btCover").attr("onmouseout","tooltip.hide();$('.btCover').css('background-image','url(\"../img/btshow.png\")');");
+	   		$(".btCover").css("background-image","url('../img/btshow.png')");
+	   		$(".btCover").css("display","");
+	  });
+	
+  	}
+  	else{
+  		$(".btCover").css("display","none");
+  		$(".btCover").css("background-image","");
+	    $(".btCover").css("margin-top","0px");
+  		
+	  	$('#footer').animate({  height:"31px"},600, function() {
+			    $(".btCover").attr("onmouseover","tooltip.show('Cacher', 90);$('.btCover').css('background-image','url(\"../img/btcover_on.png\")');");
+			    $(".btCover").attr("onmouseout","tooltip.hide();$('.btCover').css('background-image','url(\"../img/btcover.png\")');");
+			    $(".btCover").css("background-image","url('../img/btcover.png')");
+			    $(".btCover").css("display","");
+			    $(".footerInner").css("display","");
+	  		});
 
+  	}
+  });
+  
+    $(".btCover_header").click(function() {
+  	if($('#header').css("height") == "300px"){
+  		$(".btCover_header").css("display","none");
+	  	$(".btCover_header").css("margin-top","14px");
+	  	$('#header').animate({  height:"50px"},600, function() {
+	     	$(".btCover_header").attr("onmouseover","tooltip.show('Montrer', 90);$('.btCover_header').css('background-image','url(\"../img/btshow_on.png\")');");
+	   		$(".btCover_header").attr("onmouseout","tooltip.hide();$('.btCover_header').css('background-image','url(\"../img/btshow.png\")');");
+	   		$(".btCover_header").css("background-image","url('../img/btshow.png')");
+	   		$(".btCover_header").css("display","");
+	  });
+	
+  	}
+  	else{
+  		$(".btCover_header").css("display","none");
+  		$(".btCover_header").css("background-image","");
+	    $(".btCover_header").css("margin-top","0px");
+  		
+	  	$('#header').animate({  height:"300px"},600, function() {
+			    $(".btCover_header").attr("onmouseover","tooltip.show('Cacher', 90);$('.btCover_header').css('background-image','url(\"../img/btcover_on.png\")');");
+			    $(".btCover_header").attr("onmouseout","tooltip.hide();$('.btCover_header').css('background-image','url(\"../img/btcover.png\")');");
+			    $(".btCover_header").css("background-image","url('../img/btcover.png')");
+			    $(".btCover_header").css("display","");
+			   
+	  		});
+
+  	}
+  });
   $("#map").resizehandle();
   $(".content").css("line-height","500px");
 });
 		</script>
 	</head>
 	<body>
-		<div class="innerBoder">
-			
-				<div>
+		  <div id="header">
+				   <div class="headerBack">
+		            
+		             	<div>
 					<div id="choice">
 						
 						<label>Councils</label>
@@ -109,6 +165,16 @@ $(document).ready(function(){
 						<label for = "sizeLarge">Council of States</label>
 					</div>
 	            </div>
+	            
+	            <div class="btCover_header" onmouseover="tooltip.show('Cacher', 90);$('.btCover_header').css('background-image','url(\'../img/btcover_on.png\')');" onmouseout="tooltip.hide();$('.btCover_header').css('background-image','url(\'../img/btcover.png\')');" ></div>	   	
+						
+				 </div>
+			  </div>
+		<div class="innerBoder">
+				
+			
+		  
+			
 	            <div class="content">
 					<div id="map"></div>
 					
@@ -119,15 +185,17 @@ $(document).ready(function(){
 
 			<div id="footer">
 			   <div class="footerBack">
-			   	
-			   <div class="footerInner">
-					<span class="bar">Le parlement et son histoire </span> 
-					<span class="bar">&copy; All rights reserved </span> 
-					<span class="bar">Par Valentin Bourqui et Didier Crausaz</span>
-					
-					<span class="barSpace">VI Project 2012</span>
-				</div>
-			</div>
-		</div>
+	             	<div class="btCover" onmouseover="tooltip.show('Cacher', 90);$('.btCover').css('background-image','url(\'../img/btcover_on.png\')');" onmouseout="tooltip.hide();$('.btCover').css('background-image','url(\'../img/btcover.png\')');" ></div>	   	
+				   <div class="footerInner">
+			
+						<span class="bar" style="margin-left: 29px;">Le parlement et son histoire </span> 
+						<span class="bar">&copy; Tous droits réservés&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> 
+						<span class="bar">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Par Valentin Bourqui et Didier Crausaz</span>
+						
+						<span class="barSpace">VI Project 2012</span>
+				  </div>
+			 </div>
+		  </div>
+	</div>
 	</body>
 </html>
