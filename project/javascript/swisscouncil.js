@@ -1,16 +1,40 @@
-$(function() {
+google.load('visualization', '1', {
+	packages : ['table']
+});
+//google.setOnLoadCallback(drawTable);
 
+function drawTable(array) {
+
+	var data = new google.visualization.DataTable();
+
+	data.addColumn('string', 'First name');
+	data.addColumn('string', 'Last name');
+	data.addRows(array);
+	var table = new google.visualization.Table(document.getElementById('information'));
+	table.draw(data, {
+		page : 'enable',
+	});
+	google.visualization.events.addListener(table, 'select', function selectHandler(table) {
+		var selection = table.getSelection();
+	});
+	return data;
+}
+
+$(function() {
 	// swiss map personalization
 	map = new jvm.WorldMap({
 		map : 'ch_merc_en',
 		container : $('#map'),
-		backgroundColor : 'transparent',
+		backgroundColor : 'rgba(0,0,0,0)',
 		regionStyle : {
 			initial : {
 				fill : 'rgb(202,236,238)'
 			},
 			hover : {
-				fill : '#000000',
+				//fill : '#000000',
+				stroke : 'black',
+				"stroke-width" : 2,
+				"stroke-opacity" : 1,
 				"fill-opacity" : 1
 			}
 		},
@@ -47,6 +71,32 @@ $(function() {
 		map.series.regions[0].setValues(colors);
 	}
 
+	function loadcouncil(councillers) {
+		var councilstring = "";
+		if ($('#BR').attr("checked") == "checked") {
+			if (councilstring.length != 0) {
+				councilstring += " ";
+			}
+			councilstring += "BR";
+		}
+		if ($('#CN').attr("checked") == "checked") {
+			if (councilstring.length != 0) {
+				councilstring += " ";
+			}
+			councilstring += "CN";
+		}
+		if ($('#CE').attr("checked") == "checked") {
+			if (councilstring.length != 0) {
+				councilstring += " ";
+			}
+			councilstring += "CE";
+		}
+		var selectcouncillers = null;
+		selectcouncillers = councillers.councilfilter(councilstring).byCanton();
+		drawTable(councillers.toArray());
+		loadMap(selectcouncillers);
+	}
+
 
 	$("#check").button();
 	$("#format").buttonset();
@@ -54,17 +104,12 @@ $(function() {
 	var council = new Council();
 	var councillers = council.getCouncillers().datefilter();
 	var countCanton = councillers.byCanton();
-	loadMap(countCanton);
+	loadcouncil(councillers);
+	//loadMap(countCanton);
 
 	$('#choice input').change(function() {
-		var selectcoucillers = [];
-		if ($('#BR').attr("checked") == "checked") {
-			selectcouncillers = selectcouncillers.concat(councillers.councilfilter("BR").byCanton());
-		}
-		if ($('#CN').attr("checked") == "checked") {
-			selectcouncillers = selectcouncillers.concat(councillers.councilfilter("CN").byCanton());
-		}
-		loadMap(selectcoucillers);
+		map.series.regions[0].elements["CH-JU"].element.properties["d]"] = null//["fill"]="rgb(255,255,255)";
+		loadcouncil(councillers);
 	});
 });
 
@@ -109,3 +154,4 @@ function hslToRgb(h, s, l) {
 
 	return [r * 255, g * 255, b * 255];
 }
+

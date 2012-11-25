@@ -24,6 +24,7 @@
 		<script src="../javascript/lib/jquery-jvectormap-1.1.1.min.js"></script>
 		<!-- Include JVectorMap swiss map data -->
 		<script src="../javascript/lib/jquery-jvectormap-ch-merc-en.js"></script>
+		<script type='text/javascript' src='https://www.google.com/jsapi'></script>
 
 		<script type="text/javascript" src="../javascript/date.js"></script>
 		<script type="text/javascript" src="../javascript/CouncilRequest.js"></script>
@@ -50,6 +51,7 @@ jQuery.fn.resizehandle = function() {
           me.width(Math.max(500,   e.clientX+h-y ));
 
           $("#information").width(Math.max(100,   hInfo+y-e.clientX ));
+          $(".google-visualization-table-table").width(Math.max(100,   hInfo+y-e.clientX ));
           $(".jvectormap-container").children("svg").width(Math.max(20,   e.clientX+h-y));
           var a = $(".jvectormap-container").children("svg").children("g").attr("transform");
           var b = a;
