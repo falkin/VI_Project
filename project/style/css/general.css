@@ -57,22 +57,50 @@ html{
   width: 100%;
   height:100%;
 }
-#map{
-	float:left;
+.content{
+   
+    width:100%;
+	height: 100%;
+	max-height:100%;
+}
+
+
+#map{	
     width:60%;
 	height: 100%;	
-	vertical-align:middle;
-	display:inline-block;
-	line-height:1.2; /* on rétablit le line-height */	
+	display:inline-block
 }
+
+.resize {
+	  height:-moz-calc(100% - 100px);
+	  height:-webkit-calc(100% - 100px);
+	  width:7%;
+	  background: transparent;
+	  padding-top: 50px;
+	  padding-bottom: 50px;
+	  display:inline-block
+	 
+}
+
+#information{
+	  background-color:white;
+	  height:-moz-calc(100% - 100px);
+	  height:-webkit-calc(100% - 100px);
+	  width:32%;
+	  padding-top: 50px;
+	  padding-bottom: 50px; 
+	  display:inline-block 
+}
+
+
 .innerBoder{
 	margin: 6px;
 	padding-left:50px;
 	padding-right:50px;
-	max-height:-moz-calc(100% - 42px);
-    height:-moz-calc(100% - 42px);
-    max-height:-webkit-calc(100% - 42px);
-    height:-webkit-calc(100% - 42px);
+	max-height:-moz-calc(100% - 342px);
+    height:-moz-calc(100% - 342px);
+    max-height:-webkit-calc(100% - 342px);
+    height:-webkit-calc(100% - 342px);
 }
 .bar {
 	background-image:url(../../img/lineBar.png);
@@ -93,7 +121,6 @@ html{
 	 background-image:url(../../img/backHeader.png);
      background-repeat: repeat-x;
      background-position:bottom;
-
 	 height				: 300px;
 	 text-align: center;	
 }
@@ -132,16 +159,7 @@ html{
 	font-family: "Arimo",arial;	
 }
 
-.resize {
-	  height:-moz-calc(100% - 100px);
-	  height:-webkit-calc(100% - 100px);
-	  margin-left:60%;
-	  width:7%;
-	  background: transparent;
-	  padding-top: 50px;
-	  padding-bottom: 50px;
-	 
-}
+
 .bt_resize{
 	width:100%;
 	height: 100%;
@@ -169,11 +187,6 @@ html{
 .jvectormap-container{
 	vertical-align: bottom !important;
 }
-.content{
-	width:100%;
-	height: 100%;
-   
-}
 
 .btCover{
 	width: 29px;
@@ -184,6 +197,7 @@ html{
 		margin-left:auto;
 	margin-right:auto;
 	cursor: pointer;
+	
 }
 
 .btCover_header{
