@@ -2,6 +2,7 @@
 
 
 $(document).ready(function(){
+  var globalMenuActivate = 1;
   $(".btCover").click(function() {
   	if($('#footer').css("height") == "31px"){
   		$(".btCover").css("display","none");
@@ -32,13 +33,39 @@ $(document).ready(function(){
   });
   
   $(".options").click(function() {
+  	if($(".options").css("color") == "black"){
+  		$(".options").css("color","#9d9d9d");
+  		$(".filter").css("color","black");
+  		$(".about").css("color","black");
+  	}
+  	else{
+  		$(".options").css("color","black");
+  	}
+  	
   		openMore();
   });
     $(".filter").click(function() {
+    	//alert($(".filter").css("color"));
+    	if($(".filter").css("color") == "black"){
+  			$(".filter").css("color","#9d9d9d");
+  			$(".options").css("color","black");
+  			$(".about").css("color","black");
+	  	}
+	  	else{
+	  		$(".filter").css("color","black");
+	  	}
   		openMore();
   });
   
     $(".about").click(function() {
+    	if($(".about").css("color") == "black"){
+  			$(".about").css("color","#9d9d9d");
+  			$(".options").css("color","black");
+  			$(".filter").css("color","black");
+	  	}
+	  	else{
+	  		$(".about").css("color","black");
+	  	}
   		openMore();
   });
   

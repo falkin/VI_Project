@@ -51,15 +51,20 @@ function Council() {
 		return this;
 	}
 
-	this.councilfilter = function(council) {
+	this.councilfilter = function(counc) {
 		selectedcouncil = council.filter(function(counciller) {
-			return counciller.council.abbreviation.substring(0,2) == council;
+			var councilarray = counc.split(" ");
+			for (var i = 0; i < councilarray.length; i++) {
+				if (counciller.council.abbreviation.substring(0, 2) == councilarray[i])
+					return true;
+			}
+			return false;
 		});
 		return this;
 	}
 
 	this.datefilter = function() {
-		selectedcouncil = council.filter(function(council) {
+		council = council.filter(function(council) {
 			var d = council.membership.leavingDate == null;
 			return d;
 		});
@@ -80,6 +85,7 @@ function Council() {
 	this.WomanProportion = function() {
 		var countWomen = {};
 		var countMen = {};
+
 		$.each(selectedcouncil, function(index, value) {
 			var countTab = value.gender == 'f' ? countWomen : countMen;
 			if (value.canton.abbreviation in countTab)
@@ -87,6 +93,7 @@ function Council() {
 			else
 				countTab[value.canton.abbreviation] = 1;
 		});
+
 		$.each(countWomen, function(index, value) {
 			countWomen[index] = countWomen[index] / countMen[index];
 		});
@@ -95,6 +102,17 @@ function Council() {
 
 	this.toObject = function() {
 		return selectedcouncil;
+	}
+
+	this.toArray = function() {
+		var selectedcouncilarray = new Array();
+		$.each(selectedcouncil, function(index, value) {
+			var councillerarray = new Array();
+			councillerarray[0]=value.firstName;
+			councillerarray[1]=value.lastName;
+			selectedcouncilarray[selectedcouncilarray.length]=councillerarray;
+		});
+		return selectedcouncilarray;
 	}
 }
 
