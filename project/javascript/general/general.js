@@ -70,7 +70,7 @@ $(document).ready(function(){
   			if(globalMenuActivate == 0){
   		  		openMore();		
   		  		globalMenuActivate =1;
-  		  		  		  		showedMenu ="";
+  		  		  		  		if(showMenu == showedMenu) {showedMenu ="";}
   			}
   			showMenu = "options";
   			changeMenu(showedMenu,showMenu);
@@ -116,7 +116,7 @@ $(document).ready(function(){
   			if(globalMenuActivate == 0){
   		  		openMore();		
   		  		globalMenuActivate =1;
-  		  		showedMenu ="";
+  		  		if(showMenu == showedMenu) {showedMenu ="";}
   			}
   			showMenu = "filter";
   			changeMenu(showedMenu,showMenu);
@@ -164,7 +164,7 @@ $(document).ready(function(){
   			if(globalMenuActivate == 0){
   		  		openMore();		
   		  		globalMenuActivate =1;
-  		  		showedMenu ="";
+  		  		if(showMenu == showedMenu) {showedMenu ="";}
   			}
   			showMenu = "about";
   			changeMenu(showedMenu,showMenu);
