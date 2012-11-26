@@ -70,7 +70,7 @@ $(document).ready(function(){
   			if(globalMenuActivate == 0){
   		  		openMore();		
   		  		globalMenuActivate =1;
-  		  		  		  		if(showMenu == showedMenu) {showedMenu ="";}
+  		  		  		  		if("options" == showedMenu) {showedMenu ="";}
   			}
   			showMenu = "options";
   			changeMenu(showedMenu,showMenu);
@@ -116,7 +116,7 @@ $(document).ready(function(){
   			if(globalMenuActivate == 0){
   		  		openMore();		
   		  		globalMenuActivate =1;
-  		  		if(showMenu == showedMenu) {showedMenu ="";}
+  		  		if("filter" == showedMenu) {showedMenu ="";}
   			}
   			showMenu = "filter";
   			changeMenu(showedMenu,showMenu);
@@ -164,7 +164,7 @@ $(document).ready(function(){
   			if(globalMenuActivate == 0){
   		  		openMore();		
   		  		globalMenuActivate =1;
-  		  		if(showMenu == showedMenu) {showedMenu ="";}
+  		  		if("about" == showedMenu) {showedMenu ="";}
   			}
   			showMenu = "about";
   			changeMenu(showedMenu,showMenu);
