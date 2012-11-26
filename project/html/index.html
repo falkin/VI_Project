@@ -17,7 +17,7 @@
 
 		<link rel="stylesheet" href="../style/css/general.css" type="text/css" media="screen"/>
 	    <script src="../javascript/general/infoBulle.js"></script>
-
+      
 		<!-- Include jQuery library -->
 		<script type="text/javascript" src="../javascript/lib/jquery-1.8.2.min.js"></script>
 		<!-- Include JVectorMap library -->
@@ -28,129 +28,27 @@
 		<script type="text/javascript" src="../javascript/date.js"></script>
 		<script type="text/javascript" src="../javascript/CouncilRequest.js"></script>
 		<script type="text/javascript" src="../javascript/swisscouncil.js"></script>
-
+		<link href='http://fonts.googleapis.com/css?family=Francois+One' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css" />
 		<script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
-		<script>
+	    <script src="../javascript/general/general.js"></script>
 
-jQuery.fn.resizehandle = function() {
-  return this.each(function() {
-    var me = jQuery(this);
-    me.after(
-       jQuery('<div class="resize"><div class="resizehandle"><div class="bt_resize" onmouseover="tooltip.show(\'Double clique \', 90);" onmouseout="tooltip.hide();"></div></div></div>')
-      .bind('dblclick', function(e) {
-        var h = me.width();
-        var y = e.clientX+20;
-         var hInfo = $("#information").width();
-        var bigSize = e.clientX+h-y;
-        var initScale = $(".jvectormap-container").children("svg").children("g").attr("transform");
-        initScale = initScale.substring(6,11);
-      
-        var moveHandler = function(e) {
-          me.width(Math.max(500,   e.clientX+h-y ));
-
-          $("#information").width(Math.max(100,   hInfo+y-e.clientX ));
-          $(".jvectormap-container").children("svg").width(Math.max(20,   e.clientX+h-y));
-          var a = $(".jvectormap-container").children("svg").children("g").attr("transform");
-          var b = a;
-		  a = a.substring(6,a.search("tran")-2);
-		  var newValue =  ((e.clientX+h-(y+40))/bigSize)*initScale;
-		  var b=b.replace(a,newValue); 
-		   $(".jvectormap-container").children("svg").children("g").attr("transform",b);
-      	  
-        };
-        var upHandler = function(e) {
-          jQuery('html')
-          .unbind('mouseup',upHandler)
-          .unbind('mousemove', moveHandler);
-          
-        };
-         jQuery('html').bind('mouseup',upHandler);
-         jQuery('html').bind('mousemove', moveHandler);
-        
-       
-      })
-    );
-  });
-}
-
-
-$(document).ready(function(){
-  $(".btCover").click(function() {
-  	if($('#footer').css("height") == "31px"){
-  		$(".btCover").css("display","none");
-	  	$(".btCover").css("margin-top","14px");
-	  	$(".footerInner").css("display","none");
-	  	$('#footer').animate({  height:"19px"},600, function() {
-	     	$(".btCover").attr("onmouseover","tooltip.show('Montrer', 90);$('.btCover').css('background-image','url(\"../img/btshow_on.png\")');");
-	   		$(".btCover").attr("onmouseout","tooltip.hide();$('.btCover').css('background-image','url(\"../img/btshow.png\")');");
-	   		$(".btCover").css("background-image","url('../img/btshow.png')");
-	   		$(".btCover").css("display","");
-	  });
-	
-  	}
-  	else{
-  		$(".btCover").css("display","none");
-  		$(".btCover").css("background-image","");
-	    $(".btCover").css("margin-top","0px");
-  		
-	  	$('#footer').animate({  height:"31px"},600, function() {
-			    $(".btCover").attr("onmouseover","tooltip.show('Cacher', 90);$('.btCover').css('background-image','url(\"../img/btcover_on.png\")');");
-			    $(".btCover").attr("onmouseout","tooltip.hide();$('.btCover').css('background-image','url(\"../img/btcover.png\")');");
-			    $(".btCover").css("background-image","url('../img/btcover.png')");
-			    $(".btCover").css("display","");
-			    $(".footerInner").css("display","");
-	  		});
-
-  	}
-  });
-  
- 
-    $(".btCover_header").click(function() {
-  	if($('#header').css("height") == "300px"){
-  		$(".btCover_header").css("display","none");
-	  	$(".btCover_header").css("margin-top","14px");
-	  	$('#header').animate({  height:"50px"},600, function() {
-	     	$(".btCover_header").attr("onmouseover","tooltip.show('Montrer', 90);$('.btCover_header').css('background-image','url(\"../img/btshow_on.png\")');");
-	   		$(".btCover_header").attr("onmouseout","tooltip.hide();$('.btCover_header').css('background-image','url(\"../img/btshow.png\")');");
-	   		$(".btCover_header").css("background-image","url('../img/btshow.png')");
-	   		$(".btCover_header").css("display","");
-	   		$(".innerBoder").css("max-height","-moz-calc(100% - 90px)");
-	   		$(".innerBoder").css("height","-moz-calc(100% - 90px)");
-	   		$(".innerBoder").css("max-height","-webkit-calc(100% - 90px)");
-	   		$(".innerBoder").css("height","-webkit-calc(100% - 90px)");
-	  });
-	
-  	}
-  	else{
-  		$(".btCover_header").css("display","none");
-  		$(".btCover_header").css("background-image","");
-	    $(".btCover_header").css("margin-top","0px");
-        $(".innerBoder").css("max-height","-moz-calc(100% - 342px)");
-	    $(".innerBoder").css("height","-moz-calc(100% - 342px)");
-	    $(".innerBoder").css("max-height","-webkit-calc(100% - 342px)");
-	    $(".innerBoder").css("height","-webkit-calc(100% - 342px)");		
-	  	$('#header').animate({  height:"300px"},600, function() {
-			    $(".btCover_header").attr("onmouseover","tooltip.show('Cacher', 90);$('.btCover_header').css('background-image','url(\"../img/btcover_on.png\")');");
-			    $(".btCover_header").attr("onmouseout","tooltip.hide();$('.btCover_header').css('background-image','url(\"../img/btcover.png\")');");
-			    $(".btCover_header").css("background-image","url('../img/btcover.png')");
-			    $(".btCover_header").css("display","");
-				
-			   
-	  		});
-
-  	}
-  });
-  $("#map").resizehandle();
-
-});
-		</script>
 	</head>
 	<body>
 		  <div id="header">
 				   <div class="headerBack">
-		            
-		             	<div>
+		            <div class="generalOptions">
+		            	<div class="generalOptionsInner">
+		            		<span class="space"><span class="title options">Options</span>&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;<span class="title filter">Filtres carte</span>&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;<span class="title about">A propos</span></span>
+		            		<input type="text" class="inputeDate" value="Rechercher une date" onblur="this.value='Rechercher une date';this.style.color='#9d9d9d';" onclick="this.value='';this.style.color='black';"/>
+		            		<input type="text" class="inputePeople" value="Rechercher une personne" onblur="this.value='Rechercher une personne';this.style.color='#9d9d9d';" onclick="this.value='';this.style.color='black';" />
+		            		<input type="text" class="inputeParty" value="Rechercher un partie" onblur="this.value='Rechercher un partie';this.style.color='#9d9d9d';" onclick="this.value='';this.style.color='black';" />
+		            	</div>
+		            	
+		            </div>
+		        
+	         
+				     	<div style="display: none;">
 					<div id="choice">
 						
 						<label>Councils</label>
@@ -172,16 +70,16 @@ $(document).ready(function(){
 						checked = "checked"/>
 						<label for = "sizeLarge">Council of States</label>
 					</div>
-	            </div>
-	            
-	            <div class="btCover_header" onmouseover="tooltip.show('Cacher', 90);$('.btCover_header').css('background-image','url(\'../img/btcover_on.png\')');" onmouseout="tooltip.hide();$('.btCover_header').css('background-image','url(\'../img/btcover.png\')');" ></div>	   	
-						
+	            </div>	
+	               
+	            <div class="btCover_header" onmouseover="tooltip.show('Cacher', 90);$('.btCover_header').css('background-image','url(\'../img/btshow_on.png\')');" onmouseout="tooltip.hide();$('.btCover_header').css('background-image','url(\'../img/btshow.png\')');" ></div>	   	
+					
 				 </div>
 			  </div>
 	   <div class="innerBoder">
 	            <div class="content">
 					<div id="map"></div>
-					<div id="information"></div>
+					<div id="information">dsfdsf</div>
 				</div>
 			
 			
