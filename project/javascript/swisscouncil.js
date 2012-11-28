@@ -26,6 +26,7 @@ $(function() {
 		map : 'ch_merc_en',
 		container : $('#map'),
 		backgroundColor : 'rgba(0,0,0,0)',
+		zoomOnScroll : false,
 		regionStyle : {
 			initial : {
 				fill : 'rgb(202,236,238)'

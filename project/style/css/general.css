@@ -87,12 +87,12 @@ html{
 	 
 	
 }
-.aboutContent .title{
+.aboutContent .title, .optionsContent .title{
 	font-family: "Francois One" , arial;
 	font-size: 15px;
 }
 
-.aboutContent .content{
+.aboutContent .content, .optionsContent .content{
 	font-family: "Arimo" , arial;
 	font-size: 12px;
 	text-align: justify; 
@@ -103,9 +103,7 @@ html{
 	height:170px;
 	vertical-align:top;
 	margin-top:20px;
-	
 	margin-left:0px;
-	
 	-moz-box-shadow: 0px 0px 7px #c3c2c2;
 	-webkit-box-shadow: 0px 0px 7px #c3c2c2;
 	box-shadow: 0px 0px 7px #c3c2c2;
@@ -113,11 +111,24 @@ html{
 	
 }
 
+.optionsContent, .aboutContent span{
+	display: inline-block;
+}
+.buttonPeople{
+	width: 120px;
+	height:24px;
+	background-image:url(../../img/177_03.png);
+    background-repeat: no-repeat;
+}
+.jvectormap-zoomin, .jvectormap-zoomout{
+	display:none;
+}
 .generalOptionsInner .title{
 	text-transform: uppercase;
 	cursor:pointer;
 	line-height: 14px;
 	vertical-align: bottom;
+	display: inline-block;
 	
 }
 .generalOptionsInner .title:hover{
