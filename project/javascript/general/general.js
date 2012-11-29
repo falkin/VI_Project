@@ -214,7 +214,6 @@ $(document).ready(function(){
 			 });
   			closeMore();
   });
-  $("#map").resizehandle();
 });
 
 
@@ -273,7 +272,8 @@ function showAbout(){
 
 
 
-function closeMore(){		
+function closeMore(){	
+		$(".content").animate({  marginTop:"46px"},500);		
   		$(".moreInfo").css("display","none");
   		$(".btCover_header").css("display","none");
 	  	$('#header').animate({  height:"46px"},600, function() {
@@ -286,8 +286,8 @@ function closeMore(){
 
 function openMore(){
 
- 				
-  		$(".btCover_header").css("background-image","");
+ 			$(".content").animate({  marginTop:"300px"},500);		
+  		$("._header").css("background-image","");
         $(".innerBoder").css("max-height","-moz-calc(100% - 342px)");
 	    $(".innerBoder").css("height","-moz-calc(100% - 342px)");
 	    $(".innerBoder").css("max-height","-webkit-calc(100% - 342px)");
