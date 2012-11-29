@@ -43,7 +43,13 @@ $(function() {
 			regions : [{
 				attribute : 'fill'
 			}]
-		}
+		},
+      onRegionLabelShow: function(event, label, code){
+        label.html(
+          ''+label.html()+''+
+          'Unemployment rate: '+code+'%'
+        );
+      }
 	});
 
 	function loadMap(countCanton) {
