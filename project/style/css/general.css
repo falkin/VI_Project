@@ -69,7 +69,12 @@ html{
 	  margin-left:25px;
 	  overflow:auto;
 }
-
+.google-visualization-table-tr-odd, .google-visualization-table-tr-odd td,.google-visualization-table-tr-even, .google-visualization-table-tr-even td, .google-visualization-table-tr-odd-nonstrict{
+	  background-image:url(../../img/background.png) !important;
+  background-repeat: repeat !important;
+  border: none;
+  	border-bottom: #cccccc 1px solid !important;
+}
 .generalOptions{
 	width:100%;
 	border-bottom:black 3px solid;
