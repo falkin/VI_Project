@@ -14,7 +14,13 @@
 
 		<!-- Include JVectorMap style -->
 		<link rel="stylesheet" href="../style/css/jquery-jvectormap-1.1.1.css" type="text/css" media="screen"/>
-
+		<link rel="stylesheet" href="../style/css/toggle_unstyled.css"  type="text/css" >
+		
+		<!-- Remove the stylesheets below (toggle.css and toggle_iOS.css) to view the unstyled toggle -->
+		<link rel="stylesheet" href="../style/css/toggle.css"  type="text/css" >
+		
+		<!-- Remove the stylesheet below (toggle_iOS.css) to view the non-iOS version (ie. the version that uses varying heights for the toggle elements.) -->
+		<link rel="stylesheet" href="../style/css/toggle_iOS.css"  type="text/css" >
 		<link rel="stylesheet" href="../style/css/general.css" type="text/css" media="screen"/>
 	    <script src="../javascript/general/infoBulle.js"></script>
       
@@ -54,13 +60,26 @@
 		            </div>
 		        		<div class="moreInfo">
 		        			<div class="moreInfoContent">
-		        				<div class="filterContent">Filtres</div>
-		        				<div class="optionsContent"><span class="title">Options générales</span> <br/><br/><table> <tr> <td><span class="content" style="padding-left:10px;">
+		        				<div class="filterContent">	<span class="title">Partie</span>/<span class="title">Annee</span>/<span class="title">Conseil</span>/<span class="title">Réinitaliser les filtres</span> 
+		        					</div>
+		        			
+		        				<div class="optionsContent"><span class="title">Options générales</span> <br/><br/><table> <tr> <td><span class="contentInfo" style="padding-left:10px;">
 		        			    																												  Voir la position exact de chaque personne sur la carte ?  
-		        			    																											     </span></td><td><div class="buttonPeople"></div>
+		        			    																											     </span></td><td style="vertical-align: bottom;">
+		        			    																											     			<span class="toggle-bg">
+																																									<input type="radio" name="toggle" class="testMe" value="off">
+																																									<input type="radio" name="toggle" class="testMe"  value="on">
+																																									<span class="switch"></span>
+																																								</span>
+																																								<span class="texteBtShow"></span>
+		        			    																								 </td></tr><tr> <td style="vertical-align: top;"><span class="contentInfo" style="padding-left:10px;">
+		        			    																												  Type d'information représenté sur la carte ?  
+		        			    																											     </span></td><td  style="padding-left: 55px;"><input type="radio" class="radioMapTypeOne" name="group1" value="1" checked=""> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solution A<br>
+																																					<input type="radio" name="group1" class="radioMapTypeTwo"  value="2" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solution B<br>
+																																					<input type="radio" name="group1" class="radioMapTypeThree"  value="3"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solution C
 		        			    																								 </td></tr></table>
 		        			    												</div>
-		        			    <div class="aboutContent"><span class="title">Le parlement et son histoire</span> <br/><br/><span class="content">
+		        			    <div class="aboutContent"><span class="title">Le parlement et son histoire</span> <br/><br/><span class="contentInfo">
 		        			    																												  <b style="color:#f33f52; padding-left:10px;">Type : </b> Projet semestre VI Master 2012		<br/>
 		        			    																											      <b style="color:#f33f52; padding-left:10px;">Auteurs : </b> Didier Crausaz & Valentin Bourqui		<br/>
 		        			    																											      <b style="color:#f33f52; padding-left:10px;">Version : </b> 1.0 Beta	<br/>
@@ -104,7 +123,9 @@
 					<div id="map"></div>
 					<div id="information">dsfdsf</div>
 				</div>
-			
+			    <div class="contentTwo">
+					
+				</div>
 			
 
 

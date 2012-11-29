@@ -12,7 +12,7 @@ function drawTable(array) {
 	data.addRows(array);
 	var table = new google.visualization.Table(document.getElementById('information'));
 	table.draw(data, {
-		page : 'enable',
+		page : 'disable',
 	});
 	google.visualization.events.addListener(table, 'select', function selectHandler(table) {
 		var selection = table.getSelection();

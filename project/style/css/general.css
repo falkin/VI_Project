@@ -21,24 +21,28 @@ body {
   border: 6px #353535 solid;
  margin:0px;
  padding:0px;
- height:-moz-calc(100% - 12px);
- height:-webkit-calc(100% - 12px);
+
 }
 html{
   width: 100%;
   height:100%;
 }
-.content{
+.content, .contentTwo{
    
-    width:100%;
-	height: 100%;
-	max-height:100%;
+    width:1100px;
+    max-width:1100px;
+	height: 560px;
+	max-height: auto;
+	margin-left: auto;
+	margin-right: auto;
+
 }
-
-
+.content{
+	margin-top: 46px;
+}
 #map{	
-    width:60%;
-	height: 100%;	
+    width:65%;
+	height: 520px;	
 	display:inline-block;
 	vertical-align: top;
 }
@@ -55,14 +59,15 @@ html{
 }
 
 #information{
-	  background-color:white;
+	 
 	  height:-moz-calc(100% - 100px);
 	  height:-webkit-calc(100% - 100px);
 	  width:31%;
-	  padding-top: 50px;
+	  margin-top: 50px;
 	  padding-bottom: 50px; 
 	  display:inline-block;
-	  float:right;
+	  margin-left:25px;
+	  overflow:auto;
 }
 
 .generalOptions{
@@ -91,8 +96,18 @@ html{
 	font-family: "Francois One" , arial;
 	font-size: 15px;
 }
-
-.aboutContent .content, .optionsContent .content{
+.filterContent .title,.filterContent{
+	font-family: "Francois One" , arial;
+	font-size: 15px;
+	text-transform: uppercase;
+	margin-left:10px;
+	margin-right: 10px;
+	cursor: pointer;
+}
+table input{
+	margin-left:5px;
+}
+.aboutContent .contentInfo, .optionsContent .contentInfo, .texteBtShow,.optionsContent table{
 	font-family: "Arimo" , arial;
 	font-size: 12px;
 	text-align: justify; 
@@ -131,7 +146,7 @@ html{
 	display: inline-block;
 	
 }
-.generalOptionsInner .title:hover{
+.generalOptionsInner .title:hover, .filterContent .title:hover {
 	color:#f33f52;
 }
 .generalOptionsInner .about{
@@ -179,9 +194,9 @@ html{
 	margin: 6px;
 	padding-left:50px;
 	padding-right:50px;
-	max-height:-moz-calc(100% - 342px);
+	max-height:auto;
     height:-moz-calc(100% - 342px);
-    max-height:-webkit-calc(100% - 342px);
+    max-height:auto;
     height:-webkit-calc(100% - 342px);
 }
 .bar {
@@ -205,11 +220,21 @@ html{
      background-position:bottom;
 	 height				: 300px;
 	 text-align: center;	
+	    position: fixed;
+	     border-top: 6px #353535 solid;
+	 border-left: 6px #353535 solid;
+	 border-right: 6px #353535 solid;
+    	 top				: 0px;
+	 left				: 0px;
+	 right				: 0px;
+    z-index: 1;
 }
 .headerBack{
 	background-image:url(../../img/background.png);
     background-repeat: repeat;
     margin-bottom:10px;
+     height:-moz-calc(100% - 15px);
+	  height:-webkit-calc(100% - 15px);
 }
 #footer {
 	 background-image:url(../../img/backFooter.png);
@@ -309,6 +334,7 @@ margin-top:20px;
 	margin-right:auto;
 	cursor: pointer;
 	margin-top:8px;
+	z-index: 2;
 	
 }
 
@@ -323,6 +349,7 @@ margin-top:20px;
  display:block;
  padding-bottom:10px;
  text-align: center;
+ z-index: 3;
  }
  #tttop {
  display:block;
