@@ -75,22 +75,34 @@ $(function() {
 	function loadcouncil(councillers) {
 		var councilstring = "";
 		if ($('#BR').attr("checked") == "checked") {
+			$('.BR').css("color", "#f33f52");
 			if (councilstring.length != 0) {
 				councilstring += " ";
 			}
 			councilstring += "BR";
 		}
+		else{
+			$('.BR').css("color", "black");
+		}
 		if ($('#CN').attr("checked") == "checked") {
+			$('.CN').css("color", "#f33f52");
 			if (councilstring.length != 0) {
 				councilstring += " ";
 			}
 			councilstring += "CN";
 		}
+		else{
+			$('.CN').css("color", "black");
+		}
 		if ($('#CE').attr("checked") == "checked") {
+			$('.CE').css("color", "#f33f52");
 			if (councilstring.length != 0) {
 				councilstring += " ";
 			}
 			councilstring += "CE";
+		}
+		else{
+			$('.CE').css("color", "black");
 		}
 		var selectcouncillers = null;
 		selectcouncillers = councillers.councilfilter(councilstring).byCanton();

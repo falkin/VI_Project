@@ -106,12 +106,15 @@ html{
 }
  #council #choice,#year label{
 	font-family: "Arimo" , arial;
-	font-size: 15px;
+	font-size: 12px;
 	text-transform: none;
 	cursor: default;
 	font-weight: none;
 
 }
+ #council #choice div {
+ 	color:#f33f52;
+ }
  #choice div label {
  	margin-right:20px;
  	font-weight: bold;
