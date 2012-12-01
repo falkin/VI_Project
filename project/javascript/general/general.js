@@ -318,7 +318,7 @@ jQuery.fn.resizehandle = function() {
         var moveHandler = function(e) {
           me.width(Math.max(500,   e.clientX+h-y ));
 
-          $("#information").width(Math.max(100,   hInfo+y-e.clientX ));
+          $("#information").width(Math.max(100,   hInfo+y-e.clientX));
           $(".jvectormap-container").children("svg").width(Math.max(20,   e.clientX+h-y));
           var a = $(".jvectormap-container").children("svg").children("g").attr("transform");
           var b = a;

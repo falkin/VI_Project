@@ -1,7 +1,7 @@
 function Council() {
 	var council;
 	var selectedcouncil;
-
+	var allcouncil;
 	/*	this.getCouncillersOnline = function() {
 	 for (var i = 1; i < 120; i++) {
 	 $.ajax({
@@ -34,6 +34,8 @@ function Council() {
 			});
 		}
 		selectedcouncil = council;
+		allcouncil= council;
+		
 		return this;
 	};
 
@@ -113,6 +115,17 @@ function Council() {
 			selectedcouncilarray[selectedcouncilarray.length]=councillerarray;
 		});
 		return selectedcouncilarray;
+	}
+	
+	this.smallestDate = function() {
+		var smallestDate = 3000;
+		$.each(allcouncil, function(index, value) {
+			var date = value.membership.entryDate.split('-');
+			if(smallestDate > date[0]){
+				smallestDate = date[0];
+			}
+		});
+		return smallestDate;
 	}
 }
 

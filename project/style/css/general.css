@@ -97,9 +97,32 @@ html{
 	 
 	
 }
+.radioMapTypeOne,.radioMapTypeTwo,.radioMapTypeThree{
+	font-weight: bold !important;
+}
 .aboutContent .title, .optionsContent .title{
 	font-family: "Francois One" , arial;
+	font-size: 15px;
+}
+ #council #choice,#year label{
+	font-family: "Arimo" , arial;
 	font-size: 15px;
+	text-transform: none;
+	cursor: default;
+	font-weight: none;
+
+}
+ #choice div label {
+ 	margin-right:20px;
+ 	font-weight: bold;
+ }
+.contentFilerInside {
+	    height: 150px;
+    margin: 15px;
+    width: 100%;
+}
+.party{
+	color: #f33f52;
 }
 .filterContent .title,.filterContent{
 	font-family: "Francois One" , arial;
@@ -109,7 +132,7 @@ html{
 	margin-right: 10px;
 	cursor: pointer;
 }
-table input{
+table {
 	margin-left:5px;
 }
 .aboutContent .contentInfo, .optionsContent .contentInfo, .texteBtShow,.optionsContent table{
@@ -373,7 +396,7 @@ margin-top:20px;
  font-size:10px;
  
  }
-#ttbot {
+#ttbot{
 display:block;
 height:10px;
 margin-left:5px;

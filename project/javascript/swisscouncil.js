@@ -105,6 +105,8 @@ $(function() {
 	var council = new Council();
 	var councillers = council.getCouncillers().datefilter();
 	var countCanton = councillers.byCanton();
+	var smallestDate = council.smallestDate();
+
 	loadcouncil(councillers);
 	//loadMap(countCanton);
 
@@ -112,6 +114,14 @@ $(function() {
 		map.series.regions[0].elements["CH-JU"].element.properties["d]"] = null//["fill"]="rgb(255,255,255)";
 		loadcouncil(councillers);
 	});
+	
+	jQuery("#Slider1").slider({ from:Number(smallestDate), to:2012 ,round:0,format:{format:"####", locale:"us"}, 
+	                            scale: [Number(smallestDate), '|',1900, '|', 1930, '|',1960, '|', 1990,  '|', 2012], 
+	                            limits: false, step: 1, dimension: '', skin: "plastic", 
+	                            onstatechange: function( value ){
+								    /** APPELLE FONCTION POUR FILTER DATE **/
+								}});
+				   
 });
 
 /**
