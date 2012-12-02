@@ -30,9 +30,11 @@ $(document).ready(function() {
 
 		}
 	});
+	
 	if ($('.radioMapTypeOne').attr("checked") == "checked") {
 		radioMapType = $(".radioMapTypeOne").attr("value");
 		$('.prct').css("color", "#f33f52");
+		$(".typeInfo .value").text($('.prct').text());
 	} else {
 		$('.prct').css("color", "black");
 	}
@@ -40,6 +42,7 @@ $(document).ready(function() {
 	if ($('.radioMapTypeTwo').attr("checked") == "checked") {
 		radioMapType = $(".radioMapTypeTwo").attr("value");
 		$('.comp').css("color", "#f33f52");
+		$(".typeInfo .value").text($('.comp').text());
 	} else {
 		$('.comp').css("color", "black");
 	}
@@ -47,24 +50,29 @@ $(document).ready(function() {
 	if ($('.radioMapTypeThree').attr("checked") == "checked") {
 		radioMapType = $(".radioMapTypeThree").attr("value");
 		$('.pos').css("color", "#f33f52");
+		$(".typeInfo .value").text($('.pos').text());
 	} else {
 		$('.pos').css("color", "black");
 	}
+	
 	$(".radioMapTypeOne").click(function() {
 		radioMapType = $(".radioMapTypeOne").attr("value");
 		$('.prct').css("color", "#f33f52");
+		$(".typeInfo .value").text($('.prct').text());
 		$('.comp').css("color", "black");
 		$('.pos').css("color", "black");
 	});
 	$(".radioMapTypeTwo").click(function() {
 		radioMapType = $(".radioMapTypeTwo").attr("value");
 		$('.comp').css("color", "#f33f52");
+		$(".typeInfo .value").text($('.comp').text());
 		$('.prct').css("color", "black");
 		$('.pos').css("color", "black");
 	});
 	$(".radioMapTypeThree").click(function() {
 		radioMapType = $(".radioMapTypeThree").attr("value");
 		$('.pos').css("color", "#f33f52");
+		$(".typeInfo .value").text($('.pos').text());
 		$('.comp').css("color", "black");
 		$('.prct').css("color", "black");
 	});

@@ -155,7 +155,31 @@ html{
 table {
 	margin-left:5px;
 }
-
+.infoFilter { 
+	
+	margin-top:20px;
+	padding-bottom:2px;
+	margin-bottom:10px;
+	font-family: "Arimo" , arial;
+	font-size: 12px;
+	padding-left:50px;
+	
+}
+.lastInfo{
+	margin-top:0px;
+		padding-bottom:5px;
+	border-bottom: #cccccc 1px solid !important;
+}
+.yearInfo , .councilInfo{
+	margin-left:25px;
+}
+.yearInfo .value, .councilInfo .value,.partyInfo .value, .typeInfo .value{
+color:#f33f52;
+font-weight:bold;
+}
+.partyInfo{
+	min-width: 300px;
+}
 .optionsContent .title, .aboutContent .title{
 	font-family: "Francois One" , arial;
 	font-size: 15px;
@@ -283,7 +307,7 @@ color:#f33f52;
 	 background-image:url(../../img/backHeader.png);
      background-repeat: repeat-x;
      background-position:bottom;
-	 height				: 300px;
+	 height				: 46px;
 	 text-align: center;	
 	    position: fixed;
 	     border-top: 6px #353535 solid;

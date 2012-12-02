@@ -13,6 +13,8 @@ $(document).ready(function() {
 	var showFilter= "";
     var showedFilter = "party";
   
+  
+	 
 	$(".party").mouseout(function() {
 		$(".party").css("color", "#f33f52");
 	});
