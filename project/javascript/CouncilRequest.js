@@ -34,8 +34,8 @@ function Council() {
 			});
 		}
 		selectedcouncil = council;
-		allcouncil= council;
-		
+		allcouncil = council;
+
 		return this;
 	};
 
@@ -110,22 +110,47 @@ function Council() {
 		var selectedcouncilarray = new Array();
 		$.each(selectedcouncil, function(index, value) {
 			var councillerarray = new Array();
-			councillerarray[0]=value.firstName;
-			councillerarray[1]=value.lastName;
-			selectedcouncilarray[selectedcouncilarray.length]=councillerarray;
+			councillerarray[0] = value.firstName;
+			councillerarray[1] = value.lastName;
+			selectedcouncilarray[selectedcouncilarray.length] = councillerarray;
 		});
 		return selectedcouncilarray;
 	}
-	
+
 	this.smallestDate = function() {
 		var smallestDate = 3000;
 		$.each(allcouncil, function(index, value) {
 			var date = value.membership.entryDate.split('-');
-			if(smallestDate > date[0]){
+			if (smallestDate > date[0]) {
 				smallestDate = date[0];
 			}
 		});
 		return smallestDate;
+	}
+
+	this.loadAllParty = function() {
+		var allCouncilPartie = {};
+		$.each(allcouncil, function(index, value) {
+			if (!allCouncilPartie[value.party.abbreviation]) {
+				allCouncilPartie[value.party.abbreviation] = value.party.abbreviation;
+			}
+		});
+		var party;
+		$.ajax({
+			url : '../data/Parti.json',
+			async : false,
+			dataType : 'json',
+			success : function(data) {
+				party = data;
+			}
+		});
+		$.each(party, function(index, value) {
+			if (value.id != 26 && value.id != 1468 && allCouncilPartie[value.abbreviation]) {
+				var newOption = $('<option value="newOpt" id="dsfdf">' + value.abbreviation + " - " + value.name + '</option>');
+				newOption.insertAfter('#selectParty option:last-child');
+			}
+		});
+
 	}
 }
 

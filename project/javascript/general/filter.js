@@ -134,11 +134,43 @@ $(document).ready(function() {
 		}
 	});
 	
+
+
+
+   $('span.init').confirm({
+   	 msg:'Réinitaliser les filtres ?',
+eventType:'click',
+ timeout:4000,
+  dialogShow:'fadeIn',
+  dialogSpeed:'fast',
+  buttons: {
+  	
+  	ok:'Confirmer',
+    cancel:'Annuler',
+    wrapper:'<button></button>',
+    separator:''
+  }  
+});
+
 	
-	
+
+
+
 
 
 });
+
+function initFilter() {
+	$('#CN').attr("checked", true);
+	$('#BR').attr("checked", true);
+	$('#CE').attr("checked", true);
+	$('.CN').css("color", "#f33f52");
+	$('.BR').css("color", "#f33f52");
+	$('.CE').css("color", "#f33f52");
+	$("#Slider1").slider("value","2000","2012");
+    $("#Slider1").slider("value","2000","2012");	   
+}
+
 
 function changeFilter(showedFilter, showFilter) {
 

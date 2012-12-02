@@ -118,7 +118,9 @@ $(function() {
 	var councillers = council.getCouncillers().datefilter();
 	var countCanton = councillers.byCanton();
 	var smallestDate = council.smallestDate();
-
+	council.loadAllParty();
+	$(".chzn-select").chosen({no_results_text: "Aucun partie corespondant !",max_selected_options: 2});
+	
 	loadcouncil(councillers);
 	//loadMap(countCanton);
 
@@ -133,7 +135,8 @@ $(function() {
 	                            onstatechange: function( value ){
 								    /** APPELLE FONCTION POUR FILTER DATE **/
 								}});
-				   
+								
+	
 });
 
 /**

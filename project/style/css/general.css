@@ -104,7 +104,7 @@ html{
 	font-family: "Francois One" , arial;
 	font-size: 15px;
 }
- #council #choice,#year label{
+ #council #choice,#year label, #party label, #party li{
 	font-family: "Arimo" , arial;
 	font-size: 12px;
 	text-transform: none;
@@ -112,6 +112,23 @@ html{
 	font-weight: none;
 
 }
+.chzn-choices{
+	 background-image:url(../../img/background.png);
+    background-repeat: repeat;
+	border: #cccccc 1px solid !important;
+	
+	font-family: "Arimo",arial !important;	
+	color:#9d9d9d  !important;
+	width: 100% !important;
+	
+
+}
+
+.chzn-results li{
+	 background-image:url(../../img/background.png);
+  background-repeat: repeat;
+}
+	
  #council #choice div {
  	color:#f33f52;
  }
@@ -138,10 +155,27 @@ html{
 table {
 	margin-left:5px;
 }
-.aboutContent .contentInfo, .optionsContent .contentInfo, .texteBtShow,.optionsContent table{
+
+.optionsContent .title, .aboutContent .title{
+	font-family: "Francois One" , arial;
+	font-size: 15px;
+	text-transform: uppercase;
+	margin-left:10px;
+	margin-right: 10px;
+	color:#f33f52;
+}
+.aboutContent .contentInfo, .optionsContent .contentInfo , .texteBtShow,.optionsContent div{
 	font-family: "Arimo" , arial;
 	font-size: 12px;
 	text-align: justify; 
+	
+}
+.optionsContent div{
+	font-weight: bold;
+}
+
+.optionsContent .prct{
+color:#f33f52;
 }
 .filterContent, .optionsContent, .aboutContent{
 	  width:-moz-calc(100% - 30px);
@@ -406,4 +440,28 @@ margin-left:5px;
 background:url(../../img/bottomBulle.png) top center no-repeat;
 overflow:hidden;
 
+}
+
+.btNOk, .btOk{
+	margin-left:10px;
+    background: transparent;
+	border: #cccccc 1px solid;
+	width: 100px;
+	height:21px;
+	font-family: "Arimo",arial;	
+	color:#9d9d9d ;
+	cursor: pointer;
+	-moz-box-shadow: 0px 0px 4px #c3c2c2;
+	-webkit-box-shadow: 0px 0px 4px #c3c2c2;
+	box-shadow: 0px 0px 4px #c3c2c2;
+	font-size: 12px;
+}
+.btOk{
+	margin-left:40px;
+}
+.btNOk:hover, .btOk:hover{
+	color:#6f6f6f ;
+	-moz-box-shadow: 0px 0px 4px #6f6f6f;
+	-webkit-box-shadow: 0px 0px 4px #6f6f6f;
+	box-shadow: 0px 0px 4px #6f6f6f;
 }
