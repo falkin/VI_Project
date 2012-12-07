@@ -2,15 +2,16 @@ google.load('visualization', '1', {
 	packages : ['table']
 });
 //google.setOnLoadCallback(drawTable);
-
+        
 function drawTable(array) {
 
 	var data = new google.visualization.DataTable();
 
-	data.addColumn('string', 'First name');
-	data.addColumn('string', 'Last name');
+	data.addColumn('string', '');
+	data.addColumn('string', '');
+	data.addColumn('string', '');
 	data.addRows(array);
-	var table = new google.visualization.Table(document.getElementById('information'));
+	var table = new google.visualization.Table(document.getElementById('informationList'));
 	table.draw(data, {
 		page : 'disable',
 	});
@@ -136,6 +137,8 @@ $(function() {
 	var councillers = council.getCouncillers().datefilter();
 	var countCanton = councillers.byCanton();
 	var smallestDate = council.smallestDate();
+	
+		 
 	council.loadAllParty();
 	$(".chzn-select").chosen({no_results_text: "Aucun partie corespondant !",max_selected_options: 2});
 	
@@ -149,22 +152,23 @@ $(function() {
 		loadcouncil(councillers);
 	});
 	
-	 $(".chzn-results li").click(function() {
-	  	if($(".partyInfo .value").text() && $(".partyInfo .value").text() !="-"){
-	  		$(".partyInfo .value").text($(".partyInfo .value").text()+", "+$(this).text());
-	  	} 
-	  	else{
-	  		$(".partyInfo .value").text($(this).text());
-	  	}
-	  	
-	 });
-	 $(".chzn-choices li").click(function() {
-	  	
-	  		$(".partyInfo .value").text("-");
-	  	
-	  	
-	 });
-	 
+
+	 $(".chzn-select").chosen().change( function() {
+			
+		   var str = "-";
+	  	   $(".result-selected").each(function () {
+	  	  	 	var parti = $(this).text().split("-");
+	  	  	 	if(str !="-"){
+               		 str +=  ", " +parti[0] ;
+                }
+                else{
+                	str = parti[0];
+                }
+           });
+           $(".partyInfo .value").text(str);
+           
+	});
+	
 	jQuery("#Slider1").slider({ from:Number(smallestDate), to:2012 ,round:0,format:{format:"####", locale:"us"}, 
 	                            scale: [Number(smallestDate), '|',1900, '|', 1930, '|',1960, '|', 1990,  '|', 2012], 
 	                            limits: false, step: 1, dimension: '', skin: "plastic", 
@@ -178,6 +182,8 @@ $(function() {
 								   		$(".yearInfo .value").text('De '+val[0]+' à '+val[1]);
 								   }
 								}});
+								
+
 								
 	
 });

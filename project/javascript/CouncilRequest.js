@@ -112,6 +112,7 @@ function Council() {
 			var councillerarray = new Array();
 			councillerarray[0] = value.firstName;
 			councillerarray[1] = value.lastName;
+			councillerarray[2] =  value.council.abbreviation;
 			selectedcouncilarray[selectedcouncilarray.length] = councillerarray;
 		});
 		return selectedcouncilarray;
