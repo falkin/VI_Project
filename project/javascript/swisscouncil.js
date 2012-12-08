@@ -3,21 +3,48 @@ google.load('visualization', '1', {
 });
 //google.setOnLoadCallback(drawTable);
         
-function drawTable(array) {
+var filterListSearch = false;
+
+function drawTable(array,refresh) {
 
 	var data = new google.visualization.DataTable();
 
 	data.addColumn('string', '');
 	data.addColumn('string', '');
 	data.addColumn('string', '');
-	data.addRows(array);
-	var table = new google.visualization.Table(document.getElementById('informationList'));
-	table.draw(data, {
-		page : 'disable',
-	});
-	google.visualization.events.addListener(table, 'select', function selectHandler(table) {
-		var selection = table.getSelection();
-	});
+	var val = new RegExp($(".inputePeopleLong").val(), "i");
+	if(filterListSearch == true){
+		    var selectedcouncilarray = new Array();
+		    var b = 0;
+			for (var i = 0; i < array.length; i++) {
+				if(array[i][0].toString().match(val) !=null || array[i][1].toString().match(val) !=null){
+					selectedcouncilarray[b] = array[i];
+					b = b+1; 
+			    }
+			}
+			data.addRows(selectedcouncilarray);
+	}
+	else{
+		data.addRows(array);
+	}
+	if(refresh ==0){
+		var table = new google.visualization.Table(document.getElementById('informationList'));
+		table.draw(data, {
+			page : 'disable',
+		});
+		google.visualization.events.addListener(table, 'select', function selectHandler(table) {
+			var selection = table.getSelection();
+		});
+	}
+	else if(refresh ==1){
+		var table = new google.visualization.Table(document.getElementById('tableListPeople'));
+		table.draw(data, {
+			page : 'disable',
+		});
+		google.visualization.events.addListener(table, 'select', function selectHandler(table) {
+			var selection = table.getSelection();
+		});
+	}
 	return data;
 }
 
@@ -73,7 +100,7 @@ $(function() {
 		map.series.regions[0].setValues(colors);
 	}
 
-	function loadcouncil(councillers) {
+	function loadcouncil(councillers,refresh) {
 		var textInfoCouncil = "-";
 		var councilstring = "";
 		if ($('#BR').attr("checked") == "checked") {
@@ -125,8 +152,10 @@ $(function() {
 		$(".councilInfo .value").text(textInfoCouncil);
 		var selectcouncillers = null;
 		selectcouncillers = councillers.councilfilter(councilstring).byCanton();
-		drawTable(councillers.toArray());
+		
+		drawTable(councillers.toArray(),refresh);
 		loadMap(selectcouncillers);
+		
 	}
 
 
@@ -144,12 +173,24 @@ $(function() {
 	
 	
 	  
-	loadcouncil(councillers);
+	loadcouncil(councillers,0);
 	//loadMap(countCanton);
 
+	 $(".inputePeopleLong").keyup(function(event) {
+	 	
+		if ($(".inputePeopleLong").val() !="" && $(".inputePeopleLong").val() !="Rechercher une personne dans la liste"){
+		 	filterListSearch = true;
+		 }
+		 else{
+		 	filterListSearch = false;
+		 }
+		 loadcouncil(councillers,1);
+	});
+	
+	
 	$('#choice input').change(function() {
 		map.series.regions[0].elements["CH-JU"].element.properties["d]"] = null//["fill"]="rgb(255,255,255)";
-		loadcouncil(councillers);
+		loadcouncil(councillers,1);
 	});
 	
 

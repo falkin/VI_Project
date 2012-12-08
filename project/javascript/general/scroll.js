@@ -1,9 +1,9 @@
 
 
-$(document).ready(function(){
+$(document).ready(function (){
 		$("#informationList").mCustomScrollbar({
 		  set_width:"100%", 
-		  set_height:600, 
+		  set_height:500, 
 		  horizontalScroll:false, 
 		  scrollInertia:550, 
 		  scrollEasing:"easeOutCirc", 
@@ -16,10 +16,11 @@ $(document).ready(function(){
 		    scrollAmount:40 
 		  },
 		  advanced:{
+		  	updateOnContentResize: true,
 		    updateOnBrowserResize:true, 
-		    updateOnContentResize:false, 
 		    autoExpandHorizontalScroll:false, 
-		    autoScrollOnFocus:true 
+		    autoScrollOnFocus:true,
+		
 		  },
 		  callbacks:{
 		    onScrollStart:function(){}, 
@@ -30,5 +31,9 @@ $(document).ready(function(){
 		    whileScrolling:false, 
 		    whileScrollingInterval:30 
 		  }
-});
-});
+		});
+				
+	 $('.mCSB_container').attr("id","tableListPeople");		
+	 
+
+});	
