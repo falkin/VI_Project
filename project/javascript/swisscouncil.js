@@ -18,6 +18,7 @@ function displayInstead(idCouncil) {
 		insteadSp = instead.split(",");
 		insteadFinal =insteadSp[0]; 
 	  	loadMap(insteadFinal); 
+	  	map.removeAllMarkers();
 }
 function addLocation(position) {
 		var pos = parseFloat(position.toString().split(",")[0].replace("(",""));
@@ -26,7 +27,7 @@ function addLocation(position) {
 	    var cityAreaData = [];
 	    allValuesinstead++;
 	    if(allValuesinstead==insteadSp.length){
-	    	map.removeAllMarkers();
+	    	
 	    	map.addMarkers(markers,cityAreaData);
 	    	allValuesinstead=0;
 	    	 markers = new Array();
