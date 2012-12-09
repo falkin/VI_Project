@@ -97,9 +97,52 @@ html{
 	 
 	
 }
+.radioMapTypeOne,.radioMapTypeTwo,.radioMapTypeThree{
+	font-weight: bold !important;
+}
 .aboutContent .title, .optionsContent .title{
 	font-family: "Francois One" , arial;
-	font-size: 15px;
+	font-size: 15px;
+}
+ #council #choice,#year label, #party label, #party li{
+	font-family: "Arimo" , arial;
+	font-size: 12px;
+	text-transform: none;
+	cursor: default;
+	font-weight: none;
+
+}
+.chzn-choices{
+	 background-image:url(../../img/background.png);
+    background-repeat: repeat;
+	border: #cccccc 1px solid !important;
+	
+	font-family: "Arimo",arial !important;	
+	color:#9d9d9d  !important;
+	width: 100% !important;
+	
+
+}
+
+.chzn-results li{
+	 background-image:url(../../img/background.png);
+  background-repeat: repeat;
+}
+	
+ #council #choice div {
+ 	color:#f33f52;
+ }
+ #choice div label {
+ 	margin-right:20px;
+ 	font-weight: bold;
+ }
+.contentFilerInside {
+	    height: 150px;
+    margin: 15px;
+    width: 100%;
+}
+.party{
+	color: #f33f52;
 }
 .filterContent .title,.filterContent{
 	font-family: "Francois One" , arial;
@@ -109,13 +152,54 @@ html{
 	margin-right: 10px;
 	cursor: pointer;
 }
-table input{
+table {
 	margin-left:5px;
 }
-.aboutContent .contentInfo, .optionsContent .contentInfo, .texteBtShow,.optionsContent table{
+.infoFilter { 
+	
+	margin-top:20px;
+	padding-bottom:2px;
+	margin-bottom:10px;
+	font-family: "Arimo" , arial;
+	font-size: 12px;
+	padding-left:50px;
+	
+}
+.lastInfo{
+	margin-top:0px;
+		padding-bottom:5px;
+	border-bottom: #cccccc 1px solid !important;
+}
+.yearInfo , .councilInfo{
+	margin-left:25px;
+}
+.yearInfo .value, .councilInfo .value,.partyInfo .value, .typeInfo .value{
+color:#f33f52;
+font-weight:bold;
+}
+.partyInfo{
+	min-width: 300px;
+}
+.optionsContent .title, .aboutContent .title{
+	font-family: "Francois One" , arial;
+	font-size: 15px;
+	text-transform: uppercase;
+	margin-left:10px;
+	margin-right: 10px;
+	color:#f33f52;
+}
+.aboutContent .contentInfo, .optionsContent .contentInfo , .texteBtShow,.optionsContent div{
 	font-family: "Arimo" , arial;
 	font-size: 12px;
 	text-align: justify; 
+	
+}
+.optionsContent div{
+	font-weight: bold;
+}
+
+.optionsContent .prct{
+color:#f33f52;
 }
 .filterContent, .optionsContent, .aboutContent{
 	  width:-moz-calc(100% - 30px);
@@ -223,7 +307,7 @@ table input{
 	 background-image:url(../../img/backHeader.png);
      background-repeat: repeat-x;
      background-position:bottom;
-	 height				: 300px;
+	 height				: 46px;
 	 text-align: center;	
 	    position: fixed;
 	     border-top: 6px #353535 solid;
@@ -373,11 +457,35 @@ margin-top:20px;
  font-size:10px;
  
  }
-#ttbot {
+#ttbot{
 display:block;
 height:10px;
 margin-left:5px;
 background:url(../../img/bottomBulle.png) top center no-repeat;
 overflow:hidden;
 
+}
+
+.btNOk, .btOk{
+	margin-left:10px;
+    background: transparent;
+	border: #cccccc 1px solid;
+	width: 100px;
+	height:21px;
+	font-family: "Arimo",arial;	
+	color:#9d9d9d ;
+	cursor: pointer;
+	-moz-box-shadow: 0px 0px 4px #c3c2c2;
+	-webkit-box-shadow: 0px 0px 4px #c3c2c2;
+	box-shadow: 0px 0px 4px #c3c2c2;
+	font-size: 12px;
+}
+.btOk{
+	margin-left:40px;
+}
+.btNOk:hover, .btOk:hover{
+	color:#6f6f6f ;
+	-moz-box-shadow: 0px 0px 4px #6f6f6f;
+	-webkit-box-shadow: 0px 0px 4px #6f6f6f;
+	box-shadow: 0px 0px 4px #6f6f6f;
 }

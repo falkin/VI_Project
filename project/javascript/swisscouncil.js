@@ -1,3 +1,4 @@
+
 google.load('visualization', '1', {
 	packages : ['table']
 });
@@ -43,13 +44,7 @@ $(function() {
 			regions : [{
 				attribute : 'fill'
 			}]
-		},
-      onRegionLabelShow: function(event, label, code){
-        label.html(
-          ''+label.html()+''+
-          'Unemployment rate: '+code+'%'
-        );
-      }
+		}
 	});
 
 	function loadMap(countCanton) {
@@ -79,25 +74,55 @@ $(function() {
 	}
 
 	function loadcouncil(councillers) {
+		var textInfoCouncil = "-";
 		var councilstring = "";
 		if ($('#BR').attr("checked") == "checked") {
+			$('.BR').css("color", "#f33f52");
+			textInfoCouncil = "Conseil fédéral";
 			if (councilstring.length != 0) {
 				councilstring += " ";
 			}
 			councilstring += "BR";
 		}
+		else{
+			$('.BR').css("color", "black");
+		}
 		if ($('#CN').attr("checked") == "checked") {
+			$('.CN').css("color", "#f33f52");
+			if(textInfoCouncil == "-"){
+				textInfoCouncil = "Conseil national";
+			}
+			else{
+				textInfoCouncil = textInfoCouncil+", national";
+			}
 			if (councilstring.length != 0) {
 				councilstring += " ";
 			}
 			councilstring += "CN";
 		}
+		else{
+			$('.CN').css("color", "black");
+		}
 		if ($('#CE').attr("checked") == "checked") {
+			$('.CE').css("color", "#f33f52");
+			if(textInfoCouncil == "-"){
+				textInfoCouncil = "Conseil des états";
+			}
+			else{
+				textInfoCouncil = textInfoCouncil+", des états";
+			}
 			if (councilstring.length != 0) {
 				councilstring += " ";
 			}
 			councilstring += "CE";
 		}
+		else{
+			$('.CE').css("color", "black");
+		}
+		if($('#CE').attr("checked") == "checked" && $('#CN').attr("checked") == "checked" && $('#BR').attr("checked") == "checked" ){
+			textInfoCouncil = "Tous";
+		}
+		$(".councilInfo .value").text(textInfoCouncil);
 		var selectcouncillers = null;
 		selectcouncillers = councillers.councilfilter(councilstring).byCanton();
 		drawTable(councillers.toArray());
@@ -111,6 +136,12 @@ $(function() {
 	var council = new Council();
 	var councillers = council.getCouncillers().datefilter();
 	var countCanton = councillers.byCanton();
+	var smallestDate = council.smallestDate();
+	council.loadAllParty();
+	$(".chzn-select").chosen({no_results_text: "Aucun parti corespondant !",max_selected_options: 2});
+	
+	
+	  
 	loadcouncil(councillers);
 	//loadMap(countCanton);
 
@@ -118,6 +149,38 @@ $(function() {
 		map.series.regions[0].elements["CH-JU"].element.properties["d]"] = null//["fill"]="rgb(255,255,255)";
 		loadcouncil(councillers);
 	});
+	
+	 $(".chzn-results li").click(function() {
+	  	if($(".partyInfo .value").text() && $(".partyInfo .value").text() !="-"){
+	  		$(".partyInfo .value").text($(".partyInfo .value").text()+", "+$(this).text());
+	  	} 
+	  	else{
+	  		$(".partyInfo .value").text($(this).text());
+	  	}
+	  	
+	 });
+	 $(".chzn-choices li").click(function() {
+	  	
+	  		$(".partyInfo .value").text("-");
+	  	
+	  	
+	 });
+	 
+	jQuery("#Slider1").slider({ from:Number(smallestDate), to:2012 ,round:0,format:{format:"####", locale:"us"}, 
+	                            scale: [Number(smallestDate), '|',1900, '|', 1930, '|',1960, '|', 1990,  '|', 2012], 
+	                            limits: false, step: 1, dimension: '', skin: "plastic", 
+	                            onstatechange: function( value ){
+								   var val = value.split(";");
+								   
+								   if(val[0] == val[1]){
+								   		$(".yearInfo .value").text(val[0]);
+								   }
+								   else{
+								   		$(".yearInfo .value").text('De '+val[0]+' à '+val[1]);
+								   }
+								}});
+								
+	
 });
 
 /**
@@ -162,3 +225,4 @@ function hslToRgb(h, s, l) {
 	return [r * 255, g * 255, b * 255];
 }
 
+>>>>>>> bd37554033bc88306ca2815e19671e7bef75e2f6

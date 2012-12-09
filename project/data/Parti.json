@@ -1,0 +1,461 @@
+[
+	{
+		"id": 1393,
+		"updated": "2010-12-26T13:05:26Z",
+		"abbreviation": "AVL (SG)",
+		"code": "1393",
+		"name": "Allgemeine Volksliste (SG)"
+	}, {
+		"id": 28,
+		"updated": "2010-12-26T13:05:26Z",
+		"abbreviation": "AdG",
+		"code": "28",
+		"name": "Alliance de Gauche"
+	}, {
+		"id": 17,
+		"updated": "2010-12-26T13:05:26Z",
+		"abbreviation": "AdI",
+		"code": "17",
+		"name": "Alliance des Indépendants"
+	}, {
+		"id": 1395,
+		"updated": "2010-12-26T13:05:26Z",
+		"abbreviation": "AJU (BE)*",
+		"code": "1395",
+		"name": "Alliance jurassienne (BE)"
+	}, {
+		"id": 25,
+		"updated": "2010-12-26T13:05:26Z",
+		"abbreviation": "GB",
+		"code": "25",
+		"name": "Alliance verte"
+	}, {
+		"id": 1375,
+		"updated": "2011-11-09T14:04:20Z",
+		"abbreviation": "Al",
+		"code": "1375",
+		"name": "Alternative Canton de Zoug"
+	}, {
+		"id": 1396,
+		"updated": "2010-12-26T13:05:26Z",
+		"abbreviation": "BAB*",
+		"code": "1396",
+		"name": "Bauern- und Arbeiterbund"
+	}, {
+		"id": 1399,
+		"updated": "2010-12-26T13:05:26Z",
+		"abbreviation": "BV (SZ)*",
+		"code": "1399",
+		"name": "Bauernvereinigung (SZ)"
+	}, {
+		"id": 1400,
+		"updated": "2010-12-26T13:05:26Z",
+		"abbreviation": "BeVP*",
+		"code": "1400",
+		"name": "Berner Volkspartei"
+	}, {
+		"id": 1445,
+		"updated": "2010-12-26T13:05:26Z",
+		"abbreviation": "CentreD",
+		"code": "1445",
+		"name": "Centre-droit"
+	}, {
+		"id": 1444,
+		"updated": "2010-12-26T13:05:26Z",
+		"abbreviation": "CentreG",
+		"code": "1444",
+		"name": "Centre-gauche"
+	}, {
+		"id": 1577,
+		"updated": "2011-12-12T15:19:46Z",
+		"abbreviation": "csp-ow",
+		"code": "1577",
+		"name": "Christlich-soziale Partei Obwalden"
+	}, {
+		"id": 1573,
+		"updated": "2011-04-28T15:29:27Z",
+		"abbreviation": "CSPO",
+		"code": "1573",
+		"name": "Christlichsoziale Volkspartei Oberwallis"
+	}, {
+		"id": 1443,
+		"updated": "2010-12-26T13:05:26Z",
+		"abbreviation": "CoLi->Cons",
+		"code": "1443",
+		"name": "Conservateur libéral puis conservateur catholique"
+	}, {
+		"id": 1437,
+		"updated": "2010-12-26T13:05:26Z",
+		"abbreviation": "Cons->Lib",
+		"code": "1437",
+		"name": "Conservateur puis libéral"
+	}, {
+		"id": 1407,
+		"updated": "2010-12-26T13:05:26Z",
+		"abbreviation": "ConsDém*",
+		"code": "1407",
+		"name": "Conservateurs démocrate"
+	}, {
+		"id": 1420,
+		"updated": "2010-12-26T13:05:26Z",
+		"abbreviation": "ConsM*",
+		"code": "1420",
+		"name": "Conservateurs modérés"
+	}, {
+		"id": 1456,
+		"updated": "2010-12-26T13:05:26Z",
+		"abbreviation": "ConsR*",
+		"code": "1456",
+		"name": "Conservateurs réformés"
+	}, {
+		"id": 1405,
+		"updated": "2010-12-26T13:05:26Z",
+		"abbreviation": "Dém->Rad",
+		"code": "1405",
+		"name": "Démocrate puis radical"
+	}, {
+		"id": 1404,
+		"updated": "2010-12-26T13:05:26Z",
+		"abbreviation": "Dém*",
+		"code": "1404",
+		"name": "Démocrates"
+	}, {
+		"id": 19,
+		"updated": "2010-12-26T13:05:26Z",
+		"abbreviation": "DS",
+		"code": "19",
+		"name": "Démocrates Suisses"
+	}, {
+		"id": 1406,
+		"updated": "2010-12-26T13:05:26Z",
+		"abbreviation": "DAP*",
+		"code": "1406",
+		"name": "Demokraten und Arbeiterpartei"
+	}, {
+		"id": 1410,
+		"updated": "2010-12-26T13:05:26Z",
+		"abbreviation": "FSS",
+		"code": "1410",
+		"name": "Fédération socialiste suisse (VD-GE)"
+	}, {
+		"id": 1411,
+		"updated": "2010-12-26T13:05:26Z",
+		"abbreviation": "FödP*",
+		"code": "1411",
+		"name": "Föderaldemokratische Partei (GR)"
+	}, {
+		"id": 1412,
+		"updated": "2010-12-26T13:05:26Z",
+		"abbreviation": "FP*",
+		"code": "1412",
+		"name": "Fortschrittspartei"
+	}, {
+		"id": 1575,
+		"updated": "2011-08-15T08:16:50Z",
+		"abbreviation": "FraP!",
+		"code": "1575",
+		"name": "Frauen macht Politik!"
+	}, {
+		"id": 21,
+		"updated": "2010-12-26T13:05:26Z",
+		"abbreviation": "FPS",
+		"code": "21",
+		"name": "Freiheits-Partei der Schweiz"
+	}, {
+		"id": 1447,
+		"updated": "2010-12-26T13:05:26Z",
+		"abbreviation": "NF",
+		"code": "1447",
+		"name": "Front National"
+	}, {
+		"id": 1419,
+		"updated": "2010-12-26T13:05:26Z",
+		"abbreviation": "Fusio(TI)*",
+		"code": "1419",
+		"name": "Fusionisti (TI)"
+	}, {
+		"id": 1424,
+		"updated": "2010-12-26T13:05:26Z",
+		"abbreviation": "Grut*",
+		"code": "1424",
+		"name": "Grutléens"
+	}, {
+		"id": 1426,
+		"updated": "2010-12-26T13:05:26Z",
+		"abbreviation": "Grut&Dém*",
+		"code": "1426",
+		"name": "Grutléens et démocrates"
+	}, {
+		"id": 1427,
+		"updated": "2010-12-26T13:05:26Z",
+		"abbreviation": "Grut&PS*",
+		"code": "1427",
+		"name": "Grutléens et socialistes"
+	}, {
+		"id": 1468,
+		"updated": "2010-12-26T13:05:26Z",
+		"abbreviation": "?",
+		"code": "1468",
+		"name": "Indéfinissable"
+	}, {
+		"id": 1467,
+		"updated": "2010-12-26T13:05:26Z",
+		"abbreviation": "Ind*",
+		"code": "1467",
+		"name": "Indépendant"
+	}, {
+		"id": 1428,
+		"updated": "2010-12-26T13:05:26Z",
+		"abbreviation": "Ind. (GE)*",
+		"code": "1428",
+		"name": "Indépendant (rad.diss.) (GE)"
+	}, {
+		"id": 1430,
+		"updated": "2010-12-26T13:05:26Z",
+		"abbreviation": "JB",
+		"code": "1430",
+		"name": "Jeunes paysans"
+	}, {
+		"id": 1431,
+		"updated": "2010-12-26T13:05:26Z",
+		"abbreviation": "Zent (BS)*",
+		"code": "1431",
+		"name": "Juste milieu\/Zentrum (BS)"
+	}, {
+		"id": 1571,
+		"updated": "2010-12-26T13:05:26Z",
+		"abbreviation": "LG",
+		"code": "1571",
+		"name": "La Gauche"
+	}, {
+		"id": 23,
+		"updated": "2010-12-26T13:05:26Z",
+		"abbreviation": "Lega",
+		"code": "23",
+		"name": "Lega dei Ticinesi"
+	}, {
+		"id": 1440,
+		"updated": "2010-12-26T13:05:26Z",
+		"abbreviation": "Lib*",
+		"code": "1440",
+		"name": "Libéral"
+	}, {
+		"id": 1442,
+		"updated": "2010-12-26T13:05:26Z",
+		"abbreviation": "LibCons*",
+		"code": "1442",
+		"name": "Libéral-conservateur"
+	}, {
+		"id": 1414,
+		"updated": "2010-12-26T13:05:26Z",
+		"abbreviation": "LL",
+		"code": "1414",
+		"name": "Liste libre (BE)"
+	}, {
+		"id": 1576,
+		"updated": "2011-11-10T12:00:38Z",
+		"abbreviation": "MCR",
+		"code": "1576",
+		"name": "Mouvement Citoyens Romand"
+	}, {
+		"id": 1574,
+		"updated": "2011-06-29T16:52:51Z",
+		"abbreviation": "MSL",
+		"code": "1574",
+		"name": "Mouvement socio-libéral"
+	}, {
+		"id": 1551,
+		"updated": "2010-12-26T13:05:26Z",
+		"abbreviation": "PBD",
+		"code": "1551",
+		"name": "Parti bourgeois-démocratique suisse"
+	}, {
+		"id": 27,
+		"updated": "2010-12-26T13:05:26Z",
+		"abbreviation": "PCS",
+		"code": "27",
+		"name": "Parti chrétien-social"
+	}, {
+		"id": 1401,
+		"updated": "2010-12-26T13:05:26Z",
+		"abbreviation": "CSI",
+		"code": "1401",
+		"name": "Parti chrétien-social indépendant(JU)"
+	}, {
+		"id": 1432,
+		"updated": "2010-12-26T13:05:26Z",
+		"abbreviation": "PC",
+		"code": "1432",
+		"name": "Parti communiste"
+	}, {
+		"id": 1433,
+		"updated": "2010-12-26T13:05:26Z",
+		"abbreviation": "PCO*",
+		"code": "1433",
+		"name": "Parti communiste d’opposition"
+	}, {
+		"id": 14,
+		"updated": "2010-12-26T13:05:26Z",
+		"hasMorePages": true,
+		"abbreviation": "PDC",
+		"code": "14",
+		"name": "Parti démocrate-chrétien suisse"
+	}, {
+		"id": 20,
+		"updated": "2010-12-26T13:05:26Z",
+		"abbreviation": "PES",
+		"code": "20",
+		"name": "Parti écologiste suisse"
+	}, {
+		"id": 18,
+		"updated": "2010-12-26T13:05:26Z",
+		"abbreviation": "PEV",
+		"code": "18",
+		"name": "Parti évangélique suisse"
+	}, {
+		"id": 16,
+		"updated": "2010-12-26T13:05:26Z",
+		"abbreviation": "PLS",
+		"code": "16",
+		"name": "Parti libéral suisse"
+	}, {
+		"id": 1398,
+		"updated": "2010-12-26T13:05:26Z",
+		"abbreviation": "BP*",
+		"code": "1398",
+		"name": "Parti paysan (non PAB)"
+	}, {
+		"id": 1472,
+		"updated": "2010-12-26T13:05:26Z",
+		"abbreviation": "PP (BE)*",
+		"code": "1472",
+		"name": "Parti populaire (BE)"
+	}, {
+		"id": 1450,
+		"updated": "2010-12-26T13:05:26Z",
+		"abbreviation": "PPN",
+		"code": "1450",
+		"name": "Parti progressiste national (NE)"
+	}, {
+		"id": 12,
+		"updated": "2010-12-26T13:05:26Z",
+		"abbreviation": "PSS",
+		"code": "12",
+		"name": "Parti socialiste suisse"
+	}, {
+		"id": 22,
+		"updated": "2010-12-26T13:05:26Z",
+		"abbreviation": "PdT",
+		"code": "22",
+		"name": "Parti Suisse du travail"
+	}, {
+		"id": 1336,
+		"updated": "2010-12-26T13:05:26Z",
+		"abbreviation": "pvl",
+		"code": "1336",
+		"name": "Parti vert'libéral"
+	}, {
+		"id": 1451,
+		"updated": "2010-12-26T13:05:26Z",
+		"abbreviation": "PdP (TI)*",
+		"code": "1451",
+		"name": "Partito dei Popolini"
+	}, {
+		"id": 1452,
+		"updated": "2010-12-26T13:05:26Z",
+		"abbreviation": "PdP->Fusio",
+		"code": "1452",
+		"name": "Partito dei Popolini poi Fusionisti"
+	}, {
+		"id": 15,
+		"updated": "2010-12-26T13:05:26Z",
+		"abbreviation": "PLR",
+		"code": "15",
+		"name": "PLR.Les Libéraux-Radicaux"
+	}, {
+		"id": 1425,
+		"updated": "2010-12-26T13:05:26Z",
+		"abbreviation": "proc grut*",
+		"code": "1425",
+		"name": "Proche des Grutléens"
+	}, {
+		"id": 1417,
+		"updated": "2010-12-26T13:05:26Z",
+		"abbreviation": "proc Rad*",
+		"code": "1417",
+		"name": "Proche des radicaux"
+	}, {
+		"id": 1462,
+		"updated": "2010-12-26T13:05:26Z",
+		"abbreviation": "proc Soc*",
+		"code": "1462",
+		"name": "Proche des socialistes"
+	}, {
+		"id": 1434,
+		"updated": "2010-12-26T13:05:26Z",
+		"abbreviation": "procCons*",
+		"code": "1434",
+		"name": "Proches des conservateurs"
+	}, {
+		"id": 1454,
+		"updated": "2010-12-26T13:05:26Z",
+		"abbreviation": "Prog (GE)*",
+		"code": "1454",
+		"name": "Progressiste (GE)"
+	}, {
+		"id": 26,
+		"updated": "2010-12-26T13:05:26Z",
+		"abbreviation": "-",
+		"code": "26",
+		"name": "sans parti"
+	}, {
+		"id": 1461,
+		"updated": "2010-12-26T13:05:26Z",
+		"abbreviation": "SdB (AR)*",
+		"code": "1461",
+		"name": "Seele der Bewegung (AR)"
+	}, {
+		"id": 1464,
+		"updated": "2010-12-26T13:05:26Z",
+		"abbreviation": "SRF (BS)*",
+		"code": "1464",
+		"name": "Socialiste de droite (BS)"
+	}, {
+		"id": 1466,
+		"updated": "2010-12-26T13:05:26Z",
+		"abbreviation": "Trav(NE)*",
+		"code": "1466",
+		"name": "Travailliste (NE)"
+	}, {
+		"id": 1469,
+		"updated": "2010-12-26T13:05:26Z",
+		"abbreviation": "UDE",
+		"code": "1469",
+		"name": "Union de défense économique (GE)"
+	}, {
+		"id": 13,
+		"updated": "2010-12-26T13:05:26Z",
+		"abbreviation": "UDC",
+		"code": "13",
+		"name": "Union Démocratique du Centre"
+	}, {
+		"id": 24,
+		"updated": "2010-12-26T13:05:26Z",
+		"abbreviation": "UDF",
+		"code": "24",
+		"name": "Union Démocratique Féderale"
+	}, {
+		"id": 1470,
+		"updated": "2010-12-26T13:05:26Z",
+		"abbreviation": "VKons(BE)*",
+		"code": "1470",
+		"name": "Vereinigte Konservative (BE)"
+	}, {
+		"id": 1471,
+		"updated": "2010-12-26T13:05:26Z",
+		"hasMorePages": false,
+		"abbreviation": "Vig.\/GE",
+		"code": "1471",
+		"name": "Vigilants (GE)"
+	}
+]

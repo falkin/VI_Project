@@ -47,6 +47,7 @@
 		zoom: 1;
 		filter: alpha(opacity=0);
 		cursor: pointer;
+		color:#b2daa1;
 }
 
 .switch{
@@ -90,14 +91,16 @@
 	-webkit-transition: left .2s ease;
 	        transition: left .2s ease;
 	
-	width: 13spx;
+	width: 13px;
 	z-index: 1; /* Remember, it must be below the invisible inputs */
+	color: #b2daa1;
 }
 
 .texteBtShow {
 	font-weight: bold;
 	margin-left:15px;
 	margin-top:3px;
+	color: #b2daa1;
 }
 
 .toggle-bg input:checked~.switch{left: -1px;background: #b2daa1;} /* initial toggle position */
