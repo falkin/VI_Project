@@ -2,6 +2,10 @@ function Council() {
 	var council;
 	var selectedcouncil;
 	var allcouncil;
+	var partiarray=new Array();
+	var councilarray=new Array();
+	var dateBegin=2000;
+	var dateEnd=2012;
 	/*	this.getCouncillersOnline = function() {
 	 for (var i = 1; i < 120; i++) {
 	 $.ajax({
@@ -35,10 +39,10 @@ function Council() {
 		}
 		selectedcouncil = council;
 		allcouncil = council;
-
 		return this;
 	};
 
+	
 	this.cantonfilter = function(canton) {
 		selectedcouncil = council.filter(function(council) {
 			return council.canton.abbreviation == canton;
@@ -53,22 +57,64 @@ function Council() {
 		return this;
 	}
 
+	this.setCouncil = function(party){
+		councilarray = party.split(" ");
+		return this.reload();
+	}
+	
 	this.councilfilter = function(counc) {
-		selectedcouncil = council.filter(function(counciller) {
-			var councilarray = counc.split(" ");
+		selectedcouncil = selectedcouncil.filter(function(counciller) {
 			for (var i = 0; i < councilarray.length; i++) {
 				if (counciller.council.abbreviation.substring(0, 2) == councilarray[i])
 					return true;
 			}
 			return false;
 		});
+	}
+
+	this.setCouncil = function(counc){
+		councilarray=counc.split(" ");
+		return this.reload();
+	}
+	
+	this.setDate = function(dateB, dateE){
+		dateBegin=dateB;
+		dateEnd=dateE;
+		return this.reload();
+	}
+	
+	this.partyfilter = function() {
+		selectedcouncil = selectedcouncil.filter(function(counciller) {
+			if (partiarray.length==0 || partiarray[0] == "-")
+				return true;
+			for (var i = 0; i < partiarray.length; i++) {
+				if (counciller.party.abbreviation == partiarray[i])
+					return true;
+			}
+			return false;
+		});
+	}
+	
+	this.setParty = function(party){
+		partiarray = party.split(", ");
+		return this.reload();
+	}
+	
+	this.reload = function(){
+		this.getCouncillers();
+		this.datefilter();
+		this.councilfilter()
+		this.partyfilter();
 		return this;
 	}
 
 	this.datefilter = function() {
-		council = council.filter(function(council) {
-			var d = council.membership.leavingDate == null;
-			return d;
+		selectedcouncil = selectedcouncil.filter(function(council) {
+			if(council.membership.leavingDate == null && dateEnd>=2012){
+				return true;
+			}
+			yearE = parseInt(council.membership.leavingDate.substring(0,4));
+			return yearE >= dateBegin && yearE <= dateEnd;
 		});
 		return this;
 	}
@@ -113,8 +159,11 @@ function Council() {
 			var councillerarray = new Array();
 			councillerarray[0] = value.firstName;
 			councillerarray[1] = value.lastName;
-			councillerarray[2] =  {v:index, f:value.council.abbreviation};
-		
+			councillerarray[2] = {
+				v : index,
+				f : value.council.abbreviation
+			};
+
 			selectedcouncilarray[selectedcouncilarray.length] = councillerarray;
 		});
 		return selectedcouncilarray;

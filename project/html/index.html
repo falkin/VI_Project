@@ -43,7 +43,7 @@
 		<script src="../javascript/lib/jquery-jvectormap-ch-merc-en.js"></script>
 		<script type='text/javascript' src='https://www.google.com/jsapi'></script>
         <script src="http://maps.google.com/maps/api/js?key=AIzaSyCYJPJnS_j_9H0OVRDp6G3xVnx-gHZHYfw&v=3.exp&sensor=false"></script>
-		<script type="text/javascript" src="../javascript/date.js"></script>
+		<script type="text/javascript" src="../javascript/lib/date.js"></script>
 		<script  type="text/javascript" src="../javascript/MapSearch.js"></script>
 		<script type="text/javascript" src="../javascript/CouncilRequest.js"></script>
 		<script type="text/javascript" src="../javascript/swisscouncil.js"></script>
@@ -78,14 +78,14 @@
 						<span class="logo_2" ></span><span class="space"><span class="title filter">Filtres carte</span>&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;<span class="title options">Options</span>&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;<span class="title about" >A propos</span></span>
 						<input type="text" class="inputeDate" value="Rechercher une date" onblur="this.value='Rechercher une date';this.style.color='#9d9d9d';" onclick="this.value='';this.style.color='black';"/>
 						<input type="text" class="inputePeople" value="Rechercher une personne" onblur="this.value='Rechercher une personne';this.style.color='#9d9d9d';" onclick="this.value='';this.style.color='black';" />
-						<input type="text" class="inputeParty" value="Rechercher un partie" onblur="this.value='Rechercher un partie';this.style.color='#9d9d9d';" onclick="this.value='';this.style.color='black';" />
+						<input type="text" class="inputeParty" value="Rechercher un parti" onblur="this.value='Rechercher un parti';this.style.color='#9d9d9d';" onclick="this.value='';this.style.color='black';" />
 					</div>
 
 				</div>
 				<div class="moreInfo">
 					<div class="moreInfoContent">
 						<div class="filterContent">
-							<span class="title party">Partie</span>/<span class="title year">Annee</span>/<span class="title council">Conseil</span>/<span class="title init">Réinitaliser les filtres</span>
+							<span class="title party">parti</span>/<span class="title year">Annee</span>/<span class="title council">Conseil</span>/<span class="title init">Réinitaliser les filtres</span>
 							<div id="party" class="contentFilerInside">
 								<br/>
 								<label>Choisir le(s) parti(s):</label>
@@ -108,7 +108,7 @@
 									<br/>
 									<div class="layout-slider" style="width: 100%">
 										<span style="display: inline-block; width: 90%; padding: 0 5px;">
-											<input id="Slider1" type="slider" name="area" value="2000;2012" />
+											<input id="Slider1" type="slider" name="area" value="2011;2012" />
 										</span>
 									</div>
 
@@ -153,10 +153,10 @@
 							<br/>
 							<div style="width: 100%; text-align: center;">
 								<input type="radio" class="radioMapTypeOne" name="group1" value="1" checked="" >
-								<span class="prct" >Poucentage d'un partie </span>
+								<span class="prct" >Poucentage d'un parti </span>
 
 								<input type="radio" name="group1" class="radioMapTypeTwo"  value="2" >
-								<span class="comp" >Comparer deux parties</span>
+								<span class="comp" >Comparer deux partis</span>
 
 								<input type="radio" name="group1" class="radioMapTypeThree"  value="3">
 								<span class="pos" >Posititon des personnes</span>
@@ -198,7 +198,7 @@
 
 					</div>
 					<div class="infoFilter lastInfo">
-						<span class="typeInfo">Type : <span class="value">Poucentage d'un partie </span></span>
+						<span class="typeInfo">Type : <span class="value">Poucentage d'un parti </span></span>
 					</div>
 				</div>
 

@@ -3,41 +3,44 @@ google.load('visualization', '1', {
 });
 //google.setOnLoadCallback(drawTable);
 
-// GLOBAL VARIABLES 
-        
+// GLOBAL VARIABLES
+
 var filterListSearch = false;
-var table =null;
+var table = null;
 var council = null;
 var insteadFinal;
 var insteadSp;
-var allValuesinstead =0 ;
+var allValuesinstead = 0;
 var markers;
 
 function displayInstead(idCouncil) {
-		var instead = council.searchInstead(idCouncil);
-		insteadSp = instead.split(",");
-		insteadFinal =insteadSp[0]; 
-	  	loadMap(insteadFinal); 
+	var instead = council.searchInstead(idCouncil);
+	insteadSp = instead.split(",");
+	insteadFinal = insteadSp[0];
+	loadMap(insteadFinal);
 }
+
 function addLocation(position) {
-		var pos = parseFloat(position.toString().split(",")[0].replace("(",""));
-		var pos2 = parseFloat(position.toString().split(",")[1].replace(")",""));
-	    markers[allValuesinstead] = {latLng: [pos,pos2], name:insteadFinal};
-	    var cityAreaData = [];
-	    allValuesinstead++;
-	    if(allValuesinstead==insteadSp.length){
-	    	map.removeAllMarkers();
-	    	map.addMarkers(markers,cityAreaData);
-	    	allValuesinstead=0;
-	    	 markers = new Array();
-	    }
-	    else{
-	    	insteadFinal =insteadSp[allValuesinstead]; 
-	  		loadMap(insteadFinal); 
-	    }
+	var pos = parseFloat(position.toString().split(",")[0].replace("(", ""));
+	var pos2 = parseFloat(position.toString().split(",")[1].replace(")", ""));
+	markers[allValuesinstead] = {
+		latLng : [pos, pos2],
+		name : insteadFinal
+	};
+	var cityAreaData = [];
+	allValuesinstead++;
+	if (allValuesinstead == insteadSp.length) {
+		map.removeAllMarkers();
+		map.addMarkers(markers, cityAreaData);
+		allValuesinstead = 0;
+		markers = new Array();
+	} else {
+		insteadFinal = insteadSp[allValuesinstead];
+		loadMap(insteadFinal);
+	}
 }
-	
-function drawTable(array,refresh) {
+
+function drawTable(array, refresh) {
 
 	var data = new google.visualization.DataTable();
 
@@ -45,56 +48,57 @@ function drawTable(array,refresh) {
 	data.addColumn('string', '');
 	data.addColumn('number', '');
 	var val = new RegExp($(".inputePeopleLong").val(), "i");
-	if(filterListSearch == true){
-		    var selectedcouncilarray = new Array();
-		    var b = 0;
-			for (var i = 0; i < array.length; i++) {
-				if(array[i][0].toString().match(val) !=null || array[i][1].toString().match(val) !=null){
-					selectedcouncilarray[b] = array[i];
-					b = b+1; 
-			    }
+	if (filterListSearch == true) {
+		var selectedcouncilarray = new Array();
+		var b = 0;
+		for (var i = 0; i < array.length; i++) {
+			if (array[i][0].toString().match(val) != null || array[i][1].toString().match(val) != null) {
+				selectedcouncilarray[b] = array[i];
+				b = b + 1;
 			}
-			data.addRows(selectedcouncilarray);
-	}
-	else{
+		}
+		data.addRows(selectedcouncilarray);
+	} else {
 		data.addRows(array);
 	}
-	if(refresh ==0){
-		 table = new google.visualization.Table(document.getElementById('informationList'));
-		table.draw(data, {showRowNumber: false},{
+	if (refresh == 0) {
+		table = new google.visualization.Table(document.getElementById('informationList'));
+		table.draw(data, {
+			showRowNumber : false
+		}, {
 			page : 'disable',
 		});
-		google.visualization.events.addListener(table, 'select', function () {
-			 var row = table.getSelection()[0].row;
-   			 displayInstead(data.getValue(row, 2));
+		google.visualization.events.addListener(table, 'select', function() {
+			var row = table.getSelection()[0].row;
+			displayInstead(data.getValue(row, 2));
 		});
-	}
-	else if(refresh ==1){
-		 table = new google.visualization.Table(document.getElementById('tableListPeople'));
-		table.draw(data,{showRowNumber: false}, {
+	} else if (refresh == 1) {
+		table = new google.visualization.Table(document.getElementById('tableListPeople'));
+		table.draw(data, {
+			showRowNumber : false
+		}, {
 			page : 'disable',
 		});
-		google.visualization.events.addListener(table, 'select', function () {
-			 var row = table.getSelection()[0].row;
-   			 displayInstead(data.getValue(row, 2));
+		google.visualization.events.addListener(table, 'select', function() {
+			var row = table.getSelection()[0].row;
+			displayInstead(data.getValue(row, 2));
 		});
 	}
 	return data;
 }
 
-		
 $(function() {
 
-    markers = new Array();
+	markers = new Array();
 	// swiss map personalization
 	map = new jvm.WorldMap({
 		map : 'ch_merc_en',
 		container : $('#map'),
-		regionsSelectable: true,
-        
+		regionsSelectable : true,
+
 		backgroundColor : 'rgba(0,0,0,0)',
 		zoomOnScroll : false,
-		
+
 		regionStyle : {
 			initial : {
 				fill : 'rgb(202,236,238)'
@@ -107,26 +111,26 @@ $(function() {
 				"fill-opacity" : 1
 			}
 		},
-		markerStyle: {
-	      initial: {
-	        fill: '#4DAC26'
-	      },
-	      selected: {
-	        fill: '#CA0020'
-	      }
-	    },
+		markerStyle : {
+			initial : {
+				fill : '#4DAC26'
+			},
+			selected : {
+				fill : '#CA0020'
+			}
+		},
 		series : {
 			regions : [{
 				attribute : 'fill'
 			}],
-	 markers: [{
-	        attribute: 'r',
-	        scale: [5, 15]
-	        
-	        }]
-        },
+			markers : [{
+				attribute : 'r',
+				scale : [5, 15]
+
+			}]
+		},
 	});
- 
+
 	function loadMap(countCanton) {
 		var max = 0;
 		$.each(countCanton, function(index, value) {
@@ -153,8 +157,7 @@ $(function() {
 		map.series.regions[0].setValues(colors);
 	}
 
-
-	function loadcouncil(councillers,refresh) {
+	function loadcouncil(councillers, refresh) {
 		var textInfoCouncil = "-";
 		var councilstring = "";
 		if ($('#BR').attr("checked") == "checked") {
@@ -164,52 +167,46 @@ $(function() {
 				councilstring += " ";
 			}
 			councilstring += "BR";
-		}
-		else{
+		} else {
 			$('.BR').css("color", "black");
 		}
 		if ($('#CN').attr("checked") == "checked") {
 			$('.CN').css("color", "#f33f52");
-			if(textInfoCouncil == "-"){
+			if (textInfoCouncil == "-") {
 				textInfoCouncil = "Conseil national";
-			}
-			else{
-				textInfoCouncil = textInfoCouncil+", national";
+			} else {
+				textInfoCouncil = textInfoCouncil + ", national";
 			}
 			if (councilstring.length != 0) {
 				councilstring += " ";
 			}
 			councilstring += "CN";
-		}
-		else{
+		} else {
 			$('.CN').css("color", "black");
 		}
 		if ($('#CE').attr("checked") == "checked") {
 			$('.CE').css("color", "#f33f52");
-			if(textInfoCouncil == "-"){
+			if (textInfoCouncil == "-") {
 				textInfoCouncil = "Conseil des états";
-			}
-			else{
-				textInfoCouncil = textInfoCouncil+", des états";
+			} else {
+				textInfoCouncil = textInfoCouncil + ", des états";
 			}
 			if (councilstring.length != 0) {
 				councilstring += " ";
 			}
 			councilstring += "CE";
-		}
-		else{
+		} else {
 			$('.CE').css("color", "black");
 		}
-		if($('#CE').attr("checked") == "checked" && $('#CN').attr("checked") == "checked" && $('#BR').attr("checked") == "checked" ){
+		if ($('#CE').attr("checked") == "checked" && $('#CN').attr("checked") == "checked" && $('#BR').attr("checked") == "checked") {
 			textInfoCouncil = "Tous";
 		}
 		$(".councilInfo .value").text(textInfoCouncil);
 		var selectcouncillers = null;
-		selectcouncillers = councillers.councilfilter(councilstring).byCanton();
-		
-		drawTable(councillers.toArray(),refresh);
+		selectcouncillers = councillers.setCouncil(councilstring).byCanton();
+		drawTable(councillers.toArray(), refresh);
 		loadMap(selectcouncillers);
-		
+
 	}
 
 
@@ -220,66 +217,82 @@ $(function() {
 	var councillers = council.getCouncillers().datefilter();
 	var countCanton = councillers.byCanton();
 	var smallestDate = council.smallestDate();
-	 
-		 
+
 	council.loadAllParty();
-	$(".chzn-select").chosen({no_results_text: "Aucun partie corespondant !",max_selected_options: 2});
-	
-	
-	  
-	loadcouncil(councillers,0);
+	$(".chzn-select").chosen({
+		no_results_text : "Aucun parti corespondant !",
+		max_selected_options : 2
+	});
+
+	loadcouncil(councillers, 0);
 	//loadMap(countCanton);
 
-	 $(".inputePeopleLong").keyup(function(event) {
-	 	
-		if ($(".inputePeopleLong").val() !="" && $(".inputePeopleLong").val() !="Rechercher une personne dans la liste"){
-		 	filterListSearch = true;
-		 }
-		 else{
-		 	filterListSearch = false;
-		 }
-		 loadcouncil(councillers,1);
+	$(".inputePeopleLong").keyup(function(event) {
+
+		if ($(".inputePeopleLong").val() != "" && $(".inputePeopleLong").val() != "Rechercher une personne dans la liste") {
+			filterListSearch = true;
+		} else {
+			filterListSearch = false;
+		}
+		loadcouncil(councillers, 1);
 	});
-	
-	
+
 	$('#choice input').change(function() {
 		map.series.regions[0].elements["CH-JU"].element.properties["d]"] = null//["fill"]="rgb(255,255,255)";
-		loadcouncil(councillers,1);
+		loadcouncil(councillers, 1);
 	});
-	
 
-	 $(".chzn-select").chosen().change( function() {
-			
-		   var str = "-";
-	  	   $(".result-selected").each(function () {
-	  	  	 	var parti = $(this).text().split("-");
-	  	  	 	if(str !="-"){
-               		 str +=  ", " +parti[0] ;
-                }
-                else{
-                	str = parti[0];
-                }
-           });
-           $(".partyInfo .value").text(str);
-           
-	});
 	
-	jQuery("#Slider1").slider({ from:Number(smallestDate), to:2012 ,round:0,format:{format:"####", locale:"us"}, 
-	                            scale: [Number(smallestDate), '|',1900, '|', 1930, '|',1960, '|', 1990,  '|', 2012], 
-	                            limits: false, step: 1, dimension: '', skin: "plastic", 
-	                            onstatechange: function( value ){
-								   var val = value.split(";");
-								   
-								   if(val[0] == val[1]){
-								   		$(".yearInfo .value").text(val[0]);
-								   }
-								   else{
-								   		$(".yearInfo .value").text('De '+val[0]+' à '+val[1]);
-								   }
-								}});
-						
+	//selection du parti
+	$(".chzn-select").chosen().change(function() {
+		var str = "-";
+		$(".result-selected").each(function() {
+			var parti = $(this).text().split("-");
+			if (str != "-") {
+				str += ", " + parti[0].slice(0,-1);
+			} else {
+				str = parti[0].slice(0,-1);
+			}
+		});
+		$(".partyInfo .value").text(str);
+		selectcouncillers = councillers.setParty(str).byCanton();
+		drawTable(councillers.toArray(), 1);
+		loadMap(selectcouncillers);
+	});
+
+	jQuery("#Slider1").slider({
+		from : Number(smallestDate),
+		to : 2012,
+		round : 0,
+		format : {
+			format : "####",
+			locale : "us"
+		},
+		scale : [Number(smallestDate), '|', 1900, '|', 1930, '|', 1960, '|', 1990, '|', 2012],
+		limits : false,
+		step : 1,
+		dimension : '',
+		skin : "plastic",
+		onstatechange : function(value) {
+			var val = value.split(";");
+
+			if (val[0] == val[1]) {
+				$(".yearInfo .value").text(val[0]);
+			} else {
+				$(".yearInfo .value").text('De ' + val[0] + ' à ' + val[1]);
+			}
+		},
+		callback : function(value){
+			var d = this;
+			var from = parseInt(this.getValue().substring(0,4));
+			var to = parseInt(this.getValue().substring(5,9));
+			selectcouncillers = councillers.setDate(from,to).byCanton();
+			drawTable(councillers.toArray(), 1);
+			loadMap(selectcouncillers);
+		}
+	});
+
 });
-
 
 /**
  * Converts an HSL color value to RGB. Conversion formula
