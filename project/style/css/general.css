@@ -593,7 +593,9 @@ overflow:hidden;
 .google-visualization-table-tr-even:first{
 	margin-top: 200px;
 }
-
+.google-visualization-table-td-number{
+	text-align:left !important;
+}
 .largeTitle{
 	
 	font-family: "Francois One" , arial;

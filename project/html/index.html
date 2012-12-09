@@ -12,6 +12,7 @@
 		<link rel="shortcut icon" href="/favicon.ico">
 		<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
+        
 		<!-- Include JVectorMap style -->
 		<link rel="stylesheet" href="../style/css/jquery-jvectormap-1.1.1.css" type="text/css" media="screen"/>
 		<link rel="stylesheet" href="../style/css/toggle_unstyled.css"  type="text/css" >
@@ -32,7 +33,6 @@
 		<link rel="stylesheet" href="../javascript/lib/chosen/chosen.css" type="text/css">
 		<link href="../style/css/jquery.mCustomScrollbar.css" rel="stylesheet" type="text/css" />
 		<!-- end -->
-
 		<script src="../javascript/general/infoBulle.js"></script>
 
 		<!-- Include jQuery library -->
@@ -42,8 +42,9 @@
 		<!-- Include JVectorMap swiss map data -->
 		<script src="../javascript/lib/jquery-jvectormap-ch-merc-en.js"></script>
 		<script type='text/javascript' src='https://www.google.com/jsapi'></script>
-
+        <script src="http://maps.google.com/maps/api/js?key=AIzaSyCYJPJnS_j_9H0OVRDp6G3xVnx-gHZHYfw&v=3.exp&sensor=false"></script>
 		<script type="text/javascript" src="../javascript/date.js"></script>
+		<script  type="text/javascript" src="../javascript/MapSearch.js"></script>
 		<script type="text/javascript" src="../javascript/CouncilRequest.js"></script>
 		<script type="text/javascript" src="../javascript/swisscouncil.js"></script>
 		<link href='http://fonts.googleapis.com/css?family=Francois+One' rel='stylesheet' type='text/css'>
@@ -69,6 +70,7 @@
 
 	</head>
 	<body>
+		
 		<div id="header">
 			<div class="headerBack">
 				<div class="generalOptions">
@@ -209,7 +211,7 @@
 				</div>
 			</div>
 			<div class="contentTwo">
-
+  				<div id="map_canvas"></div>
 			</div>
 
 			<div id="footer">
@@ -228,5 +230,24 @@
 		</div>
 
 		<script src="../javascript/general/scroll.js"></script>
+		   <script type="text/javascript"> 
+		   
+		   function loadMap (address) {
+  				 var geocoder = new google.maps.Geocoder();
+
+			      if (geocoder) {
+			        geocoder.geocode({ 'address': address }, function (results, status) {
+			            if (status == google.maps.GeocoderStatus.OK) {
+			              addLocation(results[0].geometry.location);
+			    
+			            } 
+			            else {
+			              console.log('No results found: ' + status);
+			            }
+			         });
+			      }
+			      v=v2;
+			     }
+   </script> 
 	</body>
 </html>

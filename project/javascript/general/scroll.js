@@ -1,6 +1,8 @@
 
-
+      
 $(document).ready(function (){
+	
+      
 		$("#informationList").mCustomScrollbar({
 		  set_width:"100%", 
 		  set_height:500, 
