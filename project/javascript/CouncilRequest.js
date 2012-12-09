@@ -108,10 +108,13 @@ function Council() {
 
 	this.toArray = function() {
 		var selectedcouncilarray = new Array();
+		var val = new Array();
 		$.each(selectedcouncil, function(index, value) {
 			var councillerarray = new Array();
 			councillerarray[0] = value.firstName;
 			councillerarray[1] = value.lastName;
+			councillerarray[2] =  {v:index, f:value.council.abbreviation};
+		
 			selectedcouncilarray[selectedcouncilarray.length] = councillerarray;
 		});
 		return selectedcouncilarray;
@@ -128,6 +131,9 @@ function Council() {
 		return smallestDate;
 	}
 
+	this.searchInstead = function(idCouncil) {
+		return selectedcouncil[idCouncil].placeOfCitizenship;
+	}
 	this.loadAllParty = function() {
 		var allCouncilPartie = {};
 		$.each(allcouncil, function(index, value) {

@@ -63,17 +63,42 @@ html{
 	  height:-moz-calc(100% - 100px);
 	  height:-webkit-calc(100% - 100px);
 	  width:31%;
-	  margin-top: 50px;
 	  padding-bottom: 50px; 
 	  display:inline-block;
 	  margin-left:25px;
-	  overflow:auto;
+	 
 }
+
+.search{
+	border-bottom: 1px solid #CCCCCC !important;
+    margin-top: 15px;
+    padding-bottom: 20px;
+    width: 100%;
+}
+.inputePeopleLong{
+	padding-left: 10px;
+	background: transparent;
+	border: #cccccc 1px solid;
+	width: 97%;
+	height:21px;
+	font-family: "Arimo",arial;	
+
+	margin-top:5px;
+	color:#9d9d9d ;
+	
+	background-image:url(../../img/loupe.png);
+    background-repeat: no-repeat;
+    background-position: 313px 3px;
+}
+.mCSB_scrollTools{
+	cursor: pointer;
+}
+
 .google-visualization-table-tr-odd, .google-visualization-table-tr-odd td,.google-visualization-table-tr-even, .google-visualization-table-tr-even td, .google-visualization-table-tr-odd-nonstrict{
 	  background-image:url(../../img/background.png) !important;
   background-repeat: repeat !important;
   border: none;
-  	border-bottom: #cccccc 1px solid !important;
+  	
 }
 .generalOptions{
 	width:100%;
@@ -89,6 +114,16 @@ html{
 	font-family: "Francois One" , arial;
 	font-size: 15px;
    
+}
+#informationList{
+	-moz-box-shadow: inset 0px 0px 7px #c3c2c2;
+	-webkit-box-shadow:inset 0px 0px 7px #c3c2c2;
+	box-shadow:inset 0px 0px 7px #c3c2c2;
+	padding:10px;
+	width:94% !important;
+		max-width:94% !important;
+		min-width:94% !important;
+		min-height:500px;
 }
 .generalOptionsInner .space{
 	margin-top:6px;
@@ -162,7 +197,7 @@ table {
 	margin-bottom:10px;
 	font-family: "Arimo" , arial;
 	font-size: 12px;
-	padding-left:50px;
+	padding-left:25px;
 	
 }
 .lastInfo{
@@ -488,4 +523,95 @@ overflow:hidden;
 	-moz-box-shadow: 0px 0px 4px #6f6f6f;
 	-webkit-box-shadow: 0px 0px 4px #6f6f6f;
 	box-shadow: 0px 0px 4px #6f6f6f;
+}
+.google-visualization-table-tr-head {
+	min-width: 300px;
+}
+.google-visualization-table-tr-head td{
+	min-width:146px !important;
+}
+.google-visualization-table-tr-head, .google-visualization-table-tr-head td, .google-visualization-table-tr-head-nonstrict {
+	background-image:url(../../img/background.png) !important;
+  background-repeat: repeat !important;
+	text-align: left !important;
+}
+.google-visualization-table-tr-even:first-child  .google-visualization-table-td:first-child{
+	margin-top:70px !important;
+	padding-top:70px !important;
+}
+.google-visualization-table-tr-over  , .google-visualization-table-tr-sel {
+ background-color: #f33f52 !important;
+}
+.google-visualization-table-tr-over  td, .google-visualization-table-tr-sel td{
+	background-color: transparent !important;
+}
+.google-visualization-table-tr-head td:hover{
+	color:#f33f52;
+}
+.google-visualization-table-table{
+	width: 290px !important;
+	min-width: 290px !important;
+	table-layout:fixed;
+	overflow:hidden;
+	 white-space: nowrap; 
+}
+.google-visualization-table-tr-even{
+	color:#888888;
+	
+}
+.google-visualization-table-tr-odd{
+	color:#333333;
+	
+}
+.google-visualization-table-tr-even .google-visualization-table-td:last-child,.google-visualization-table-tr-odd .google-visualization-table-td:last-child,.google-visualization-table-tr-over  td:last-child, .google-visualization-table-tr-sel td:last-child{
+	
+	padding-left:30px;
+}
+.google-visualization-table-tr-sel, .google-visualization-table-tr-over{
+	padding:none !important;
+	border:none !important;
+	margin:none !important;
+}
+.google-visualization-table-td{
+	padding:none !important;
+	border:none !important;
+	font-family: "Arimo",arial !important ;	
+	padding-top:2px;
+	padding-bottom:2px;
+	cursor:pointer !important;
+} 
+.google-visualization-table-tr-head{
+	visibility: hidden;
+	display:none;
+}
+.google-visualization-table-td{
+	min-width:90px;
+	width: 90px;
+	 overflow:hidden;
+}
+
+.google-visualization-table-tr-even:first{
+	margin-top: 200px;
+}
+.google-visualization-table-td-number{
+	text-align:left !important;
+}
+.largeTitle{
+	
+	font-family: "Francois One" , arial;
+	font-size: 15px;
+	text-transform: uppercase;
+	color: black;
+	font-weight: normal;
+	
+	
+}
+.nameP,.surnameP{
+	border-right: #cccccc 1px solid !important;
+}
+.nameP,.surnameP,.partiP{
+	
+	padding-right: 51px;
+	margin-left: 15px;
+	
 }

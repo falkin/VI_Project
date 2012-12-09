@@ -4,30 +4,99 @@ google.load('visualization', '1', {
 });
 //google.setOnLoadCallback(drawTable);
 
-function drawTable(array) {
+// GLOBAL VARIABLES 
+        
+var filterListSearch = false;
+var table =null;
+var council = null;
+var insteadFinal;
+var insteadSp;
+var allValuesinstead =0 ;
+var markers;
+
+function displayInstead(idCouncil) {
+		var instead = council.searchInstead(idCouncil);
+		insteadSp = instead.split(",");
+		insteadFinal =insteadSp[0]; 
+	  	loadMap(insteadFinal); 
+	  	map.removeAllMarkers();
+}
+function addLocation(position) {
+		var pos = parseFloat(position.toString().split(",")[0].replace("(",""));
+		var pos2 = parseFloat(position.toString().split(",")[1].replace(")",""));
+	    markers[allValuesinstead] = {latLng: [pos,pos2], name:insteadFinal};
+	    var cityAreaData = [];
+	    allValuesinstead++;
+	    if(allValuesinstead==insteadSp.length){
+	    	
+	    	map.addMarkers(markers,cityAreaData);
+	    	allValuesinstead=0;
+	    	 markers = new Array();
+	    }
+	    else{
+	    	insteadFinal =insteadSp[allValuesinstead]; 
+	  		loadMap(insteadFinal); 
+	    }
+}
+	
+function drawTable(array,refresh) {
 
 	var data = new google.visualization.DataTable();
 
-	data.addColumn('string', 'First name');
-	data.addColumn('string', 'Last name');
-	data.addRows(array);
-	var table = new google.visualization.Table(document.getElementById('information'));
-	table.draw(data, {
-		page : 'disable',
-	});
-	google.visualization.events.addListener(table, 'select', function selectHandler(table) {
-		var selection = table.getSelection();
-	});
+	data.addColumn('string', '');
+	data.addColumn('string', '');
+	data.addColumn('number', '');
+	var val = new RegExp($(".inputePeopleLong").val(), "i");
+	if(filterListSearch == true){
+		    var selectedcouncilarray = new Array();
+		    var b = 0;
+			for (var i = 0; i < array.length; i++) {
+				if(array[i][0].toString().match(val) !=null || array[i][1].toString().match(val) !=null){
+					selectedcouncilarray[b] = array[i];
+					b = b+1; 
+			    }
+			}
+			data.addRows(selectedcouncilarray);
+	}
+	else{
+		data.addRows(array);
+	}
+	if(refresh ==0){
+		 table = new google.visualization.Table(document.getElementById('informationList'));
+		table.draw(data, {showRowNumber: false},{
+			page : 'disable',
+		});
+		google.visualization.events.addListener(table, 'select', function () {
+			 var row = table.getSelection()[0].row;
+   			 displayInstead(data.getValue(row, 2));
+		});
+	}
+	else if(refresh ==1){
+		 table = new google.visualization.Table(document.getElementById('tableListPeople'));
+		table.draw(data,{showRowNumber: false}, {
+			page : 'disable',
+		});
+		google.visualization.events.addListener(table, 'select', function () {
+			 var row = table.getSelection()[0].row;
+   			 displayInstead(data.getValue(row, 2));
+		});
+	}
 	return data;
 }
 
+		
 $(function() {
+
+    markers = new Array();
 	// swiss map personalization
 	map = new jvm.WorldMap({
 		map : 'ch_merc_en',
 		container : $('#map'),
+		regionsSelectable: true,
+        
 		backgroundColor : 'rgba(0,0,0,0)',
 		zoomOnScroll : false,
+		
 		regionStyle : {
 			initial : {
 				fill : 'rgb(202,236,238)'
@@ -40,13 +109,26 @@ $(function() {
 				"fill-opacity" : 1
 			}
 		},
+		markerStyle: {
+	      initial: {
+	        fill: '#4DAC26'
+	      },
+	      selected: {
+	        fill: '#CA0020'
+	      }
+	    },
 		series : {
 			regions : [{
 				attribute : 'fill'
-			}]
-		}
+			}],
+	 markers: [{
+	        attribute: 'r',
+	        scale: [5, 15]
+	        
+	        }]
+        },
 	});
-
+ 
 	function loadMap(countCanton) {
 		var max = 0;
 		$.each(countCanton, function(index, value) {
@@ -73,7 +155,8 @@ $(function() {
 		map.series.regions[0].setValues(colors);
 	}
 
-	function loadcouncil(councillers) {
+
+	function loadcouncil(councillers,refresh) {
 		var textInfoCouncil = "-";
 		var councilstring = "";
 		if ($('#BR').attr("checked") == "checked") {
@@ -125,47 +208,64 @@ $(function() {
 		$(".councilInfo .value").text(textInfoCouncil);
 		var selectcouncillers = null;
 		selectcouncillers = councillers.councilfilter(councilstring).byCanton();
-		drawTable(councillers.toArray());
+		
+		drawTable(councillers.toArray(),refresh);
 		loadMap(selectcouncillers);
+		
 	}
 
 
 	$("#check").button();
 	$("#format").buttonset();
 	$("#udclogo").load('../img/UDC_fr_pant_5f.svg');
-	var council = new Council();
+	council = new Council();
 	var councillers = council.getCouncillers().datefilter();
 	var countCanton = councillers.byCanton();
 	var smallestDate = council.smallestDate();
+	 
+		 
 	council.loadAllParty();
 	$(".chzn-select").chosen({no_results_text: "Aucun parti corespondant !",max_selected_options: 2});
 	
 	
 	  
-	loadcouncil(councillers);
+	loadcouncil(councillers,0);
 	//loadMap(countCanton);
 
-	$('#choice input').change(function() {
-		map.series.regions[0].elements["CH-JU"].element.properties["d]"] = null//["fill"]="rgb(255,255,255)";
-		loadcouncil(councillers);
+	 $(".inputePeopleLong").keyup(function(event) {
+	 	
+		if ($(".inputePeopleLong").val() !="" && $(".inputePeopleLong").val() !="Rechercher une personne dans la liste"){
+		 	filterListSearch = true;
+		 }
+		 else{
+		 	filterListSearch = false;
+		 }
+		 loadcouncil(councillers,1);
 	});
 	
-	 $(".chzn-results li").click(function() {
-	  	if($(".partyInfo .value").text() && $(".partyInfo .value").text() !="-"){
-	  		$(".partyInfo .value").text($(".partyInfo .value").text()+", "+$(this).text());
-	  	} 
-	  	else{
-	  		$(".partyInfo .value").text($(this).text());
-	  	}
-	  	
-	 });
-	 $(".chzn-choices li").click(function() {
-	  	
-	  		$(".partyInfo .value").text("-");
-	  	
-	  	
-	 });
-	 
+	
+	$('#choice input').change(function() {
+		map.series.regions[0].elements["CH-JU"].element.properties["d]"] = null//["fill"]="rgb(255,255,255)";
+		loadcouncil(councillers,1);
+	});
+	
+
+	 $(".chzn-select").chosen().change( function() {
+			
+		   var str = "-";
+	  	   $(".result-selected").each(function () {
+	  	  	 	var parti = $(this).text().split("-");
+	  	  	 	if(str !="-"){
+               		 str +=  ", " +parti[0] ;
+                }
+                else{
+                	str = parti[0];
+                }
+           });
+           $(".partyInfo .value").text(str);
+           
+	});
+	
 	jQuery("#Slider1").slider({ from:Number(smallestDate), to:2012 ,round:0,format:{format:"####", locale:"us"}, 
 	                            scale: [Number(smallestDate), '|',1900, '|', 1930, '|',1960, '|', 1990,  '|', 2012], 
 	                            limits: false, step: 1, dimension: '', skin: "plastic", 
@@ -179,9 +279,9 @@ $(function() {
 								   		$(".yearInfo .value").text('De '+val[0]+' à '+val[1]);
 								   }
 								}});
-								
-	
+						
 });
+
 
 /**
  * Converts an HSL color value to RGB. Conversion formula
