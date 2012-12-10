@@ -75,7 +75,7 @@
 			<div class="headerBack">
 				<div class="generalOptions">
 					<div class="generalOptionsInner">
-						<span class="logo_2" ></span><span class="space"><span class="title filter">Filtres carte</span>&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;<span class="title options">Options</span>&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;<span class="title about" >A propos</span></span>
+						<span class="logo_2" ></span><span class="space"><span class="title filter">Options generales</span>&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;<span class="title about" >A propos</span></span>
 						<input type="text" class="inputeDate" value="Rechercher une date" onblur="this.value='Rechercher une date';this.style.color='#9d9d9d';" onclick="this.value='';this.style.color='black';"/>
 						<input type="text" class="inputePeople" value="Rechercher une personne" onblur="this.value='Rechercher une personne';this.style.color='#9d9d9d';" onclick="this.value='';this.style.color='black';" />
 						<input type="text" class="inputeParty" value="Rechercher un partie" onblur="this.value='Rechercher un partie';this.style.color='#9d9d9d';" onclick="this.value='';this.style.color='black';" />
@@ -85,10 +85,10 @@
 				<div class="moreInfo">
 					<div class="moreInfoContent">
 						<div class="filterContent">
-							<span class="title party">Partie</span>/<span class="title year">Annee</span>/<span class="title council">Conseil</span>/<span class="title init">Réinitaliser les filtres</span>
+							<span class="title party">Partie</span>/<span class="title year">Annee</span>/<span class="title council">Affichage</span>/<span class="title init">Réinitaliser les options</span>
 							<div id="party" class="contentFilerInside">
 								<br/>
-								<label>Choisir le(s) parti(s):</label>
+								<label>Choisir le(s) parti(s): (<span id="helpParty">?</span>)</label>
 								<br/>
 								<br/>
 
@@ -183,7 +183,7 @@
 					<img alt="logo" src="../img/logo.png"/ class="logo">
 				</div>
 
-				<div class="btCover_header" onmouseover="tooltip.show('Cacher', 90);$('.btCover_header').css('background-image','url(\'../img/btshow_on.png\')');" onmouseout="tooltip.hide();$('.btCover_header').css('background-image','url(\'../img/btshow.png\')');" ></div>
+				<div class="btCover_header" onmouseover="tooltip.show('Cacher', 90,'');$('.btCover_header').css('background-image','url(\'../img/btshow_on.png\')');" onmouseout="tooltip.hide();$('.btCover_header').css('background-image','url(\'../img/btshow.png\')');" ></div>
 
 			</div>
 		</div>
@@ -206,17 +206,61 @@
 					<div class="search">
 						<input type="text" class="inputePeopleLong" value="Rechercher une personne dans la liste" onblur="if(this.value==''){this.value='Rechercher une personne dans la liste';this.style.color='#9d9d9d';}" onclick="if(this.value=='Rechercher une personne dans la liste'){this.value='';this.style.color='black';}" />
 					</div>	
-					<span class="nameP largeTitle">NOM</span><span class="surnameP largeTitle">PRENOM</span><span class="partiP largeTitle">Conseil</span>
+					<span class="nameP largeTitle">NOM</span><span class="surnameP largeTitle">PRENOM</span><span class="partiP largeTitle">CANTON</span>
 					<div id="informationList"></div>
 				</div>
 			</div>
 			<div class="contentTwo">
-  				<div id="map_canvas"></div>
+  				<div id="partyGraph">
+  						<h1>Infomrations sur le parti : UDC</h1>
+  				</div>
+  				<div id="moreInformation">
+  					<h1>Valentin Bourqui</h1>
+  				</p>	 "id": 1353,
+    "updated": "2012-11-18T16:45:41Z",
+    "birthDate": "1799-07-29T00:00:00Z",
+    "birthDateMask": "YYYY-MM-DD",
+    "canton": {
+      "id": 0,
+      "abbreviation": "GR",
+      "code": "KAN_0_"
+    },
+    "council": {
+      "id": 2,
+      "abbreviation": "CE",
+      "code": "RAT_2_",
+      "type": "S"
+    },
+    "dateOfDeath": "1866-07-16T00:00:00Z",
+    "dateOfDeathMask": "YYYY-MM-DD",
+    "entryDateMask": "YYYY-MM",
+    "faction": {
+      "id": 126,
+      "abbreviation": "MC"
+    },
+    "firstName": "Giuseppe",
+    "function": "m",
+    "gender": "m",
+    "lastName": "a Marca",
+    "leavingDateMask": "YYYY-MM",
+    "membership": {
+      "id": 0,
+      "entryDate": "1849-12-01T00:00:00Z",
+      "leavingDate": "1851-07-01T00:00:00Z"
+    },
+    "party": {
+      "id": 0,
+      "abbreviation": "PDC",
+      "name": null
+    },
+    "placeOfCitizenship": "Soazza (GR)"
+  },<p>
+  				</div>
 			</div>
 
 			<div id="footer">
 				<div class="footerBack">
-					<div class="btCover" onmouseover="tooltip.show('Cacher', 90);$('.btCover').css('background-image','url(\'../img/btcover_on.png\')');" onmouseout="tooltip.hide();$('.btCover').css('background-image','url(\'../img/btcover.png\')');" ></div>
+					<div class="btCover" onmouseover="tooltip.show('Cacher', 90,'');$('.btCover').css('background-image','url(\'../img/btcover_on.png\')');" onmouseout="tooltip.hide();$('.btCover').css('background-image','url(\'../img/btcover.png\')');" ></div>
 					<div class="footerInner">
 
 						<span class="bar" style="margin-left: 29px;">Le parlement et son histoire </span>
@@ -232,13 +276,13 @@
 		<script src="../javascript/general/scroll.js"></script>
 		   <script type="text/javascript"> 
 		   
-		   function loadMap (address) {
+		   function loadMap (address,nameSelected,data) {
   				 var geocoder = new google.maps.Geocoder();
 
 			      if (geocoder) {
 			        geocoder.geocode({ 'address': address }, function (results, status) {
 			            if (status == google.maps.GeocoderStatus.OK) {
-			              addLocation(results[0].geometry.location);
+			              addLocation(results[0].geometry.location,nameSelected,data);
 			    
 			            } 
 			            else {

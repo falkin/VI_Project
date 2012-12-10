@@ -111,9 +111,9 @@ function Council() {
 		var val = new Array();
 		$.each(selectedcouncil, function(index, value) {
 			var councillerarray = new Array();
-			councillerarray[0] = value.firstName;
-			councillerarray[1] = value.lastName;
-			councillerarray[2] =  {v:index, f:value.council.abbreviation};
+			councillerarray[0] = value.lastName;
+			councillerarray[1] = value.firstName;
+			councillerarray[2] =  {v:index, f:value.canton.abbreviation};
 		
 			selectedcouncilarray[selectedcouncilarray.length] = councillerarray;
 		});
