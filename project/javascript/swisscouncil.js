@@ -1,3 +1,4 @@
+
 google.load('visualization', '1', {
 	packages : ['table']
 });
@@ -275,7 +276,7 @@ $(function() {
 	 
 		 
 	council.loadAllParty();
-	$(".chzn-select").chosen({no_results_text: "Aucun partie corespondant !",max_selected_options: 2});
+	$(".chzn-select").chosen({no_results_text: "Aucun parti corespondant !",max_selected_options: 2});
 	
 	
 	  
@@ -375,3 +376,4 @@ function hslToRgb(h, s, l) {
 	return [r * 255, g * 255, b * 255];
 }
 
+>>>>>>> bd37554033bc88306ca2815e19671e7bef75e2f6
