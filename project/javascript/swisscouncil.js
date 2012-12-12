@@ -14,30 +14,32 @@ var allValuesinstead = 0;
 var markers;
 
 function displayInstead(idCouncil) {
-	var instead = council.searchInstead(idCouncil);
-	insteadSp = instead.split(",");
-	insteadFinal = insteadSp[0];
-	loadMap(insteadFinal);
+		var instead = council.searchInstead(idCouncil);
+		insteadSp = instead.split(",");
+		insteadFinal =insteadSp[0]; 
+	  	loadMap(insteadFinal); 
+	  	map.removeAllMarkers();
+
 }
 
 function addLocation(position) {
-	var pos = parseFloat(position.toString().split(",")[0].replace("(", ""));
-	var pos2 = parseFloat(position.toString().split(",")[1].replace(")", ""));
-	markers[allValuesinstead] = {
-		latLng : [pos, pos2],
-		name : insteadFinal
-	};
-	var cityAreaData = [];
-	allValuesinstead++;
-	if (allValuesinstead == insteadSp.length) {
-		map.removeAllMarkers();
-		map.addMarkers(markers, cityAreaData);
-		allValuesinstead = 0;
-		markers = new Array();
-	} else {
-		insteadFinal = insteadSp[allValuesinstead];
-		loadMap(insteadFinal);
-	}
+
+		var pos = parseFloat(position.toString().split(",")[0].replace("(",""));
+		var pos2 = parseFloat(position.toString().split(",")[1].replace(")",""));
+	    markers[allValuesinstead] = {latLng: [pos,pos2], name:insteadFinal};
+	    var cityAreaData = [];
+	    allValuesinstead++;
+	    if(allValuesinstead==insteadSp.length){
+	    	
+	    	map.addMarkers(markers,cityAreaData);
+	    	allValuesinstead=0;
+	    	 markers = new Array();
+	    }
+	    else{
+	    	insteadFinal =insteadSp[allValuesinstead]; 
+	  		loadMap(insteadFinal); 
+	    }
+
 }
 
 function drawTable(array, refresh) {
