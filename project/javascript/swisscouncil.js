@@ -1,67 +1,70 @@
-
 google.load('visualization', '1', {
 	packages : ['table']
 });
 //google.setOnLoadCallback(drawTable);
 
-// GLOBAL VARIABLES 
-        
+// GLOBAL VARIABLES
+
 var filterListSearch = false;
-var table =null;
+var table = null;
 var council = null;
 var insteadFinal;
 var insteadSp;
-var allValuesinstead =0 ;
+var allValuesinstead = 0;
 var markers;
-var lenghtTableSelection =0;
-var tableSelectedListID=0;
-function displayInstead(tableSelection,data) {
-		lenghtTableSelection = tableSelection.length-1;
-		var idCouncil = table.getSelection()[0].row;
-		var nameSelected = data.getValue(idCouncil, 0)+" "+data.getValue(idCouncil, 1) + " - ";
-		var instead = council.searchInstead(idCouncil);
-		insteadSp = instead.split(",");
-		insteadFinal =insteadSp[0]; 
-		tableSelectedListID=0;
-		council.updateMoreInformations(idCouncil,"One");
-	  	loadMap(insteadFinal,nameSelected,data); 
-	  
+var lenghtTableSelection = 0;
+var tableSelectedListID = 0;
+
+function displayInstead(tableSelection, data) {
+	lenghtTableSelection = tableSelection.length - 1;
+	var idCouncil = table.getSelection()[0].row;
+	var nameSelected = data.getValue(idCouncil, 0) + " " + data.getValue(idCouncil, 1) + " - ";
+	var instead = council.searchInstead(idCouncil);
+	insteadSp = instead.split(",");
+	insteadFinal = insteadSp[0];
+	tableSelectedListID = 0;
+	council.updateMoreInformations(idCouncil, "One");
+	loadMap(insteadFinal, nameSelected, data);
+
+
 }
-function addLocation(position,nameSelected,data) {
-		var pos = parseFloat(position.toString().split(",")[0].replace("(",""));
-		var pos2 = parseFloat(position.toString().split(",")[1].replace(")",""));
-	    markers[tableSelectedListID] = {latLng: [pos,pos2], name:nameSelected+"Lieu d'origine: "+insteadFinal};
-	    var cityAreaData = [];
-	    allValuesinstead++;
-	    tableSelectedListID++;
-	    map.removeAllMarkers();
-	    if(allValuesinstead==insteadSp.length){
-	    	
-	    	if(lenghtTableSelection == 0){
-	    		map.addMarkers(markers,cityAreaData);
-	    		allValuesinstead=0;
-	    		markers = new Array();
-	    		tableSelectedListID=0;
-	    	}
-	    	else{
-	    		var idCouncil = table.getSelection()[lenghtTableSelection].row;
-				var nameSelected = data.getValue(idCouncil, 0)+" "+data.getValue(idCouncil, 1) + " - ";
-				var instead = council.searchInstead(idCouncil);
-				insteadSp = instead.split(",");
-				insteadFinal =insteadSp[0]; 
-				 allValuesinstead=0;
-				lenghtTableSelection--;
-			  	loadMap(insteadFinal,nameSelected,data); 
-			  	
-	    	}
-	    }
-	    else{
-	    	insteadFinal =insteadSp[allValuesinstead]; 
-	  		loadMap(insteadFinal,nameSelected,data); 
-	    }
+
+function addLocation(position, nameSelected, data) {
+	var pos = parseFloat(position.toString().split(",")[0].replace("(", ""));
+	var pos2 = parseFloat(position.toString().split(",")[1].replace(")", ""));
+	markers[tableSelectedListID] = {
+		latLng : [pos, pos2],
+		name : nameSelected + "Lieu d'origine: " + insteadFinal
+	};
+	var cityAreaData = [];
+	allValuesinstead++;
+	tableSelectedListID++;
+	map.removeAllMarkers();
+	if (allValuesinstead == insteadSp.length) {
+
+		if (lenghtTableSelection == 0) {
+			map.addMarkers(markers, cityAreaData);
+			allValuesinstead = 0;
+			markers = new Array();
+			tableSelectedListID = 0;
+		} else {
+			var idCouncil = table.getSelection()[lenghtTableSelection].row;
+			var nameSelected = data.getValue(idCouncil, 0) + " " + data.getValue(idCouncil, 1) + " - ";
+			var instead = council.searchInstead(idCouncil);
+			insteadSp = instead.split(",");
+			insteadFinal = insteadSp[0];
+			allValuesinstead = 0;
+			lenghtTableSelection--;
+			loadMap(insteadFinal, nameSelected, data);
+
+		}
+	} else {
+		insteadFinal = insteadSp[allValuesinstead];
+		loadMap(insteadFinal, nameSelected, data);
+	}
 }
-	
-function drawTable(array,refresh) {
+
+function drawTable(array, refresh) {
 
 	var data = new google.visualization.DataTable();
 
@@ -71,83 +74,82 @@ function drawTable(array,refresh) {
 	var val = new Array();
 	var valSplit = $(".inputePeopleLong").val().split(" ");
 	for (var x = 0; x < valSplit.length; x++) {
-		if(valSplit[x] != "")
-		 val[x] = new RegExp(valSplit[x], "i");
+		if (valSplit[x] != "")
+			val[x] = new RegExp(valSplit[x], "i");
 	}
-	if(filterListSearch == true && $(".inputePeopleLong").val() != ""){
-		    var selectedcouncilarray = new Array();
-		    var b = 0;
-		    
-			for (var i = 0; i < array.length; i++) {
-				for (var x = 0; x < val.length; x++) {	
-					
-					if((array[i][0].toString().match(val[x]) !=null || array[i][1].toString().match(val[x]) !=null || array[i][2].f.match(val[x]) !=null) && val != ""){
-						selectedcouncilarray[b] = array[i];
-						b = b+1; 
-						break;
-				    }
+	if (filterListSearch == true && $(".inputePeopleLong").val() != "") {
+		var selectedcouncilarray = new Array();
+		var b = 0;
+
+		for (var i = 0; i < array.length; i++) {
+			for (var x = 0; x < val.length; x++) {
+
+				if ((array[i][0].toString().match(val[x]) != null || array[i][1].toString().match(val[x]) != null || array[i][2].f.match(val[x]) != null) && val != "") {
+					selectedcouncilarray[b] = array[i];
+					b = b + 1;
+					break;
 				}
 			}
-			data.addRows(selectedcouncilarray);
-	}
-	else{
+		}
+		data.addRows(selectedcouncilarray);
+	} else {
 		data.addRows(array);
 	}
-	if(refresh ==0){
-		 table = new google.visualization.Table(document.getElementById('informationList'));
-		table.draw(data, {showRowNumber: false},{
+	if (refresh == 0) {
+		table = new google.visualization.Table(document.getElementById('informationList'));
+		table.draw(data, {
+			showRowNumber : false
+		}, {
 			page : 'disable',
 		});
-		google.visualization.events.addListener(table, 'select', function () {
-			if((table.getSelection()).length >= 4){
-			
+		google.visualization.events.addListener(table, 'select', function() {
+			if ((table.getSelection()).length >= 4) {
+
 			}
-			if((table.getSelection()).length > 0 && (table.getSelection()).length < 4){
-   					 displayInstead(table.getSelection(),data);
-   			}
-   			else if((table.getSelection()).length == 0){
-   				 map.removeAllMarkers();
-   				 nameSelected= null;
-   			}
-   			 
+			if ((table.getSelection()).length > 0 && (table.getSelection()).length < 4) {
+				displayInstead(table.getSelection(), data);
+			} else if ((table.getSelection()).length == 0) {
+				map.removeAllMarkers();
+				nameSelected = null;
+			}
+
 		});
-	}
-	else if(refresh ==1){
+	} else if (refresh == 1) {
 		table = new google.visualization.Table(document.getElementById('tableListPeople'));
-		table.draw(data,{showRowNumber: false}, {
+		table.draw(data, {
+			showRowNumber : false
+		}, {
 			page : 'disable',
 		});
-		google.visualization.events.addListener(table, 'select', function () {
-			if((table.getSelection()).length >= 4){
-			
-				$('.google-visualization-table-tr-sel').css('background-color','black'); 
+		google.visualization.events.addListener(table, 'select', function() {
+			if ((table.getSelection()).length >= 4) {
+
+				$('.google-visualization-table-tr-sel').css('background-color', 'black');
 			}
-			
-			if((table.getSelection()).length > 0 && (table.getSelection()).length < 4){
-   					 displayInstead(table.getSelection(),data);
-   			}
-   			else if((table.getSelection()).length == 0){
-   				 map.removeAllMarkers();
-   				 nameSelected= null;
-   			}
-   			 
+
+			if ((table.getSelection()).length > 0 && (table.getSelection()).length < 4) {
+				displayInstead(table.getSelection(), data);
+			} else if ((table.getSelection()).length == 0) {
+				map.removeAllMarkers();
+				nameSelected = null;
+			}
+
 		});
 	}
 	return data;
 }
 
-		
 $(function() {
-    markers = new Array();
+	markers = new Array();
 	// swiss map personalization
 	map = new jvm.WorldMap({
 		map : 'ch_merc_en',
 		container : $('#map'),
-		regionsSelectable: true,
-        
+		regionsSelectable : true,
+
 		backgroundColor : 'rgba(0,0,0,0)',
 		zoomOnScroll : false,
-		
+
 		regionStyle : {
 			initial : {
 				fill : 'rgb(202,236,238)'
@@ -160,26 +162,26 @@ $(function() {
 				"fill-opacity" : 1
 			}
 		},
-		markerStyle: {
-	      initial: {
-	        fill: '#f33f52',
-	      },
-	      selected: {
-	        fill: '#f33f52'
-	      }
-	    },
+		markerStyle : {
+			initial : {
+				fill : '#f33f52',
+			},
+			selected : {
+				fill : '#f33f52'
+			}
+		},
 		series : {
 			regions : [{
 				attribute : 'fill'
 			}],
-	 markers: [{
-	        attribute: 'r',
-	        scale: [5, 15]
-	        
-	        }]
-        },
+			markers : [{
+				attribute : 'r',
+				scale : [5, 15]
+
+			}]
+		},
 	});
- 
+
 	function loadMap(countCanton) {
 		var max = 0;
 		$.each(countCanton, function(index, value) {
@@ -206,8 +208,7 @@ $(function() {
 		map.series.regions[0].setValues(colors);
 	}
 
-
-	function loadcouncil(councillers,refresh) {
+	function loadcouncil(councillers, refresh) {
 		var textInfoCouncil = "-";
 		var councilstring = "";
 		if ($('#BR').attr("checked") == "checked") {
@@ -217,52 +218,47 @@ $(function() {
 				councilstring += " ";
 			}
 			councilstring += "BR";
-		}
-		else{
+		} else {
 			$('.BR').css("color", "black");
 		}
 		if ($('#CN').attr("checked") == "checked") {
 			$('.CN').css("color", "#f33f52");
-			if(textInfoCouncil == "-"){
+			if (textInfoCouncil == "-") {
 				textInfoCouncil = "Conseil national";
-			}
-			else{
-				textInfoCouncil = textInfoCouncil+", national";
+			} else {
+				textInfoCouncil = textInfoCouncil + ", national";
 			}
 			if (councilstring.length != 0) {
 				councilstring += " ";
 			}
 			councilstring += "CN";
-		}
-		else{
+		} else {
 			$('.CN').css("color", "black");
 		}
 		if ($('#CE').attr("checked") == "checked") {
 			$('.CE').css("color", "#f33f52");
-			if(textInfoCouncil == "-"){
+			if (textInfoCouncil == "-") {
 				textInfoCouncil = "Conseil des états";
-			}
-			else{
-				textInfoCouncil = textInfoCouncil+", des états";
+			} else {
+				textInfoCouncil = textInfoCouncil + ", des états";
 			}
 			if (councilstring.length != 0) {
 				councilstring += " ";
 			}
 			councilstring += "CE";
-		}
-		else{
+		} else {
 			$('.CE').css("color", "black");
 		}
-		if($('#CE').attr("checked") == "checked" && $('#CN').attr("checked") == "checked" && $('#BR').attr("checked") == "checked" ){
+		if ($('#CE').attr("checked") == "checked" && $('#CN').attr("checked") == "checked" && $('#BR').attr("checked") == "checked") {
 			textInfoCouncil = "Tous";
 		}
 		$(".councilInfo .value").text(textInfoCouncil);
 		var selectcouncillers = null;
 		selectcouncillers = councillers.councilfilter(councilstring).byCanton();
-		
-		drawTable(councillers.toArray(),refresh);
+
+		drawTable(councillers.toArray(), refresh);
 		loadMap(selectcouncillers);
-		
+
 	}
 
 
@@ -273,66 +269,71 @@ $(function() {
 	var councillers = council.getCouncillers().datefilter();
 	var countCanton = councillers.byCanton();
 	var smallestDate = council.smallestDate();
-	 
-		 
+
 	council.loadAllParty();
-	$(".chzn-select").chosen({no_results_text: "Aucun parti corespondant !",max_selected_options: 2});
-	
-	
-	  
-	loadcouncil(councillers,0);
+	$(".chzn-select").chosen({
+		no_results_text : "Aucun parti corespondant !",
+		max_selected_options : 2
+	});
+
+	loadcouncil(councillers, 0);
 	//loadMap(countCanton);
 
-	 $(".inputePeopleLong").keyup(function(event) {
-	 	map.removeAllMarkers();
-		if ($(".inputePeopleLong").val() !="" && $(".inputePeopleLong").val() !="Rechercher une personne dans la liste"){
-		 	filterListSearch = true;
-		 }
-		 else{
-		 	filterListSearch = false;
-		 }
-		 loadcouncil(councillers,1);
+	$(".inputePeopleLong").keyup(function(event) {
+		map.removeAllMarkers();
+		if ($(".inputePeopleLong").val() != "" && $(".inputePeopleLong").val() != "Rechercher une personne dans la liste") {
+			filterListSearch = true;
+		} else {
+			filterListSearch = false;
+		}
+		loadcouncil(councillers, 1);
 	});
-	
-	
+
 	$('#choice input').change(function() {
 		map.series.regions[0].elements["CH-JU"].element.properties["d]"] = null//["fill"]="rgb(255,255,255)";
-		loadcouncil(councillers,1);
+		loadcouncil(councillers, 1);
 	});
-	
 
-	 $(".chzn-select").chosen().change( function() {
-			
-		   var str = "-";
-	  	   $(".result-selected").each(function () {
-	  	  	 	var parti = $(this).text().split("-");
-	  	  	 	if(str !="-"){
-               		 str +=  ", " +parti[0] ;
-                }
-                else{
-                	str = parti[0];
-                }
-           });
-           $(".partyInfo .value").text(str);
-           
+	$(".chzn-select").chosen().change(function() {
+
+		var str = "-";
+		$(".result-selected").each(function() {
+			var parti = $(this).text().split("-");
+			if (str != "-") {
+				str += ", " + parti[0];
+			} else {
+				str = parti[0];
+			}
+		});
+		$(".partyInfo .value").text(str);
+
 	});
-	
-	jQuery("#Slider1").slider({ from:Number(smallestDate), to:2012 ,round:0,format:{format:"####", locale:"us"}, 
-	                            scale: [Number(smallestDate), '|',1900, '|', 1930, '|',1960, '|', 1990,  '|', 2012], 
-	                            limits: false, step: 1, dimension: '', skin: "plastic", 
-	                            onstatechange: function( value ){
-								   var val = value.split(";");
-								   
-								   if(val[0] == val[1]){
-								   		$(".yearInfo .value").text(val[0]);
-								   }
-								   else{
-								   		$(".yearInfo .value").text('De '+val[0]+' à '+val[1]);
-								   }
-								}});
-						
+
+	jQuery("#Slider1").slider({
+		from : Number(smallestDate),
+		to : 2012,
+		round : 0,
+		format : {
+			format : "####",
+			locale : "us"
+		},
+		scale : [Number(smallestDate), '|', 1900, '|', 1930, '|', 1960, '|', 1990, '|', 2012],
+		limits : false,
+		step : 1,
+		dimension : '',
+		skin : "plastic",
+		onstatechange : function(value) {
+			var val = value.split(";");
+
+			if (val[0] == val[1]) {
+				$(".yearInfo .value").text(val[0]);
+			} else {
+				$(".yearInfo .value").text('De ' + val[0] + ' à ' + val[1]);
+			}
+		}
+	});
+
 });
-
 
 /**
  * Converts an HSL color value to RGB. Conversion formula
@@ -375,5 +376,4 @@ function hslToRgb(h, s, l) {
 
 	return [r * 255, g * 255, b * 255];
 }
-
 
