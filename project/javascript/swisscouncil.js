@@ -23,6 +23,7 @@ function displayInstead(tableSelection,data) {
 		insteadSp = instead.split(",");
 		insteadFinal =insteadSp[0]; 
 		tableSelectedListID=0;
+		council.updateMoreInformations(idCouncil,"One");
 	  	loadMap(insteadFinal,nameSelected,data); 
 	  
 }
@@ -102,7 +103,6 @@ function drawTable(array,refresh) {
 			
 			}
 			if((table.getSelection()).length > 0 && (table.getSelection()).length < 4){
-			
    					 displayInstead(table.getSelection(),data);
    			}
    			else if((table.getSelection()).length == 0){
@@ -376,4 +376,4 @@ function hslToRgb(h, s, l) {
 	return [r * 255, g * 255, b * 255];
 }
 
->>>>>>> bd37554033bc88306ca2815e19671e7bef75e2f6
+
