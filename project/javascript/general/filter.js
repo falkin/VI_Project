@@ -141,16 +141,16 @@ $(document).ready(function() {
 
    $('span.init').confirm({
    	 msg:'Réinitaliser les filtres ?',
-eventType:'click',
- timeout:4000,
-  dialogShow:'fadeIn',
-  dialogSpeed:'fast',
-  buttons: {
+     eventType:'click',
+     timeout:4000,
+     dialogShow:'fadeIn',
+     dialogSpeed:'fast',
+     buttons: {
   	
-  	ok:'Confirmer',
-    cancel:'Annuler',
-    wrapper:'<button></button>',
-    separator:''
+    ok:'Confirmer',
+     cancel:'Annuler',
+     wrapper:'<button></button>',
+     separator:''
   }  
 });
 
@@ -169,8 +169,11 @@ function initFilter() {
 	$('.CN').css("color", "#f33f52");
 	$('.BR').css("color", "#f33f52");
 	$('.CE').css("color", "#f33f52");
+	$(".search-choice").html = "";
+	
 	$("#Slider1").slider("value","2000","2012");
-    $("#Slider1").slider("value","2000","2012");	   
+	$(".chzn-select").val('').trigger('liszt:updated');
+	$(".partyInfo .value").text("-");
 }
 
 

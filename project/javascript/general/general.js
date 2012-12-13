@@ -3,8 +3,8 @@
 
 $(document).ready(function(){
 	
-		  		$(".moreInfo").css("display","none");
-		  		$(".btCover_header").css("display","none");
+  $(".moreInfo").css("display","none");
+  $(".btCover_header").css("display","none");
   
   $("#helpParty").attr("onmouseover","tooltip.show('Aucun parti sélectionné = Tous les partis représentés sur la carte // Un parti sélectioné = Poucentage du parti // Deux partis sélectionés = Comparaison des partis', 400,'Long');");
   $("#helpParty").attr("onmouseout","tooltip.hide();");
