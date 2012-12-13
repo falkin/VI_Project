@@ -25,7 +25,7 @@ function displayInstead(tableSelection, data) {
 	insteadFinal = insteadSp[0];
 	tableSelectedListID = 0;
 	$('.moreInformationOne').animate({  opacity:"0"},600, function(){
-		council.updateMoreInformations(idCouncil, "One");
+		council.updateMoreInformations(data.getValue(idCouncil, 2), "One");
 		$(".moreInformationOne").css("display","");
   			
 	});	
@@ -55,14 +55,14 @@ function addLocation(position, nameSelected, data) {
 		} else {
 			if(lenghtTableSelection == 1){
 				$('.moreInformationTwo').animate({  opacity:"0"},600, function(){
-					council.updateMoreInformations(idCouncil, "Two");
+					council.updateMoreInformations(data.getValue(idCouncil, 2), "Two");
 						$(".moreInformationTwo").css("display","");
   				
 				});	
 			}
 			else if(lenghtTableSelection == 2){
 				$('.moreInformationTree').animate({  opacity:"0"},600, function(){
-					council.updateMoreInformations(idCouncil, "Tree");
+					council.updateMoreInformations(data.getValue(idCouncil, 2), "Tree");
 					$(".moreInformationTree").css("display","");
 				});	
 			}

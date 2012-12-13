@@ -8,6 +8,7 @@ function Council() {
 	"octobre", "novembre", "décembre");
 	var ar = new Array();
 	var conc = new Array();	
+	var idLevels;
 	conc['CN'] = "Conseil national";
 	conc['BR'] = "Conseil fédéral";
 	conc['BR*'] = "Conseil fédéral";	
@@ -178,7 +179,9 @@ function Council() {
 		alert("coucou")
 	}
 	this.updateMoreInformations = function(idCouncil,idLevel) {
-		searchImage(selectedcouncil[idCouncil].lastName+"&"+selectedcouncil[idCouncil].firstName,this);
+		//$(".profileBase").css("opacity",0);
+		idLevels = idLevel;
+		//	searchImage(selectedcouncil[idCouncil].lastName+"+"+selectedcouncil[idCouncil].firstName+"+"+selectedcouncil[idCouncil].party.abbreviation,this);
 		var dateBir= selectedcouncil[idCouncil].birthDate.toString().split("T")[0].split("-");
 		var entry= selectedcouncil[idCouncil].membership.entryDate.toString().split("T")[0].split("-");
 		

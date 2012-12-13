@@ -219,7 +219,7 @@
 					<h1 class="titleName"></h1>
 					<table style="margin-top: 20px;">
 						<tr>
-							<td><img  alt="profil"  class="profileBase" src="../img/profilBase.jpg"   /></td><td style="vertical-align: top;"><span><span class="title tcanton">Canton: </span><span class="infoblod canton"></span> <img width="20px" height="20px" alt="drapeau"  class="imgCanton"  /></span>
+							<td><img  alt="profil"  class="profileBase" src="../img/profilBase.jpg" width="120" height="151"  /></td><td style="vertical-align: top;"><span><span class="title tcanton">Canton: </span><span class="infoblod canton"></span> <img width="20px" height="20px" alt="drapeau"  class="imgCanton"  /></span>
 							<br/>
 							<span><span class="title tgender">Genre: </span><span class="infoblod gender"></span></span>
 							<br/>
@@ -259,7 +259,7 @@
 						<h1 class="titleName"></h1>
 						<table style="margin-top: 20px;">
 							<tr>
-								<td><img  alt="profil"  class="profileBase" src="../img/profilBase.jpg"   /></td><td style="vertical-align: top;"><span><span class="title tcanton">Canton: </span><span class="infoblod canton"></span> <img width="20px" height="20px" alt="drapeau"  class="imgCanton"  /></span>
+								<td><img  alt="profil"  class="profileBase" src="../img/profilBase.jpg"  width="120" height="151" /></td><td style="vertical-align: top;"><span><span class="title tcanton">Canton: </span><span class="infoblod canton"></span> <img width="20px" height="20px" alt="drapeau"  class="imgCanton"  /></span>
 								<br/>
 								<span><span class="title tgender">Genre: </span><span class="infoblod gender"></span></span>
 								<br/>
@@ -298,7 +298,7 @@
 							<h1 class="titleName"></h1>
 							<table style="margin-top: 20px;">
 								<tr>
-									<td><img  alt="profil"  class="profileBase" src="../img/profilBase.jpg"   /></td><td style="vertical-align: top;"><span><span class="title tcanton">Canton: </span><span class="infoblod canton"></span> <img width="20px" height="20px" alt="drapeau"  class="imgCanton"  /></span>
+									<td><img  alt="profil"  class="profileBase" src="../img/profilBase.jpg"  width="120" height="151"  /></td><td style="vertical-align: top;"><span><span class="title tcanton">Canton: </span><span class="infoblod canton"></span> <img width="20px" height="20px" alt="drapeau"  class="imgCanton"  /></span>
 									<br/>
 									<span><span class="title tgender">Genre: </span><span class="infoblod gender"></span></span>
 									<br/>
@@ -375,12 +375,19 @@
 
 										
 					function searchImageResponse(data, status) {
-					  alert("data: " + data + ", status: " + status);
+						
+			
+						 $(".profileBase").attr("src", data.responseData.results[0].url, function(){
+						 	   $(".profileBase").css("opacity",1);	
+						 });
+			
+			   		
 					}
 
 
 					function searchImage(log,council) {
-						var URL = "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=fuzzy%20monkey";					
+				
+						var URL = "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q="+log;					
 						$.getJSON(URL + "&callback=?", searchImageResponse);
 
 					}
