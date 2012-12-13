@@ -76,7 +76,7 @@
 			<div class="headerBack">
 				<div class="generalOptions">
 					<div class="generalOptionsInner">
-						<span class="logo_2" ></span><span class="space"><span class="title filter">Filtres carte</span>&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;<span class="title options">Options</span>&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;<span class="title about" >A propos</span></span>
+						<span class="logo_2" ></span><span class="space"><span class="title filter">Options generales</span>&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;<span class="title about" >A propos</span></span>
 						<input type="text" class="inputeDate" value="Rechercher une date" onblur="this.value='Rechercher une date';this.style.color='#9d9d9d';" onclick="this.value='';this.style.color='black';"/>
 						<input type="text" class="inputePeople" value="Rechercher une personne" onblur="this.value='Rechercher une personne';this.style.color='#9d9d9d';" onclick="this.value='';this.style.color='black';" />
 						<input type="text" class="inputeParty" value="Rechercher un parti" onblur="this.value='Rechercher un parti';this.style.color='#9d9d9d';" onclick="this.value='';this.style.color='black';" />
@@ -86,10 +86,10 @@
 				<div class="moreInfo">
 					<div class="moreInfoContent">
 						<div class="filterContent">
-							<span class="title party">parti</span>/<span class="title year">Annee</span>/<span class="title council">Conseil</span>/<span class="title init">Réinitaliser les filtres</span>
+							<span class="title party">Parti</span>/<span class="title year">Annee</span>/<span class="title council">Affichage</span>/<span class="title init">Réinitaliser les options</span>
 							<div id="party" class="contentFilerInside">
 								<br/>
-								<label>Choisir le(s) parti(s):</label>
+								<label>Choisir le(s) parti(s): (<span id="helpParty">?</span>)</label>
 								<br/>
 								<br/>
 
@@ -138,7 +138,7 @@
 										id="CE"
 										value = "large"
 										checked = "checked"/>
-										<label for = "sizeLarge" class="CE">Conseil des états</label>
+										<label for = "sizeLarge" class="CE">Conseil des Etats</label>
 									</div>
 								</div>
 							</div>
@@ -184,7 +184,7 @@
 					<img alt="logo" src="../img/logo.png"/ class="logo">
 				</div>
 
-				<div class="btCover_header" onmouseover="tooltip.show('Cacher', 90);$('.btCover_header').css('background-image','url(\'../img/btshow_on.png\')');" onmouseout="tooltip.hide();$('.btCover_header').css('background-image','url(\'../img/btshow.png\')');" ></div>
+				<div class="btCover_header" onmouseover="tooltip.show('Cacher', 90,'');$('.btCover_header').css('background-image','url(\'../img/btshow_on.png\')');" onmouseout="tooltip.hide();$('.btCover_header').css('background-image','url(\'../img/btshow.png\')');" ></div>
 
 			</div>
 		</div>
@@ -207,17 +207,34 @@
 					<div class="search">
 						<input type="text" class="inputePeopleLong" value="Rechercher une personne dans la liste" onblur="if(this.value==''){this.value='Rechercher une personne dans la liste';this.style.color='#9d9d9d';}" onclick="if(this.value=='Rechercher une personne dans la liste'){this.value='';this.style.color='black';}" />
 					</div>	
-					<span class="nameP largeTitle">NOM</span><span class="surnameP largeTitle">PRENOM</span><span class="partiP largeTitle">Conseil</span>
+					<span class="nameP largeTitle">NOM</span><span class="surnameP largeTitle">PRENOM</span><span class="partiP largeTitle">CANTON</span>
 					<div id="informationList"></div>
 				</div>
 			</div>
 			<div class="contentTwo">
-  				<div id="map_canvas"></div>
+  				<div id="partyGraph">
+  						<h1>Infomrations sur le parti : UDC</h1>
+  				</div>
+  				<div class="moreInformationOne">
+  					<h1 class="titleName">Valentin Bourqui</h1>
+  					<span><span class="title tbirthDate">Date de naissance: </span><span class="birthDate">1799-07-29T00:00:00Z</span></span><br/>
+  					<span><span class="title tdateOfDeath">Date du décet: </span><span class="dateOfDeath">1866-07-16T00:00:00Z</span></span><br/>
+  				    <span><span class="title tplaceOfCitizenship">Lieu d'origine: </span><span class="placeOfCitizenship">Soazza (GR)</span></span><br/>
+  					<span><span class="title tcanton">Canton: </span><span class="canton">GR</span> <img width="20px" height="20px" alt="drapeau"  class="imgCanton"  /></span><br/>
+  					<span><span class="title tgender">Genre: </span><span class="gender">M</span></span><br/>
+  					<span><span class="title tparty">Parti: </span><span class="party">PDC</span></span><br/>
+  					<span><span class="title tcouncil">Conseil: </span><span class="council">CE</span></span><br/>
+  					<span><span class="title tentryDate">Date d'entré: </span><span class="entryDate">1849-12-01T00:00:00Z</span></span><br/>
+  					<span><span class="title tleavingDate">Date de sortie: </span><span class="leavingDate">1851-07-01T00:00:00Z</span></span><br/>
+  				
+  					
+  				
+  				</div>
 			</div>
 
 			<div id="footer">
 				<div class="footerBack">
-					<div class="btCover" onmouseover="tooltip.show('Cacher', 90);$('.btCover').css('background-image','url(\'../img/btcover_on.png\')');" onmouseout="tooltip.hide();$('.btCover').css('background-image','url(\'../img/btcover.png\')');" ></div>
+					<div class="btCover" onmouseover="tooltip.show('Cacher', 90,'');$('.btCover').css('background-image','url(\'../img/btcover_on.png\')');" onmouseout="tooltip.hide();$('.btCover').css('background-image','url(\'../img/btcover.png\')');" ></div>
 					<div class="footerInner">
 
 						<span class="bar" style="margin-left: 29px;">Le parlement et son histoire </span>
@@ -233,13 +250,13 @@
 		<script src="../javascript/general/scroll.js"></script>
 		   <script type="text/javascript"> 
 		   
-		   function loadMap (address) {
+		   function loadMap (address,nameSelected,data) {
   				 var geocoder = new google.maps.Geocoder();
 
 			      if (geocoder) {
 			        geocoder.geocode({ 'address': address }, function (results, status) {
 			            if (status == google.maps.GeocoderStatus.OK) {
-			              addLocation(results[0].geometry.location);
+			              addLocation(results[0].geometry.location,nameSelected,data);
 			    
 			            } 
 			            else {

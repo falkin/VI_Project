@@ -2,10 +2,47 @@ function Council() {
 	var council;
 	var selectedcouncil;
 	var allcouncil;
-	var partiarray=new Array();
-	var councilarray=new Array();
-	var dateBegin=2000;
-	var dateEnd=2012;
+	var partiarray = new Array();
+	var councilarray = new Array();
+	var dateBegin = 2000;
+	var dateEnd = 2012;
+
+	var monthNames = new Array("janvier", "février", "mars", "avril", "mai", "juin", "juillet", "aout", "septembre", "octobre", "novembre", "décembre");
+	var ar = new Array();
+	var conc = new Array();
+	conc['CN'] = "Conseil national";
+	conc['BR'] = "Conseil fédéral";
+	conc['BR*'] = "Conseil fédéral";
+	conc['CE'] = "Conseil des Etats";
+	var genr = new Array();
+	genr['m'] = "Homme";
+	genr['f'] = "Femme";
+	ar['ZH'] = new Array("474px-Wappen_Zürich_matt.scg.png", "Zurich");
+	ar['BE'] = new Array("474px-Wappen_Bern_matt.scg.png", "Berne");
+	ar['LU'] = new Array("474px-Wappen_Luzern_matt.scg.png", "Lucerne");
+	ar['UR'] = new Array("474px-Wappen_Uri_matt.scg.png", "Uri");
+	ar['SZ'] = new Array("474px-Wappen_des_Kantons_Schwyz.", "Schwytz");
+	ar['OW'] = new Array("474px-Wappen_Obwalden_matt.scg.png", "Obwald");
+	ar['NW'] = new Array("474px-Wappen_Nidwalden_matt.scg.png", "Nidwald");
+	ar['GL'] = new Array("474px-Wappen_Glarus_matt.scg.png", "Glaris");
+	ar['ZG'] = new Array("474px-Wappen_Zug_matt.scg.png", "Zoug");
+	ar['FR'] = new Array("474px-Wappen_Freiburg_matt.scg.png", "Fribourg");
+	ar['SO'] = new Array("474px-Wappen_Solothurn_matt.scg.png", "Soleure");
+	ar['BS'] = new Array("474px-Wappen_Basel-Stadt_matt.scg.png", "Bâle-Ville");
+	ar['BL'] = new Array("474px-Wappen_Basel-Landschaft.", "Bâle-Campagne");
+	ar['SH'] = new Array("474px-Wappen_Schaffhausen_matt.scg.png", "Schaffhouse");
+	ar['AR'] = new Array("474px-Wappen_Appenzell_Ausserrhoden_matt.scg.png", "Appenzell Rhodes-Extérieures");
+	ar['AI'] = new Array("474px-Wappen_Appenzell_Innerrhoden_matt.scg.png", "Appenzell Rhodes-Intérieures");
+	ar['SG'] = new Array("474px-Wappen_St._Gallen_matt.scg.png", "Saint-Gall");
+	ar['GR'] = new Array("474px-Wappen_Graubünden_matt.scg.png", "Grisons");
+	ar['AG'] = new Array("474px-Wappen_Aargau_matt.scg.png", "Argovie");
+	ar['TG'] = new Array("474px-Wappen_Thurgau_matt.scg.png", "Thurgovie");
+	ar['TI'] = new Array("474px-Wappen_Tessin_matt.scg.png", "Tessin");
+	ar['VD'] = new Array("474px-Wappen_Waadt_matt.scg.png", "Vaud");
+	ar['VS'] = new Array("474px-Wappen_Wallis_matt.scg.png", "Valais");
+	ar['NE'] = new Array("474px-Wappen_Neuenburg_matt.scg.png", "Neuchâtel");
+	ar['GE'] = new Array("474px-Wappen_Genf_matt.scg.png", "Genève");
+	ar['JU'] = new Array("474px-Wappen_Jura_matt.scg.png", "Jura");
 	/*	this.getCouncillersOnline = function() {
 	 for (var i = 1; i < 120; i++) {
 	 $.ajax({
@@ -42,7 +79,6 @@ function Council() {
 		return this;
 	};
 
-	
 	this.cantonfilter = function(canton) {
 		selectedcouncil = council.filter(function(council) {
 			return council.canton.abbreviation == canton;
@@ -57,11 +93,11 @@ function Council() {
 		return this;
 	}
 
-	this.setCouncil = function(party){
+	this.setCouncil = function(party) {
 		councilarray = party.split(" ");
 		return this.reload();
 	}
-	
+
 	this.councilfilter = function(counc) {
 		selectedcouncil = selectedcouncil.filter(function(counciller) {
 			for (var i = 0; i < councilarray.length; i++) {
@@ -72,20 +108,20 @@ function Council() {
 		});
 	}
 
-	this.setCouncil = function(counc){
-		councilarray=counc.split(" ");
+	this.setCouncil = function(counc) {
+		councilarray = counc.split(" ");
 		return this.reload();
 	}
-	
-	this.setDate = function(dateB, dateE){
-		dateBegin=dateB;
-		dateEnd=dateE;
+
+	this.setDate = function(dateB, dateE) {
+		dateBegin = dateB;
+		dateEnd = dateE;
 		return this.reload();
 	}
-	
+
 	this.partyfilter = function() {
 		selectedcouncil = selectedcouncil.filter(function(counciller) {
-			if (partiarray.length==0 || partiarray[0] == "-")
+			if (partiarray.length == 0 || partiarray[0] == "-")
 				return true;
 			for (var i = 0; i < partiarray.length; i++) {
 				if (counciller.party.abbreviation == partiarray[i])
@@ -94,13 +130,13 @@ function Council() {
 			return false;
 		});
 	}
-	
-	this.setParty = function(party){
+
+	this.setParty = function(party) {
 		partiarray = party.split(", ");
 		return this.reload();
 	}
-	
-	this.reload = function(){
+
+	this.reload = function() {
 		this.getCouncillers();
 		this.datefilter();
 		this.councilfilter()
@@ -110,10 +146,10 @@ function Council() {
 
 	this.datefilter = function() {
 		selectedcouncil = selectedcouncil.filter(function(council) {
-			if(council.membership.leavingDate == null && dateEnd>=2012){
+			if (council.membership.leavingDate == null && dateEnd >= 2012) {
 				return true;
 			}
-			yearE = parseInt(council.membership.leavingDate.substring(0,4));
+			yearE = parseInt(council.membership.leavingDate.substring(0, 4));
 			return yearE >= dateBegin && yearE <= dateEnd;
 		});
 		return this;
@@ -157,13 +193,13 @@ function Council() {
 		var val = new Array();
 		$.each(selectedcouncil, function(index, value) {
 			var councillerarray = new Array();
-			councillerarray[0] = value.firstName;
-			councillerarray[1] = value.lastName;
+			councillerarray[0] = value.lastName;
+			councillerarray[1] = value.firstName;
 			councillerarray[2] = {
 				v : index,
-				f : value.council.abbreviation
+				f : value.canton.abbreviation
 			};
-
+			//selectedcouncilarray[selectedcouncilarray.length] = councillerarray;
 			selectedcouncilarray[selectedcouncilarray.length] = councillerarray;
 		});
 		return selectedcouncilarray;
@@ -183,6 +219,53 @@ function Council() {
 	this.searchInstead = function(idCouncil) {
 		return selectedcouncil[idCouncil].placeOfCitizenship;
 	}
+
+	this.updateMoreInformations = function(idCouncil, idLevel) {
+		var dateBir = selectedcouncil[idCouncil].birthDate.toString().split("T")[0].split("-");
+		var entry = selectedcouncil[idCouncil].membership.entryDate.toString().split("T")[0].split("-");
+
+		$(".moreInformation" + idLevel + " .titleName").text(selectedcouncil[idCouncil].lastName + " " + selectedcouncil[idCouncil].firstName);
+		$(".moreInformation" + idLevel + " .birthDate").text(dateBir[2] + " " + monthNames[dateBir[1].replace("0", "") - 1] + " " + dateBir[0]);
+		if (selectedcouncil[idCouncil].dateOfDeath) {
+			var dateDeath = selectedcouncil[idCouncil].birthDate.toString().split("T")[0].split("-");
+			$(".moreInformation" + idLevel + " .dateOfDeath").text(dateDeath[2] + " " + monthNames[dateDeath[1].replace("0", "") - 1] + " " + dateDeath[0]);
+		} else {
+			$(".moreInformation" + idLevel + " .dateOfDeath").text(" - ");
+		}
+		$(".moreInformation" + idLevel + " .placeOfCitizenship").text(selectedcouncil[idCouncil].placeOfCitizenship);
+		$(".moreInformation" + idLevel + " .canton").text(ar[selectedcouncil[idCouncil].canton.abbreviation][1]);
+		$(".moreInformation" + idLevel + " .imgCanton").attr("src", "../img/canton/" + ar[selectedcouncil[idCouncil].canton.abbreviation][0]);
+		$(".moreInformation" + idLevel + " .gender").text(genr[selectedcouncil[idCouncil].gender]);
+		$(".moreInformation" + idLevel + " .party").text(this.searchParty(selectedcouncil[idCouncil].party.abbreviation));
+		$(".moreInformation" + idLevel + " .council").text(conc[selectedcouncil[idCouncil].council.abbreviation]);
+		$(".moreInformation" + idLevel + " .entryDate").text(entry[2] + " " + monthNames[entry[1].replace("0", "") - 1] + " " + entry[0]);
+		if (selectedcouncil[idCouncil].membership.leavingDate) {
+			var leave = selectedcouncil[idCouncil].membership.leavingDate.toString().split("T")[0].split("-");
+			$(".moreInformation" + idLevel + " .leavingDate").text(leave[2] + " " + monthNames[leave[1].replace("0", "") - 1] + " " + leave[0]);
+		} else {
+			$(".moreInformation" + idLevel + " .leavingDate").text(" - ");
+		}
+
+	}
+
+	this.searchParty = function(key) {
+		var party;
+		$.ajax({
+			url : '../data/Parti.json',
+			async : false,
+			dataType : 'json',
+			success : function(data) {
+				party = data;
+			}
+		});
+		$.each(party, function(index, value) {
+			if (value.abbreviation == key) {
+				return "(" + value.abbreviation + ") " + value.name;
+			}
+		});
+		return key;
+	}
+
 	this.loadAllParty = function() {
 		var allCouncilPartie = {};
 		$.each(allcouncil, function(index, value) {

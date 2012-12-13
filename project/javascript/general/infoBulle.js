@@ -7,10 +7,19 @@ var tooltip=function(){
  var timer = 20;
  var endalpha = 80;
  var alpha = 0;
+ var db = 0;
  var tt,t,c,b,h;
  var ie = document.all ? true : false;
  return{
-  show:function(v,w){
+  show:function(v,w,d){
+  	if(d=="Long"){
+    	endalpha=90;
+    	db=155;
+    }
+    else{
+    	endalpha=80;
+    	db=47;
+    }
    if(tt == null){
     tt = document.createElement('div');
     tt.setAttribute('id',id);
@@ -19,15 +28,18 @@ var tooltip=function(){
     c = document.createElement('div');
     c.setAttribute('id',id + 'cont');
     b = document.createElement('div');
-    b.setAttribute('id',id + 'bot');
+   
     tt.appendChild(t);
     tt.appendChild(c);
     tt.appendChild(b);
     document.body.appendChild(tt);
     tt.style.opacity = 0;
+    
     tt.style.filter = 'alpha(opacity=0)';
-    document.onmousemove = this.pos;
+    
    }
+   document.onmousemove = this.pos;
+   b.setAttribute('id',id + 'bot'+d);
    tt.style.display = 'block';
    c.innerHTML = v;
    tt.style.width = w ? w + 'px' : 'auto';
@@ -44,8 +56,9 @@ var tooltip=function(){
   tt.timer = setInterval(function(){tooltip.fade(1)},timer);
   },
   pos:function(e){
+  	
    var u = ie ? event.clientY + document.documentElement.scrollTop : e.pageY;
-   var l = ie ? event.clientX + document.documentElement.scrollLeft : e.pageX-47;
+   var l = ie ? event.clientX + document.documentElement.scrollLeft : e.pageX-db;
    tt.style.top = (u - h) + 'px';
    tt.style.left = (l + left) + 'px';
   },

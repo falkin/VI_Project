@@ -7,7 +7,9 @@ $(document).ready(function(){
   $(".aboutContent").css("display","none");
   $(".optionsContent").css("opacity","0");
   $(".aboutContent").css("opacity","0");
-    
+  $("#helpParty").attr("onmouseover","tooltip.show('Un parti sélectioné = poucentage du parti // deux partis sélectionés = comparaison des partis', 400,'Long');");
+  $("#helpParty").attr("onmouseout","tooltip.hide();");
+  
   var globalMenuActivate = 1;
   var optionActivate = 0;
   var aboutActivate = 0;
@@ -20,7 +22,7 @@ $(document).ready(function(){
 	  	$(".btCover").css("margin-top","14px");
 	  	$(".footerInner").css("display","none");
 	  	$('#footer').animate({  height:"19px"},600, function() {
-	     	$(".btCover").attr("onmouseover","tooltip.show('Montrer', 90);$('.btCover').css('background-image','url(\"../img/btshow_on.png\")');");
+	     	$(".btCover").attr("onmouseover","tooltip.show('Montrer', 90,'');$('.btCover').css('background-image','url(\"../img/btshow_on.png\")');");
 	   		$(".btCover").attr("onmouseout","tooltip.hide();$('.btCover').css('background-image','url(\"../img/btshow.png\")');");
 	   		$(".btCover").css("background-image","url('../img/btshow.png')");
 	   		$(".btCover").css("display","");
@@ -33,7 +35,7 @@ $(document).ready(function(){
 	    $(".btCover").css("margin-top","0px");
   		
 	  	$('#footer').animate({  height:"31px"},600, function() {
-			    $(".btCover").attr("onmouseover","tooltip.show('Cacher', 90);$('.btCover').css('background-image','url(\"../img/btcover_on.png\")');");
+			    $(".btCover").attr("onmouseover","tooltip.show('Cacher', 90,'');$('.btCover').css('background-image','url(\"../img/btcover_on.png\")');");
 			    $(".btCover").attr("onmouseout","tooltip.hide();$('.btCover').css('background-image','url(\"../img/btcover.png\")');");
 			    $(".btCover").css("background-image","url('../img/btcover.png')");
 			    $(".btCover").css("display","");
@@ -293,7 +295,7 @@ function openMore(){
 	    $(".innerBoder").css("max-height","-webkit-calc(100% - 342px)");
 	    $(".innerBoder").css("height","-webkit-calc(100% - 342px)");		
 	  	$('#header').animate({  height:"300px"},600, function() {
-		 	$(".btCover_header").attr("onmouseover","tooltip.show('Cacher', 90);$('.btCover_header').css('background-image','url(\"../img/btshow_on.png\")');");
+		 	$(".btCover_header").attr("onmouseover","tooltip.show('Cacher', 90,'');$('.btCover_header').css('background-image','url(\"../img/btshow_on.png\")');");
 	   		$(".btCover_header").attr("onmouseout","tooltip.hide();$('.btCover_header').css('background-image','url(\"../img/btshow.png\")');");
 	        $(".btCover_header").css("background-image","url('../img/btshow.png')");
 		    $(".btCover_header").css("display","");
@@ -306,7 +308,7 @@ jQuery.fn.resizehandle = function() {
   return this.each(function() {
     var me = jQuery(this);
     me.after(
-       jQuery('<div class="resize"><div class="resizehandle"><div class="bt_resize" onmouseover="tooltip.show(\'Double clique \', 90);" onmouseout="tooltip.hide();"></div></div></div>')
+       jQuery('<div class="resize"><div class="resizehandle"><div class="bt_resize" onmouseover="tooltip.show(\'Double clique \', 90,\'\');" onmouseout="tooltip.hide();"></div></div></div>')
       .bind('dblclick', function(e) {
         var h = me.width();
         var y = e.clientX+20;
