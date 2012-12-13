@@ -727,16 +727,12 @@ overflow:hidden;
 	-webkit-box-shadow: 0px 0px 3px #444444;
 	box-shadow: 0px 0px 3px #444444;
 	padding:none !important;
-	background-image:url(../../img/quit.png) !important;
-    background-repeat: no-repeat !important;
-    background-position: 265px 1px;
+
 	margin:none !important;
 }
 
  .google-visualization-table-tr-over{
- 		background-image:url(../../img/quit.png) !important;
-    background-repeat: no-repeat !important;
-    background-position: 265px 1px;
+ 		
    }
 
 .moreInformationOne span,.moreInformationTwo span,.moreInformationTree span{

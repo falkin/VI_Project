@@ -82,6 +82,7 @@ function addLocation(position, nameSelected, data) {
 	}
 }
 
+
 function drawTable(array, refresh) {
 
 	var data = new google.visualization.DataTable();
@@ -89,6 +90,7 @@ function drawTable(array, refresh) {
 	data.addColumn('string', '');
 	data.addColumn('string', '');
 	data.addColumn('number', '');
+
 	var val = new Array();
 	var valSplit = $(".inputePeopleLong").val().split(" ");
 	for (var x = 0; x < valSplit.length; x++) {
@@ -116,6 +118,7 @@ function drawTable(array, refresh) {
 	}
 	if (refresh == 0) {
 		table = new google.visualization.Table(document.getElementById('informationList'));
+
 		table.draw(data, {
 			showRowNumber : false
 		}, {
@@ -165,7 +168,6 @@ function drawTable(array, refresh) {
 			} else if ((table.getSelection()).length == 0) {
 				map.removeAllMarkers();
 				nameSelected = null;
-			
 			}
 
 		});
@@ -196,14 +198,14 @@ $(function() {
 				"fill-opacity" : 1
 			}
 		},
-		markerStyle : {
-			initial : {
-				fill : '#f33f52',
-			},
-			selected : {
-				fill : '#f33f52'
-			}
-		},
+		markerStyle: {
+	      initial: {
+	        fill: '#f33f52',
+	      },
+	      selected: {
+	        fill: '#f33f52'
+	      }
+	    },
 		series : {
 			regions : [{
 				attribute : 'fill'
@@ -288,8 +290,7 @@ $(function() {
 		}
 		$(".councilInfo .value").text(textInfoCouncil);
 		var selectcouncillers = null;
-		selectcouncillers = councillers.councilfilter(councilstring).byCanton();
-
+		selectcouncillers = councillers.setCouncil(councilstring).byCanton();
 		drawTable(councillers.toArray(), refresh);
 		loadMap(selectcouncillers);
 
@@ -328,19 +329,22 @@ $(function() {
 		loadcouncil(councillers, 1);
 	});
 
+	
+	//selection du parti
 	$(".chzn-select").chosen().change(function() {
-
 		var str = "-";
 		$(".result-selected").each(function() {
 			var parti = $(this).text().split("-");
 			if (str != "-") {
-				str += ", " + parti[0];
+				str += ", " + parti[0].slice(0,-1);
 			} else {
-				str = parti[0];
+				str = parti[0].slice(0,-1);
 			}
 		});
 		$(".partyInfo .value").text(str);
-
+		selectcouncillers = councillers.setParty(str).byCanton();
+		drawTable(councillers.toArray(), 1);
+		loadMap(selectcouncillers);
 	});
 
 	jQuery("#Slider1").slider({
@@ -363,9 +367,18 @@ $(function() {
 				$(".yearInfo .value").text(val[0]);
 			} else {
 				$(".yearInfo .value").text('De ' + val[0] + ' à ' + val[1]);
-			}
+			}
+		},
+		callback : function(value){
+			var d = this;
+			var from = parseInt(this.getValue().substring(0,4));
+			var to = parseInt(this.getValue().substring(5,9));
+			selectcouncillers = councillers.setDate(from,to).byCanton();
+			drawTable(councillers.toArray(), 1);
+			loadMap(selectcouncillers);
 		}
 	});
+
 
 });
 

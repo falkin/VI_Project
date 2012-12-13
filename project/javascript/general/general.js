@@ -3,23 +3,19 @@
 
 $(document).ready(function(){
 	
-  $(".optionsContent").css("display","none");
-  $(".aboutContent").css("display","none");
-  $(".optionsContent").css("opacity","0");
-  $(".aboutContent").css("opacity","0");
-  $(".moreInformationOne").css("opacity","0").css("display","none");
-  $(".moreInformationTwo").css("opacity","0").css("display","none");
-  $(".moreInformationTree").css("opacity","0").css("display","none");
+		  		$(".moreInfo").css("display","none");
+		  		$(".btCover_header").css("display","none");
   
   $("#helpParty").attr("onmouseover","tooltip.show('Aucun parti sélectionné = Tous les partis représentés sur la carte // Un parti sélectioné = Poucentage du parti // Deux partis sélectionés = Comparaison des partis', 400,'Long');");
   $("#helpParty").attr("onmouseout","tooltip.hide();");
   
-  var globalMenuActivate = 1;
+  var globalMenuActivate = 0;
   var optionActivate = 0;
   var aboutActivate = 0;
-  var filterMenuActivate = 1;
+  var filterMenuActivate = 0;
   var showMenu = "";
   var showedMenu = "filter";
+  
   $(".btCover").click(function() {
   	if($('#footer').css("height") == "31px"){
   		$(".btCover").css("display","none");
