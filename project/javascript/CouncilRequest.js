@@ -15,32 +15,32 @@ function Council() {
 	var genr = new Array();	
 	genr['m'] = "Homme";
 	genr['f'] = "Femme";	
-	ar['ZH'] =	new Array("474px-Wappen_Zürich_matt.scg.png","Zurich");
-	ar['BE'] =	new Array("474px-Wappen_Bern_matt.scg.png","Berne");
-	ar['LU'] =	new Array("474px-Wappen_Luzern_matt.scg.png","Lucerne");
-	ar['UR'] =	new Array("474px-Wappen_Uri_matt.scg.png","Uri");
+	ar['ZH'] =	new Array("474px-Wappen_Zürich_matt.svg.png","Zurich");
+	ar['BE'] =	new Array("474px-Wappen_Bern_matt.svg.png","Berne");
+	ar['LU'] =	new Array("474px-Wappen_Luzern_matt.svg.png","Lucerne");
+	ar['UR'] =	new Array("474px-Wappen_Uri_matt.svg.png","Uri");
 	ar['SZ'] =	new Array("474px-Wappen_des_Kantons_Schwyz.","Schwytz");
-	ar['OW'] =	new Array("474px-Wappen_Obwalden_matt.scg.png","Obwald");
-	ar['NW'] =	new Array("474px-Wappen_Nidwalden_matt.scg.png","Nidwald");
-	ar['GL'] =	new Array("474px-Wappen_Glarus_matt.scg.png","Glaris");
-	ar['ZG'] =	new Array("474px-Wappen_Zug_matt.scg.png","Zoug");
-	ar['FR'] =	new Array("474px-Wappen_Freiburg_matt.scg.png","Fribourg");
-	ar['SO'] =	new Array("474px-Wappen_Solothurn_matt.scg.png","Soleure");
-	ar['BS'] =	new Array("474px-Wappen_Basel-Stadt_matt.scg.png","Bâle-Ville");
-	ar['BL'] =	new Array("474px-Wappen_Basel-Landschaft.","Bâle-Campagne");
-	ar['SH'] =	new Array("474px-Wappen_Schaffhausen_matt.scg.png","Schaffhouse");
-	ar['AR'] =	new Array("474px-Wappen_Appenzell_Ausserrhoden_matt.scg.png","Appenzell Rhodes-Extérieures");
-	ar['AI'] =	new Array("474px-Wappen_Appenzell_Innerrhoden_matt.scg.png","Appenzell Rhodes-Intérieures");
-	ar['SG'] =	new Array("474px-Wappen_St._Gallen_matt.scg.png","Saint-Gall");
-	ar['GR'] =	new Array("474px-Wappen_Graubünden_matt.scg.png","Grisons");
-	ar['AG'] =	new Array("474px-Wappen_Aargau_matt.scg.png","Argovie");
-	ar['TG'] =	new Array("474px-Wappen_Thurgau_matt.scg.png","Thurgovie");
-	ar['TI'] =	new Array("474px-Wappen_Tessin_matt.scg.png","Tessin");
-	ar['VD'] =	new Array("474px-Wappen_Waadt_matt.scg.png","Vaud");
-	ar['VS'] =	new Array("474px-Wappen_Wallis_matt.scg.png","Valais");
-	ar['NE'] =	new Array("474px-Wappen_Neuenburg_matt.scg.png","Neuchâtel");
-	ar['GE'] =	new Array("474px-Wappen_Genf_matt.scg.png","Genève");
-	ar['JU'] =	new Array("474px-Wappen_Jura_matt.scg.png","Jura");
+	ar['OW'] =	new Array("474px-Wappen_Obwalden_matt.svg.png","Obwald");
+	ar['NW'] =	new Array("474px-Wappen_Nidwalden_matt.svg.png","Nidwald");
+	ar['GL'] =	new Array("474px-Wappen_Glarus_matt.svg.png","Glaris");
+	ar['ZG'] =	new Array("474px-Wappen_Zug_matt.svg.png","Zoug");
+	ar['FR'] =	new Array("474px-Wappen_Freiburg_matt.svg.png","Fribourg");
+	ar['SO'] =	new Array("474px-Wappen_Solothurn_matt.svg.png","Soleure");
+	ar['BS'] =	new Array("474px-Wappen_Basel-Stadt_matt.svg.png","Bâle-Ville");
+	ar['BL'] =	new Array("474px-Wappen_Basel-Landschaft.svg.png","Bâle-Campagne");
+	ar['SH'] =	new Array("474px-Wappen_Schaffhausen_matt.svg.png","Schaffhouse");
+	ar['AR'] =	new Array("474px-Wappen_Appenzell_Ausserrhoden_matt.svg.png","Appenzell Rhodes-Extérieures");
+	ar['AI'] =	new Array("474px-Wappen_Appenzell_Innerrhoden_matt.svg.png","Appenzell Rhodes-Intérieures");
+	ar['SG'] =	new Array("474px-Wappen_St_Gallen.svg.png","Saint-Gall");
+	ar['GR'] =	new Array("474px-Wappen_Graubünden_matt.svg.png","Grisons");
+	ar['AG'] =	new Array("474px-Wappen_Aargau_matt.svg.png","Argovie");
+	ar['TG'] =	new Array("474px-Wappen_Thurgau_matt.svg.png","Thurgovie");
+	ar['TI'] =	new Array("474px-Wappen_Tessin_matt.svg.png","Tessin");
+	ar['VD'] =	new Array("474px-Wappen_Waadt_matt.svg.png","Vaud");
+	ar['VS'] =	new Array("474px-Wappen_Wallis_matt.svg.png","Valais");
+	ar['NE'] =	new Array("474px-Wappen_Neuenburg_matt.svg.png","Neuchâtel");
+	ar['GE'] =	new Array("474px-Wappen_Genf_matt.svg.png","Genève");
+	ar['JU'] =	new Array("474px-Wappen_Jura_matt.svg.png","Jura");
 	/*	this.getCouncillersOnline = function() {
 	 for (var i = 1; i < 120; i++) {
 	 $.ajax({
@@ -174,10 +174,11 @@ function Council() {
 		return selectedcouncil[idCouncil].placeOfCitizenship;
 	}
 	
-	
-
-
+	this.setImage = function(data) {
+		alert("coucou")
+	}
 	this.updateMoreInformations = function(idCouncil,idLevel) {
+		searchImage(selectedcouncil[idCouncil].lastName+"&"+selectedcouncil[idCouncil].firstName,this);
 		var dateBir= selectedcouncil[idCouncil].birthDate.toString().split("T")[0].split("-");
 		var entry= selectedcouncil[idCouncil].membership.entryDate.toString().split("T")[0].split("-");
 		
@@ -202,8 +203,9 @@ function Council() {
 			$(".moreInformation"+idLevel+" .leavingDate").text(leave[2]+" "+monthNames[leave[1].replace("0","")-1]+" "+leave[0]);
 		}
 		else{
-				$(".moreInformation"+idLevel+" .leavingDate").text(" - ");
+				$(".moreInformation"+idLevel+" .leavingDate").text("Encore en fonction");
 		}
+		$(".moreInformation"+idLevel).animate({  opacity:"1"},600);
 		
 	}
 	

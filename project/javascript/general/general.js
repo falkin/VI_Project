@@ -7,7 +7,11 @@ $(document).ready(function(){
   $(".aboutContent").css("display","none");
   $(".optionsContent").css("opacity","0");
   $(".aboutContent").css("opacity","0");
-  $("#helpParty").attr("onmouseover","tooltip.show('Un parti sélectioné = poucentage du parti // deux partis sélectionés = comparaison des partis', 400,'Long');");
+  $(".moreInformationOne").css("opacity","0").css("display","none");
+  $(".moreInformationTwo").css("opacity","0").css("display","none");
+  $(".moreInformationTree").css("opacity","0").css("display","none");
+  
+  $("#helpParty").attr("onmouseover","tooltip.show('Aucun parti sélectionné = Tous les partis représentés sur la carte // Un parti sélectioné = Poucentage du parti // Deux partis sélectionés = Comparaison des partis', 400,'Long');");
   $("#helpParty").attr("onmouseout","tooltip.hide();");
   
   var globalMenuActivate = 1;

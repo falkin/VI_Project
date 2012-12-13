@@ -12,7 +12,6 @@
 		<link rel="shortcut icon" href="/favicon.ico">
 		<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
-        
 		<!-- Include JVectorMap style -->
 		<link rel="stylesheet" href="../style/css/jquery-jvectormap-1.1.1.css" type="text/css" media="screen"/>
 		<link rel="stylesheet" href="../style/css/toggle_unstyled.css"  type="text/css" >
@@ -42,9 +41,9 @@
 		<!-- Include JVectorMap swiss map data -->
 		<script src="../javascript/lib/jquery-jvectormap-ch-merc-en.js"></script>
 		<script type='text/javascript' src='https://www.google.com/jsapi'></script>
-        <script src="http://maps.google.com/maps/api/js?key=AIzaSyCYJPJnS_j_9H0OVRDp6G3xVnx-gHZHYfw&v=3.exp&sensor=false"></script>
+		<script src="http://maps.google.com/maps/api/js?key=AIzaSyCYJPJnS_j_9H0OVRDp6G3xVnx-gHZHYfw&v=3.exp&sensor=false"></script>
 		<script type="text/javascript" src="../javascript/date.js"></script>
-		
+
 		<script type="text/javascript" src="../javascript/CouncilRequest.js"></script>
 		<script type="text/javascript" src="../javascript/swisscouncil.js"></script>
 		<link href='http://fonts.googleapis.com/css?family=Francois+One' rel='stylesheet' type='text/css'>
@@ -70,7 +69,7 @@
 
 	</head>
 	<body>
-		
+
 		<div id="header">
 			<div class="headerBack">
 				<div class="generalOptions">
@@ -199,72 +198,192 @@
 					</div>
 					<div class="infoFilter lastInfo">
 						<span class="typeInfo">Type : <span class="value">Poucentage d'un partie </span></span>
+						<span class="typeTotal">Total : <span class="value">-</span></span>
 					</div>
 				</div>
 
 				<div id="information">
 					<div class="search">
 						<input type="text" class="inputePeopleLong" value="Rechercher une personne dans la liste" onblur="if(this.value==''){this.value='Rechercher une personne dans la liste';this.style.color='#9d9d9d';}" onclick="if(this.value=='Rechercher une personne dans la liste'){this.value='';this.style.color='black';}" />
-					</div>	
+					</div>
 					<span class="nameP largeTitle">NOM</span><span class="surnameP largeTitle">PRENOM</span><span class="partiP largeTitle">CANTON</span>
 					<div id="informationList"></div>
 				</div>
 			</div>
 			<div class="contentTwo">
-  				<div id="partyGraph">
-  						<h1>Infomrations sur le parti : UDC</h1>
-  				</div>
-  				<div class="moreInformationOne">
-  					<h1 class="titleName">Valentin Bourqui</h1>
-  					<span><span class="title tbirthDate">Date de naissance: </span><span class="birthDate">1799-07-29T00:00:00Z</span></span><br/>
-  					<span><span class="title tdateOfDeath">Date du décet: </span><span class="dateOfDeath">1866-07-16T00:00:00Z</span></span><br/>
-  				    <span><span class="title tplaceOfCitizenship">Lieu d'origine: </span><span class="placeOfCitizenship">Soazza (GR)</span></span><br/>
-  					<span><span class="title tcanton">Canton: </span><span class="canton">GR</span> <img width="20px" height="20px" alt="drapeau"  class="imgCanton"  /></span><br/>
-  					<span><span class="title tgender">Genre: </span><span class="gender">M</span></span><br/>
-  					<span><span class="title tparty">Parti: </span><span class="party">PDC</span></span><br/>
-  					<span><span class="title tcouncil">Conseil: </span><span class="council">CE</span></span><br/>
-  					<span><span class="title tentryDate">Date d'entré: </span><span class="entryDate">1849-12-01T00:00:00Z</span></span><br/>
-  					<span><span class="title tleavingDate">Date de sortie: </span><span class="leavingDate">1851-07-01T00:00:00Z</span></span><br/>
-  				
-  					
-  				
-  				</div>
-			</div>
+				<div id="partyGraph">
+					<h1>Infomrations sur le parti : UDC</h1>
+				</div>
+	        <div class="moreInformation">
+	 			<div class="moreInformationOne">
+					<h1 class="titleName"></h1>
+					<table style="margin-top: 20px;">
+						<tr>
+							<td><img  alt="profil"  class="profileBase" src="../img/profilBase.jpg"   /></td><td style="vertical-align: top;"><span><span class="title tcanton">Canton: </span><span class="infoblod canton"></span> <img width="20px" height="20px" alt="drapeau"  class="imgCanton"  /></span>
+							<br/>
+							<span><span class="title tgender">Genre: </span><span class="infoblod gender"></span></span>
+							<br/>
+							<span><span class="title tbirthDate">Naissance: </span><span class="infoblod birthDate"></span></span>
+							<br/>
+							<span><span class="title tdateOfDeath">Déces: </span><span class="infoblod dateOfDeath"></span></span>
+							<br/>
+							<span><span class="title tplaceOfCitizenship">Lieu d'origine: </span><span class="infoblod placeOfCitizenship"></span></span>
+							<br/>
+							</td>
+						</tr>
+					</table>
 
-			<div id="footer">
-				<div class="footerBack">
-					<div class="btCover" onmouseover="tooltip.show('Cacher', 90,'');$('.btCover').css('background-image','url(\'../img/btcover_on.png\')');" onmouseout="tooltip.hide();$('.btCover').css('background-image','url(\'../img/btcover.png\')');" ></div>
-					<div class="footerInner">
+					<div class="mandate">
+						Dernier mandat
+					</div>
+					<br/>
+					<div class="mandatContent">
+						<table style="margin:0; padding:0px;">
+							<tr>
+								<td><span class="title tparty">Parti: </span></td><td><span class="infoblod party"></span></td>
+							</tr>
+							<tr>
+								<td><span class="title tcouncil">Conseil: </span></td><td><span class="infoblod council"></span></td>
+							</tr>
+							<tr>
+								<td><span class="title tentryDate">Date d'entré: </span></td><td><span class="infoblod entryDate"></span></td>
+							</tr>
+							<tr>
+								<td style="padding-right: 20px;"><span class="title tleavingDate">Date de sortie: </span></td><td><span class="infoblod leavingDate"></span></td>
+							</tr><tr></tr>
+						</table>
+					</div>
+					
+					</div>
+					<div class="moreInformationTwo">
+						<h1 class="titleName"></h1>
+						<table style="margin-top: 20px;">
+							<tr>
+								<td><img  alt="profil"  class="profileBase" src="../img/profilBase.jpg"   /></td><td style="vertical-align: top;"><span><span class="title tcanton">Canton: </span><span class="infoblod canton"></span> <img width="20px" height="20px" alt="drapeau"  class="imgCanton"  /></span>
+								<br/>
+								<span><span class="title tgender">Genre: </span><span class="infoblod gender"></span></span>
+								<br/>
+								<span><span class="title tbirthDate">Naissance: </span><span class="infoblod birthDate"></span></span>
+								<br/>
+								<span><span class="title tdateOfDeath">Déces: </span><span class="infoblod dateOfDeath"></span></span>
+								<br/>
+								<span><span class="title tplaceOfCitizenship">Lieu d'origine: </span><span class="infoblod placeOfCitizenship"></span></span>
+								<br/>
+								</td>
+							</tr>
+						</table>
 
-						<span class="bar" style="margin-left: 29px;">Le parlement et son histoire </span>
-						<span class="bar">&copy; Tous droits réservés&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-						<span class="bar">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Par Valentin Bourqui et Didier Crausaz</span>
+						<div class="mandate">
+							Dernier mandat
+						</div>
+						<br/>
+						<div class="mandatContent">
+							<table style="margin:0; padding:0px;">
+								<tr>
+									<td><span class="title tparty">Parti: </span></td><td><span class="infoblod party"></span></td>
+								</tr>
+								<tr>
+									<td><span class="title tcouncil">Conseil: </span></td><td><span class="infoblod council"></span></td>
+								</tr>
+								<tr>
+									<td><span class="title tentryDate">Date d'entré: </span></td><td><span class="infoblod entryDate"></span></td>
+								</tr>
+								<tr>
+									<td style="padding-right: 20px;"><span class="title tleavingDate">Date de sortie: </span></td><td><span class="infoblod leavingDate"></span></td>
+								</tr><tr></tr>
+							</table>
+						</div>
+						</div>
+						<div class="moreInformationTree">
+							<h1 class="titleName"></h1>
+							<table style="margin-top: 20px;">
+								<tr>
+									<td><img  alt="profil"  class="profileBase" src="../img/profilBase.jpg"   /></td><td style="vertical-align: top;"><span><span class="title tcanton">Canton: </span><span class="infoblod canton"></span> <img width="20px" height="20px" alt="drapeau"  class="imgCanton"  /></span>
+									<br/>
+									<span><span class="title tgender">Genre: </span><span class="infoblod gender"></span></span>
+									<br/>
+									<span><span class="title tbirthDate">Naissance: </span><span class="infoblod birthDate"></span></span>
+									<br/>
+									<span><span class="title tdateOfDeath">Déces: </span><span class="infoblod dateOfDeath"></span></span>
+									<br/>
+									<span><span class="title tplaceOfCitizenship">Lieu d'origine: </span><span class="infoblod placeOfCitizenship"></span></span>
+									<br/>
+									</td>
+								</tr>
+							</table>
 
-						<span class="barSpace">VI Project 2012</span>
+							<div class="mandate">
+								Dernier mandat
+							</div>
+							<br/>
+							<div class="mandatContent">
+								<table style="margin:0; padding:0px;">
+									<tr>
+										<td><span class="title tparty">Parti: </span></td><td><span class="infoblod party"></span></td>
+									</tr>
+									<tr>
+										<td><span class="title tcouncil">Conseil: </span></td><td><span class="infoblod council"></span></td>
+									</tr>
+									<tr>
+										<td><span class="title tentryDate">Date d'entré: </span></td><td><span class="infoblod entryDate"></span></td>
+									</tr>
+									<tr>
+										<td style="padding-right: 20px;"><span class="title tleavingDate">Date de sortie: </span></td><td><span class="infoblod leavingDate"></span></td>
+									</tr><tr></tr>
+								</table>
+							</div>
+
+						</div>
+					</div>
+						<div class="clear"></div>
+				</div>
+			
+					<div id="footer">
+						<div class="footerBack">
+							<div class="btCover" onmouseover="tooltip.show('Cacher', 90,'');$('.btCover').css('background-image','url(\'../img/btcover_on.png\')');" onmouseout="tooltip.hide();$('.btCover').css('background-image','url(\'../img/btcover.png\')');" ></div>
+							<div class="footerInner">
+
+								<span class="bar" style="margin-left: 29px;">Le parlement et son histoire </span>
+								<span class="bar">&copy; Tous droits réservés&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+								<span class="bar">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Par Valentin Bourqui et Didier Crausaz</span>
+
+								<span class="barSpace">VI Project 2012</span>
+							</div>
+						</div>
 					</div>
 				</div>
-			</div>
-		</div>
 
-		<script src="../javascript/general/scroll.js"></script>
-		   <script type="text/javascript"> 
-		   
-		   function loadMap (address,nameSelected,data) {
-  				 var geocoder = new google.maps.Geocoder();
+				<script src="../javascript/general/scroll.js"></script>
+				<script type="text/javascript">
+					function loadMap(address, nameSelected, data) {
+						var geocoder = new google.maps.Geocoder();
+						
+						if (geocoder) {
+						geocoder.geocode({
+						'address' : address
+						}, function(results, status) {
+						if (status == google.maps.GeocoderStatus.OK) {
+						addLocation(results[0].geometry.location, nameSelected, data);
+						
+						} else {
+						console.log('No results found: ' + status);
+						}
+						});
+						}
+						v = v2;
+					}
 
-			      if (geocoder) {
-			        geocoder.geocode({ 'address': address }, function (results, status) {
-			            if (status == google.maps.GeocoderStatus.OK) {
-			              addLocation(results[0].geometry.location,nameSelected,data);
-			    
-			            } 
-			            else {
-			              console.log('No results found: ' + status);
-			            }
-			         });
-			      }
-			      v=v2;
-			     }
-   </script> 
+										
+					function searchImageResponse(data, status) {
+					  alert("data: " + data + ", status: " + status);
+					}
+
+
+					function searchImage(log,council) {
+						var URL = "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=fuzzy%20monkey";					
+						$.getJSON(URL + "&callback=?", searchImageResponse);
+
+					}
+				</script>
 	</body>
 </html>

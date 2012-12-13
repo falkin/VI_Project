@@ -16,14 +16,19 @@ var lenghtTableSelection = 0;
 var tableSelectedListID = 0;
 
 function displayInstead(tableSelection, data) {
+
 	lenghtTableSelection = tableSelection.length - 1;
-	var idCouncil = table.getSelection()[0].row;
+	var idCouncil = tableSelection[0].row;
 	var nameSelected = data.getValue(idCouncil, 0) + " " + data.getValue(idCouncil, 1) + " - ";
-	var instead = council.searchInstead(idCouncil);
+	var instead = council.searchInstead(data.getValue(idCouncil, 2));
 	insteadSp = instead.split(",");
 	insteadFinal = insteadSp[0];
 	tableSelectedListID = 0;
-	council.updateMoreInformations(idCouncil, "One");
+	$('.moreInformationOne').animate({  opacity:"0"},600, function(){
+		council.updateMoreInformations(idCouncil, "One");
+		$(".moreInformationOne").css("display","");
+  			
+	});	
 	loadMap(insteadFinal, nameSelected, data);
 
 
@@ -48,6 +53,19 @@ function addLocation(position, nameSelected, data) {
 			markers = new Array();
 			tableSelectedListID = 0;
 		} else {
+			if(lenghtTableSelection == 1){
+				$('.moreInformationTwo').animate({  opacity:"0"},600, function(){
+					council.updateMoreInformations(idCouncil, "Two");
+						$(".moreInformationTwo").css("display","");
+  				
+				});	
+			}
+			else if(lenghtTableSelection == 2){
+				$('.moreInformationTree').animate({  opacity:"0"},600, function(){
+					council.updateMoreInformations(idCouncil, "Tree");
+					$(".moreInformationTree").css("display","");
+				});	
+			}
 			var idCouncil = table.getSelection()[lenghtTableSelection].row;
 			var nameSelected = data.getValue(idCouncil, 0) + " " + data.getValue(idCouncil, 1) + " - ";
 			var instead = council.searchInstead(idCouncil);
@@ -80,7 +98,6 @@ function drawTable(array, refresh) {
 	if (filterListSearch == true && $(".inputePeopleLong").val() != "") {
 		var selectedcouncilarray = new Array();
 		var b = 0;
-
 		for (var i = 0; i < array.length; i++) {
 			for (var x = 0; x < val.length; x++) {
 
@@ -91,8 +108,10 @@ function drawTable(array, refresh) {
 				}
 			}
 		}
+		$(".typeTotal .value").text(selectedcouncilarray.length+" personnes");
 		data.addRows(selectedcouncilarray);
 	} else {
+		$(".typeTotal .value").text(array.length+" personnes");
 		data.addRows(array);
 	}
 	if (refresh == 0) {
@@ -103,7 +122,14 @@ function drawTable(array, refresh) {
 			page : 'disable',
 		});
 		google.visualization.events.addListener(table, 'select', function() {
+			$('.moreInformationOne').animate({  opacity:"0"},600);
+				$('.moreInformationTwo').animate({  opacity:"0"},600);
+ 				$('.moreInformationTree').animate({  opacity:"0"},600);
+ 				$(".moreInformationOne").css("display","none");
+  				$(".moreInformationTwo").css("display","none");
+  				$(".moreInformationTree").css("display","none");
 			if ((table.getSelection()).length >= 4) {
+			
 
 			}
 			if ((table.getSelection()).length > 0 && (table.getSelection()).length < 4) {
@@ -111,6 +137,7 @@ function drawTable(array, refresh) {
 			} else if ((table.getSelection()).length == 0) {
 				map.removeAllMarkers();
 				nameSelected = null;
+				
 			}
 
 		});
@@ -122,9 +149,15 @@ function drawTable(array, refresh) {
 			page : 'disable',
 		});
 		google.visualization.events.addListener(table, 'select', function() {
+				$('.moreInformationOne').animate({  opacity:"0"},600);
+				$('.moreInformationTwo').animate({  opacity:"0"},600);
+ 				$('.moreInformationTree').animate({  opacity:"0"},600);
+ 				$(".moreInformationOne").css("display","none");
+  				$(".moreInformationTwo").css("display","none");
+  				$(".moreInformationTree").css("display","none");
 			if ((table.getSelection()).length >= 4) {
 
-				$('.google-visualization-table-tr-sel').css('background-color', 'black');
+					
 			}
 
 			if ((table.getSelection()).length > 0 && (table.getSelection()).length < 4) {
@@ -132,6 +165,7 @@ function drawTable(array, refresh) {
 			} else if ((table.getSelection()).length == 0) {
 				map.removeAllMarkers();
 				nameSelected = null;
+			
 			}
 
 		});
