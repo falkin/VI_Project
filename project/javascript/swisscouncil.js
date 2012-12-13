@@ -1,4 +1,3 @@
-
 google.load('visualization', '1', {
 	packages : ['table']
 });
@@ -13,54 +12,76 @@ var insteadFinal;
 var insteadSp;
 var allValuesinstead = 0;
 var markers;
-var lenghtTableSelection =0;
-var tableSelectedListID=0;
-function displayInstead(tableSelection,data) {
-		lenghtTableSelection = tableSelection.length-1;
-		var idCouncil = table.getSelection()[0].row;
-		var nameSelected = data.getValue(idCouncil, 0)+" "+data.getValue(idCouncil, 1) + " - ";
-		var instead = council.searchInstead(idCouncil);
-		insteadSp = instead.split(",");
-		insteadFinal =insteadSp[0]; 
-		tableSelectedListID=0;
-		council.updateMoreInformations(idCouncil,"One");
-	  	loadMap(insteadFinal,nameSelected,data); 
-	  
-}
-function addLocation(position,nameSelected,data) {
-		var pos = parseFloat(position.toString().split(",")[0].replace("(",""));
-		var pos2 = parseFloat(position.toString().split(",")[1].replace(")",""));
-	    markers[tableSelectedListID] = {latLng: [pos,pos2], name:nameSelected+"Lieu d'origine: "+insteadFinal};
-	    var cityAreaData = [];
-	    allValuesinstead++;
-	    tableSelectedListID++;
-	    map.removeAllMarkers();
-	    if(allValuesinstead==insteadSp.length){
-	    	
-	    	if(lenghtTableSelection == 0){
-	    		map.addMarkers(markers,cityAreaData);
-	    		allValuesinstead=0;
-	    		markers = new Array();
-	    		tableSelectedListID=0;
-	    	}
-	    	else{
-	    		var idCouncil = table.getSelection()[lenghtTableSelection].row;
-				var nameSelected = data.getValue(idCouncil, 0)+" "+data.getValue(idCouncil, 1) + " - ";
-				var instead = council.searchInstead(idCouncil);
-				insteadSp = instead.split(",");
-				insteadFinal =insteadSp[0]; 
-				 allValuesinstead=0;
-				lenghtTableSelection--;
-			  	loadMap(insteadFinal,nameSelected,data); 
-			  	
-	    	}
-	    }
-	    else{
-	    	insteadFinal =insteadSp[allValuesinstead]; 
-	  		loadMap(insteadFinal,nameSelected,data); 
-	    }
+var lenghtTableSelection = 0;
+var tableSelectedListID = 0;
+
+function displayInstead(tableSelection, data) {
+
+	lenghtTableSelection = tableSelection.length - 1;
+	var idCouncil = tableSelection[0].row;
+	var nameSelected = data.getValue(idCouncil, 0) + " " + data.getValue(idCouncil, 1) + " - ";
+	var instead = council.searchInstead(data.getValue(idCouncil, 2));
+	insteadSp = instead.split(",");
+	insteadFinal = insteadSp[0];
+	tableSelectedListID = 0;
+	$('.moreInformationOne').animate({  opacity:"0"},600, function(){
+		council.updateMoreInformations(idCouncil, "One");
+		$(".moreInformationOne").css("display","");
+  			
+	});	
+	loadMap(insteadFinal, nameSelected, data);
+
 
 }
+
+function addLocation(position, nameSelected, data) {
+	var pos = parseFloat(position.toString().split(",")[0].replace("(", ""));
+	var pos2 = parseFloat(position.toString().split(",")[1].replace(")", ""));
+	markers[tableSelectedListID] = {
+		latLng : [pos, pos2],
+		name : nameSelected + "Lieu d'origine: " + insteadFinal
+	};
+	var cityAreaData = [];
+	allValuesinstead++;
+	tableSelectedListID++;
+	map.removeAllMarkers();
+	if (allValuesinstead == insteadSp.length) {
+
+		if (lenghtTableSelection == 0) {
+			map.addMarkers(markers, cityAreaData);
+			allValuesinstead = 0;
+			markers = new Array();
+			tableSelectedListID = 0;
+		} else {
+			if(lenghtTableSelection == 1){
+				$('.moreInformationTwo').animate({  opacity:"0"},600, function(){
+					council.updateMoreInformations(idCouncil, "Two");
+						$(".moreInformationTwo").css("display","");
+  				
+				});	
+			}
+			else if(lenghtTableSelection == 2){
+				$('.moreInformationTree').animate({  opacity:"0"},600, function(){
+					council.updateMoreInformations(idCouncil, "Tree");
+					$(".moreInformationTree").css("display","");
+				});	
+			}
+			var idCouncil = table.getSelection()[lenghtTableSelection].row;
+			var nameSelected = data.getValue(idCouncil, 0) + " " + data.getValue(idCouncil, 1) + " - ";
+			var instead = council.searchInstead(idCouncil);
+			insteadSp = instead.split(",");
+			insteadFinal = insteadSp[0];
+			allValuesinstead = 0;
+			lenghtTableSelection--;
+			loadMap(insteadFinal, nameSelected, data);
+
+		}
+	} else {
+		insteadFinal = insteadSp[allValuesinstead];
+		loadMap(insteadFinal, nameSelected, data);
+	}
+}
+
 
 function drawTable(array, refresh) {
 
@@ -73,74 +94,89 @@ function drawTable(array, refresh) {
 	var val = new Array();
 	var valSplit = $(".inputePeopleLong").val().split(" ");
 	for (var x = 0; x < valSplit.length; x++) {
-		if(valSplit[x] != "")
-		 val[x] = new RegExp(valSplit[x], "i");
+		if (valSplit[x] != "")
+			val[x] = new RegExp(valSplit[x], "i");
 	}
-	if(filterListSearch == true && $(".inputePeopleLong").val() != ""){
-		    var selectedcouncilarray = new Array();
-		    var b = 0;
-		    
-			for (var i = 0; i < array.length; i++) {
-				for (var x = 0; x < val.length; x++) {	
-					
-					if((array[i][0].toString().match(val[x]) !=null || array[i][1].toString().match(val[x]) !=null || array[i][2].f.match(val[x]) !=null) && val != ""){
-						selectedcouncilarray[b] = array[i];
-						b = b+1; 
-						break;
-				    }
+	if (filterListSearch == true && $(".inputePeopleLong").val() != "") {
+		var selectedcouncilarray = new Array();
+		var b = 0;
+		for (var i = 0; i < array.length; i++) {
+			for (var x = 0; x < val.length; x++) {
+
+				if ((array[i][0].toString().match(val[x]) != null || array[i][1].toString().match(val[x]) != null || array[i][2].f.match(val[x]) != null) && val != "") {
+					selectedcouncilarray[b] = array[i];
+					b = b + 1;
+					break;
 				}
 			}
+		}
+		$(".typeTotal .value").text(selectedcouncilarray.length+" personnes");
 		data.addRows(selectedcouncilarray);
 	} else {
+		$(".typeTotal .value").text(array.length+" personnes");
 		data.addRows(array);
 	}
 	if (refresh == 0) {
 		table = new google.visualization.Table(document.getElementById('informationList'));
+
 		table.draw(data, {
 			showRowNumber : false
 		}, {
 			page : 'disable',
 		});
-		google.visualization.events.addListener(table, 'select', function () {
-			if((table.getSelection()).length >= 4){
+		google.visualization.events.addListener(table, 'select', function() {
+			$('.moreInformationOne').animate({  opacity:"0"},600);
+				$('.moreInformationTwo').animate({  opacity:"0"},600);
+ 				$('.moreInformationTree').animate({  opacity:"0"},600);
+ 				$(".moreInformationOne").css("display","none");
+  				$(".moreInformationTwo").css("display","none");
+  				$(".moreInformationTree").css("display","none");
+			if ((table.getSelection()).length >= 4) {
 			
+
 			}
-			if((table.getSelection()).length > 0 && (table.getSelection()).length < 4){
-   					 displayInstead(table.getSelection(),data);
-   			}
-   			else if((table.getSelection()).length == 0){
-   				 map.removeAllMarkers();
-   				 nameSelected= null;
-   			}
-   			 
+			if ((table.getSelection()).length > 0 && (table.getSelection()).length < 4) {
+				displayInstead(table.getSelection(), data);
+			} else if ((table.getSelection()).length == 0) {
+				map.removeAllMarkers();
+				nameSelected = null;
+				
+			}
+
 		});
-	}
-	else if(refresh ==1){
+	} else if (refresh == 1) {
 		table = new google.visualization.Table(document.getElementById('tableListPeople'));
-		table.draw(data,{showRowNumber: false}, {
+		table.draw(data, {
+			showRowNumber : false
+		}, {
 			page : 'disable',
 		});
-		google.visualization.events.addListener(table, 'select', function () {
-			if((table.getSelection()).length >= 4){
-			
-				$('.google-visualization-table-tr-sel').css('background-color','black'); 
+		google.visualization.events.addListener(table, 'select', function() {
+				$('.moreInformationOne').animate({  opacity:"0"},600);
+				$('.moreInformationTwo').animate({  opacity:"0"},600);
+ 				$('.moreInformationTree').animate({  opacity:"0"},600);
+ 				$(".moreInformationOne").css("display","none");
+  				$(".moreInformationTwo").css("display","none");
+  				$(".moreInformationTree").css("display","none");
+			if ((table.getSelection()).length >= 4) {
+
+					
 			}
-			
-			if((table.getSelection()).length > 0 && (table.getSelection()).length < 4){
-   					 displayInstead(table.getSelection(),data);
-   			}
-   			else if((table.getSelection()).length == 0){
-   				 map.removeAllMarkers();
-   				 nameSelected= null;
-   			}
-   			 
+
+			if ((table.getSelection()).length > 0 && (table.getSelection()).length < 4) {
+				displayInstead(table.getSelection(), data);
+			} else if ((table.getSelection()).length == 0) {
+				map.removeAllMarkers();
+				nameSelected = null;
+			}
+
 		});
 	}
 	return data;
 }
 
 $(function() {
-    markers = new Array();
+	markers = new Array();
 	// swiss map personalization
 	map = new jvm.WorldMap({
 		map : 'ch_merc_en',
@@ -270,22 +306,22 @@ $(function() {
 	var smallestDate = council.smallestDate();
 
 	council.loadAllParty();
-	$(".chzn-select").chosen({no_results_text: "Aucun parti corespondant !",max_selected_options: 2});
-	
-	
-	  
-	loadcouncil(councillers,0);
+	$(".chzn-select").chosen({
+		no_results_text : "Aucun parti corespondant !",
+		max_selected_options : 2
+	});
+
+	loadcouncil(councillers, 0);
 	//loadMap(countCanton);
 
-	 $(".inputePeopleLong").keyup(function(event) {
-	 	map.removeAllMarkers();
-		if ($(".inputePeopleLong").val() !="" && $(".inputePeopleLong").val() !="Rechercher une personne dans la liste"){
-		 	filterListSearch = true;
-		 }
-		 else{
-		 	filterListSearch = false;
-		 }
-		 loadcouncil(councillers,1);
+	$(".inputePeopleLong").keyup(function(event) {
+		map.removeAllMarkers();
+		if ($(".inputePeopleLong").val() != "" && $(".inputePeopleLong").val() != "Rechercher une personne dans la liste") {
+			filterListSearch = true;
+		} else {
+			filterListSearch = false;
+		}
+		loadcouncil(councillers, 1);
 	});
 
 	$('#choice input').change(function() {
@@ -343,6 +379,7 @@ $(function() {
 		}
 	});
 
+
 });
 
 /**
@@ -386,5 +423,4 @@ function hslToRgb(h, s, l) {
 
 	return [r * 255, g * 255, b * 255];
 }
-
 
