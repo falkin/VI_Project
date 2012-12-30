@@ -24,13 +24,14 @@ function displayInstead(tableSelection, data) {
 	insteadSp = instead.split(",");
 	insteadFinal = insteadSp[0];
 	tableSelectedListID = 0;
-	$('.moreInformationOne').animate({  opacity:"0"},600, function(){
+	$('.moreInformationOne').animate({
+		opacity : "0"
+	}, 600, function() {
 		council.updateMoreInformations(data.getValue(idCouncil, 2), "One");
-		$(".moreInformationOne").css("display","");
-  			
-	});	
-	loadMap(insteadFinal, nameSelected, data);
+		$(".moreInformationOne").css("display", "");
 
+	});
+	loadMap(insteadFinal, nameSelected, data);
 
 }
 
@@ -53,18 +54,21 @@ function addLocation(position, nameSelected, data) {
 			markers = new Array();
 			tableSelectedListID = 0;
 		} else {
-			if(lenghtTableSelection == 1){
-				$('.moreInformationTwo').animate({  opacity:"0"},600, function(){
+			if (lenghtTableSelection == 1) {
+				$('.moreInformationTwo').animate({
+					opacity : "0"
+				}, 600, function() {
 					council.updateMoreInformations(data.getValue(idCouncil, 2), "Two");
-						$(".moreInformationTwo").css("display","");
-  				
-				});	
-			}
-			else if(lenghtTableSelection == 2){
-				$('.moreInformationTree').animate({  opacity:"0"},600, function(){
+					$(".moreInformationTwo").css("display", "");
+
+				});
+			} else if (lenghtTableSelection == 2) {
+				$('.moreInformationTree').animate({
+					opacity : "0"
+				}, 600, function() {
 					council.updateMoreInformations(data.getValue(idCouncil, 2), "Tree");
-					$(".moreInformationTree").css("display","");
-				});	
+					$(".moreInformationTree").css("display", "");
+				});
 			}
 			var idCouncil = table.getSelection()[lenghtTableSelection].row;
 			var nameSelected = data.getValue(idCouncil, 0) + " " + data.getValue(idCouncil, 1) + " - ";
@@ -81,7 +85,6 @@ function addLocation(position, nameSelected, data) {
 		loadMap(insteadFinal, nameSelected, data);
 	}
 }
-
 
 function drawTable(array, refresh) {
 
@@ -110,10 +113,10 @@ function drawTable(array, refresh) {
 				}
 			}
 		}
-		$(".typeTotal .value").text(selectedcouncilarray.length+" personnes");
+		$(".typeTotal .value").text(selectedcouncilarray.length + " personnes");
 		data.addRows(selectedcouncilarray);
 	} else {
-		$(".typeTotal .value").text(array.length+" personnes");
+		$(".typeTotal .value").text(array.length + " personnes");
 		data.addRows(array);
 	}
 	if (refresh == 0) {
@@ -125,14 +128,19 @@ function drawTable(array, refresh) {
 			page : 'disable',
 		});
 		google.visualization.events.addListener(table, 'select', function() {
-			$('.moreInformationOne').animate({  opacity:"0"},600);
-				$('.moreInformationTwo').animate({  opacity:"0"},600);
- 				$('.moreInformationTree').animate({  opacity:"0"},600);
- 				$(".moreInformationOne").css("display","none");
-  				$(".moreInformationTwo").css("display","none");
-  				$(".moreInformationTree").css("display","none");
+			$('.moreInformationOne').animate({
+				opacity : "0"
+			}, 600);
+			$('.moreInformationTwo').animate({
+				opacity : "0"
+			}, 600);
+			$('.moreInformationTree').animate({
+				opacity : "0"
+			}, 600);
+			$(".moreInformationOne").css("display", "none");
+			$(".moreInformationTwo").css("display", "none");
+			$(".moreInformationTree").css("display", "none");
 			if ((table.getSelection()).length >= 4) {
-			
 
 			}
 			if ((table.getSelection()).length > 0 && (table.getSelection()).length < 4) {
@@ -140,7 +148,7 @@ function drawTable(array, refresh) {
 			} else if ((table.getSelection()).length == 0) {
 				map.removeAllMarkers();
 				nameSelected = null;
-				
+
 			}
 
 		});
@@ -152,15 +160,20 @@ function drawTable(array, refresh) {
 			page : 'disable',
 		});
 		google.visualization.events.addListener(table, 'select', function() {
-				$('.moreInformationOne').animate({  opacity:"0"},600);
-				$('.moreInformationTwo').animate({  opacity:"0"},600);
- 				$('.moreInformationTree').animate({  opacity:"0"},600);
- 				$(".moreInformationOne").css("display","none");
-  				$(".moreInformationTwo").css("display","none");
-  				$(".moreInformationTree").css("display","none");
+			$('.moreInformationOne').animate({
+				opacity : "0"
+			}, 600);
+			$('.moreInformationTwo').animate({
+				opacity : "0"
+			}, 600);
+			$('.moreInformationTree').animate({
+				opacity : "0"
+			}, 600);
+			$(".moreInformationOne").css("display", "none");
+			$(".moreInformationTwo").css("display", "none");
+			$(".moreInformationTree").css("display", "none");
 			if ((table.getSelection()).length >= 4) {
 
-					
 			}
 
 			if ((table.getSelection()).length > 0 && (table.getSelection()).length < 4) {
@@ -198,14 +211,14 @@ $(function() {
 				"fill-opacity" : 1
 			}
 		},
-		markerStyle: {
-	      initial: {
-	        fill: '#f33f52',
-	      },
-	      selected: {
-	        fill: '#f33f52'
-	      }
-	    },
+		markerStyle : {
+			initial : {
+				fill : '#f33f52',
+			},
+			selected : {
+				fill : '#f33f52'
+			}
+		},
 		series : {
 			regions : [{
 				attribute : 'fill'
@@ -226,22 +239,36 @@ $(function() {
 		});
 
 		var colors = {}, key;
-
+		var H=0.5;
+		var S=0.5;
 		for (key in map.regions) {
 			var region = key.substring(3, 7);
 			if (!( region in countCanton)) {
 				countCanton[region] = 0;
 			}
-			if (max == 0) {
-				max = 1;
+			if (countCanton[region]==0) {
+			var color = "rgb(200,200,200)";
 			}
+			else{
 			var x = ((-180 * countCanton[region] / max) + 220) / 255;
-
-			var color = hslToRgb(0.509, 0.501, x);
-			var colorstring = "rgb(" + parseFloat(color[0]).toFixed(0) + "," + parseFloat(color[1]).toFixed(0) + "," + parseFloat(color[2]).toFixed(0) + ")";
-			colors[key] = colorstring;
+			var color = hslToRgb(H, S, x);
+			}
+			colors[key] = color;
 		}
+		var maxcolor=hslToRgb(H, S,(40 / 255));
+		var mediumcolor;
+		if(max>1)
+		mediumcolor = hslToRgb(H, S,((-180 * 0.5) + 220) / 255);
+		else
+		mediumcolor=maxcolor;
+		var mincolor=hslToRgb(H, S,((-180 * 1 / max) + 220) / 255);
+			
 		map.series.regions[0].setValues(colors);
+		
+		$('.jvectormap-container #legend').remove();
+		if(max>0)
+		$('.jvectormap-container').append("<div id=\"legend\" style=\"height:50px;width:200px;position:absolute;right:0px;bottom:0px\"><svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\"><defs><linearGradient id=\"grad1\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"0%\"><stop offset=\"0%\" style=\"stop-color:"+mincolor+";stop-opacity:1\" /><stop offset=\"10%\" style=\"stop-color:"+mincolor+";stop-opacity:1\" /><stop offset=\"50%\" style=\"stop-color:"+mediumcolor+";stop-opacity:1\" /><stop offset=\"90%\" style=\"stop-color:"+maxcolor+";stop-opacity:1\"/><stop offset=\"100%\" style=\"stop-color:"+maxcolor+";stop-opacity:1\"/></linearGradient></defs><text style=\"text-anchor:middle\" fill=\"black\" font-size=\"8\" font-family=\"Verdana\" x=\"90\" y=\"10\">Nombre de personnes</text><rect width=\"180\" height=\"15\" fill=\"url(#grad1)\" x=\"2\" y=\"15\"/><text fill=\"black\" font-size=\"8\" font-family=\"Verdana\" y=\"40\">1</text><text style=\"text-anchor:middle\" fill=\"black\" font-size=\"8\" font-family=\"Verdana\" x=\"180\" y=\"40\">"+max+"</text></svg></div>");
+		//$('#map svg').append('<defs><linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" style="stop-color:rgb(202, 235, 237);stop-opacity:1" /><stop offset="100%" style="stop-color:rgb(19,57,60);stop-opacity:1"/></linearGradient></defs><rect width="200" height="15" fill="url(#grad1)" x="2"/><text fill="black" font-size="8" font-family="Verdana" y="25">1</text><text style="text-anchor:middle" fill="black" font-size="8" font-family="Verdana" x="200"y="25"></text>');
 	}
 
 	function loadcouncil(councillers, refresh) {
@@ -329,16 +356,15 @@ $(function() {
 		loadcouncil(councillers, 1);
 	});
 
-	
 	//selection du parti
 	$(".chzn-select").chosen().change(function() {
 		var str = "-";
 		$(".result-selected").each(function() {
 			var parti = $(this).text().split("-");
 			if (str != "-") {
-				str += ", " + parti[0].slice(0,-1);
+				str += ", " + parti[0].slice(0, -1);
 			} else {
-				str = parti[0].slice(0,-1);
+				str = parti[0].slice(0, -1);
 			}
 		});
 		$(".partyInfo .value").text(str);
@@ -369,16 +395,15 @@ $(function() {
 				$(".yearInfo .value").text('De ' + val[0] + ' à ' + val[1]);
 			}
 		},
-		callback : function(value){
+		callback : function(value) {
 			var d = this;
-			var from = parseInt(this.getValue().substring(0,4));
-			var to = parseInt(this.getValue().substring(5,9));
-			selectcouncillers = councillers.setDate(from,to).byCanton();
+			var from = parseInt(this.getValue().substring(0, 4));
+			var to = parseInt(this.getValue().substring(5, 9));
+			selectcouncillers = councillers.setDate(from, to).byCanton();
 			drawTable(councillers.toArray(), 1);
 			loadMap(selectcouncillers);
 		}
 	});
-
 
 });
 
@@ -420,7 +445,7 @@ function hslToRgb(h, s, l) {
 		g = hue2rgb(p, q, h);
 		b = hue2rgb(p, q, h - 1 / 3);
 	}
+	var color = [parseFloat(r * 255).toFixed(0), parseFloat(g * 255).toFixed(0), parseFloat(b * 255).toFixed(0)];
+	return "rgb(" + color[0] + "," + color[1] + "," + color[2] + ")";
 
-	return [r * 255, g * 255, b * 255];
 }
-
