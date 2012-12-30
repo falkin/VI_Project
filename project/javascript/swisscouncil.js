@@ -4,6 +4,9 @@ google.load('visualization', '1', {
 //google.setOnLoadCallback(drawTable);
 
 // GLOBAL VARIABLES
+// colors for map
+var HUE = 0.5;
+var SATURATION = 0.5;
 
 var filterListSearch = false;
 var table = null;
@@ -14,6 +17,9 @@ var allValuesinstead = 0;
 var markers;
 var lenghtTableSelection = 0;
 var tableSelectedListID = 0;
+var selectcouncillers = null;
+var selectedCanton;
+
 
 function displayInstead(tableSelection, data) {
 
@@ -87,7 +93,7 @@ function addLocation(position, nameSelected, data) {
 }
 
 function drawTable(array, refresh) {
-
+	
 	var data = new google.visualization.DataTable();
 
 	data.addColumn('string', '');
@@ -100,7 +106,24 @@ function drawTable(array, refresh) {
 		if (valSplit[x] != "")
 			val[x] = new RegExp(valSplit[x], "i");
 	}
-	if (filterListSearch == true && $(".inputePeopleLong").val() != "") {
+	if(selectedCanton != null && selectedCanton.length>0){
+		var selectedcouncilarray = new Array();
+		var b = 0;
+		for (var i = 0; i < array.length; i++) {
+			for (var x = 0; x < selectedCanton.length; x++) {
+
+				if ((array[i][2].f.match(selectedCanton[x]) != null)) {
+					selectedcouncilarray[b] = array[i];
+					b = b + 1;
+					break;
+				}
+			}
+		}
+		array=selectedcouncilarray;
+		//data.addRows(selectedcouncilarray);
+	}
+	
+	if (filterListSearch && $(".inputePeopleLong").val() != "") {
 		var selectedcouncilarray = new Array();
 		var b = 0;
 		for (var i = 0; i < array.length; i++) {
@@ -113,11 +136,22 @@ function drawTable(array, refresh) {
 				}
 			}
 		}
-		$(".typeTotal .value").text(selectedcouncilarray.length + " personnes");
-		data.addRows(selectedcouncilarray);
-	} else {
+		//$(".typeTotal .value").text(selectedcouncilarray.length + " personnes");
+		//data.addRows(selectedcouncilarray);
+		array=selectedcouncilarray;
+	}
+	singlePersonArray=new Array();
+	$.each(array, function(index, value) {
+		if (index>0 && value[0] == singlePersonArray[singlePersonArray.length-1][0] && value[1] == singlePersonArray[singlePersonArray.length-1][1])
+			singlePersonArray[singlePersonArray.length-1]=value;
+		else{
+			singlePersonArray.push(value);
+		}
+	array=singlePersonArray;
+	});
+	data.addRows(array);
+	if(!(filterListSearch && $(".inputePeopleLong").val() != "") && !(selectedCanton != null && selectedCanton.length>0)) {
 		$(".typeTotal .value").text(array.length + " personnes");
-		data.addRows(array);
 	}
 	if (refresh == 0) {
 		table = new google.visualization.Table(document.getElementById('informationList'));
@@ -201,7 +235,7 @@ $(function() {
 
 		regionStyle : {
 			initial : {
-				fill : 'rgb(202,236,238)'
+				fill : 'rgb(200,200,200)'
 			},
 			hover : {
 				//fill : '#000000',
@@ -209,6 +243,9 @@ $(function() {
 				"stroke-width" : 2,
 				"stroke-opacity" : 1,
 				"fill-opacity" : 1
+			},
+			selected : {
+				fill : '#F33F52'
 			}
 		},
 		markerStyle : {
@@ -229,6 +266,21 @@ $(function() {
 
 			}]
 		},
+		onRegionLabelShow : function(e, el, code) {
+			var region = code.substring(3, 7);
+			var nbpersonne = selectcouncillers[region];
+			el.html("<b>" + el.html() + "</b><br/>" + nbpersonne + " personne");
+			if (nbpersonne > 1)
+				el.html(el.html() + "s");
+		},
+		onRegionSelected : function(e,code,isSelected,selectedRegionCode){
+			$.each(selectedRegionCode, function(index, value) {
+				selectedRegionCode[index]=value.substring(3, 7);
+			});
+			selectedCanton=selectedRegionCode;
+			drawTable(councillers.toArray(), 1);
+	
+		}
 	});
 
 	function loadMap(countCanton) {
@@ -239,35 +291,33 @@ $(function() {
 		});
 
 		var colors = {}, key;
-		var H=0.5;
-		var S=0.5;
 		for (key in map.regions) {
 			var region = key.substring(3, 7);
 			if (!( region in countCanton)) {
 				countCanton[region] = 0;
 			}
-			if (countCanton[region]==0) {
-			var color = "rgb(200,200,200)";
+			if (countCanton[region] == 0) {
+				var color = "rgb(200,200,200)";
 			}
-			else{
-			var x = ((-180 * countCanton[region] / max) + 220) / 255;
-			var color = hslToRgb(H, S, x);
+			if (countCanton[region] > 0) {
+				var x = ((-180 * countCanton[region] / max) + 220) / 255;
+				var color = hslToRgb(HUE, SATURATION, x);
 			}
 			colors[key] = color;
 		}
-		var maxcolor=hslToRgb(H, S,(40 / 255));
+		var maxcolor = hslToRgb(HUE, SATURATION, (40 / 255));
 		var mediumcolor;
-		if(max>1)
-		mediumcolor = hslToRgb(H, S,((-180 * 0.5) + 220) / 255);
+		if (max > 1)
+			mediumcolor = hslToRgb(HUE, SATURATION, ((-180 * 0.5) + 220) / 255);
 		else
-		mediumcolor=maxcolor;
-		var mincolor=hslToRgb(H, S,((-180 * 1 / max) + 220) / 255);
-			
+			mediumcolor = maxcolor;
+		var mincolor = hslToRgb(HUE, SATURATION, ((-180 * 1 / max) + 220) / 255);
+
 		map.series.regions[0].setValues(colors);
-		
+
 		$('.jvectormap-container #legend').remove();
-		if(max>0)
-		$('.jvectormap-container').append("<div id=\"legend\" style=\"height:50px;width:200px;position:absolute;right:0px;bottom:0px\"><svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\"><defs><linearGradient id=\"grad1\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"0%\"><stop offset=\"0%\" style=\"stop-color:"+mincolor+";stop-opacity:1\" /><stop offset=\"10%\" style=\"stop-color:"+mincolor+";stop-opacity:1\" /><stop offset=\"50%\" style=\"stop-color:"+mediumcolor+";stop-opacity:1\" /><stop offset=\"90%\" style=\"stop-color:"+maxcolor+";stop-opacity:1\"/><stop offset=\"100%\" style=\"stop-color:"+maxcolor+";stop-opacity:1\"/></linearGradient></defs><text style=\"text-anchor:middle\" fill=\"black\" font-size=\"8\" font-family=\"Verdana\" x=\"90\" y=\"10\">Nombre de personnes</text><rect width=\"180\" height=\"15\" fill=\"url(#grad1)\" x=\"2\" y=\"15\"/><text fill=\"black\" font-size=\"8\" font-family=\"Verdana\" y=\"40\">1</text><text style=\"text-anchor:middle\" fill=\"black\" font-size=\"8\" font-family=\"Verdana\" x=\"180\" y=\"40\">"+max+"</text></svg></div>");
+		if (max > 0)
+			$('.jvectormap-container').append("<div id=\"legend\" style=\"height:50px;width:200px;position:absolute;right:0px;bottom:0px\"><svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\"><defs><linearGradient id=\"grad1\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"0%\"><stop offset=\"0%\" style=\"stop-color:" + mincolor + ";stop-opacity:1\" /><stop offset=\"10%\" style=\"stop-color:" + mincolor + ";stop-opacity:1\" /><stop offset=\"50%\" style=\"stop-color:" + mediumcolor + ";stop-opacity:1\" /><stop offset=\"90%\" style=\"stop-color:" + maxcolor + ";stop-opacity:1\"/><stop offset=\"100%\" style=\"stop-color:" + maxcolor + ";stop-opacity:1\"/></linearGradient></defs><text style=\"text-anchor:middle\" fill=\"black\" font-size=\"8\" font-family=\"Verdana\" x=\"90\" y=\"10\">Nombre de personnes</text><rect width=\"180\" height=\"15\" fill=\"url(#grad1)\" x=\"2\" y=\"15\"/><text fill=\"black\" font-size=\"8\" font-family=\"Verdana\" y=\"40\">1</text><text style=\"text-anchor:middle\" fill=\"black\" font-size=\"8\" font-family=\"Verdana\" x=\"180\" y=\"40\">" + max + "</text></svg></div>");
 		//$('#map svg').append('<defs><linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" style="stop-color:rgb(202, 235, 237);stop-opacity:1" /><stop offset="100%" style="stop-color:rgb(19,57,60);stop-opacity:1"/></linearGradient></defs><rect width="200" height="15" fill="url(#grad1)" x="2"/><text fill="black" font-size="8" font-family="Verdana" y="25">1</text><text style="text-anchor:middle" fill="black" font-size="8" font-family="Verdana" x="200"y="25"></text>');
 	}
 
@@ -276,7 +326,7 @@ $(function() {
 		var councilstring = "";
 		if ($('#BR').attr("checked") == "checked") {
 			$('.BR').css("color", "#f33f52");
-			textInfoCouncil = "Conseil fédéral";
+			textInfoCouncil = "Conseil Fédéral";
 			if (councilstring.length != 0) {
 				councilstring += " ";
 			}
@@ -287,9 +337,9 @@ $(function() {
 		if ($('#CN').attr("checked") == "checked") {
 			$('.CN').css("color", "#f33f52");
 			if (textInfoCouncil == "-") {
-				textInfoCouncil = "Conseil national";
+				textInfoCouncil = "Conseil National";
 			} else {
-				textInfoCouncil = textInfoCouncil + ", national";
+				textInfoCouncil = textInfoCouncil + ", National";
 			}
 			if (councilstring.length != 0) {
 				councilstring += " ";
@@ -301,9 +351,9 @@ $(function() {
 		if ($('#CE').attr("checked") == "checked") {
 			$('.CE').css("color", "#f33f52");
 			if (textInfoCouncil == "-") {
-				textInfoCouncil = "Conseil des états";
+				textInfoCouncil = "Conseil des Etats";
 			} else {
-				textInfoCouncil = textInfoCouncil + ", des états";
+				textInfoCouncil = textInfoCouncil + ", des Etats";
 			}
 			if (councilstring.length != 0) {
 				councilstring += " ";
@@ -316,7 +366,6 @@ $(function() {
 			textInfoCouncil = "Tous";
 		}
 		$(".councilInfo .value").text(textInfoCouncil);
-		var selectcouncillers = null;
 		selectcouncillers = councillers.setCouncil(councilstring).byCanton();
 		drawTable(councillers.toArray(), refresh);
 		loadMap(selectcouncillers);
@@ -407,6 +456,8 @@ $(function() {
 
 });
 
+
+
 /**
  * Converts an HSL color value to RGB. Conversion formula
  * adapted from http://en.wikipedia.org/wiki/HSL_color_space.
@@ -416,7 +467,7 @@ $(function() {
  * @param   Number  h       The hue
  * @param   Number  s       The saturation
  * @param   Number  l       The lightness
- * @return  Array           The RGB representation
+ * @return  string           The RGB representation
  */
 function hslToRgb(h, s, l) {
 	var r, g, b;
@@ -447,5 +498,4 @@ function hslToRgb(h, s, l) {
 	}
 	var color = [parseFloat(r * 255).toFixed(0), parseFloat(g * 255).toFixed(0), parseFloat(b * 255).toFixed(0)];
 	return "rgb(" + color[0] + "," + color[1] + "," + color[2] + ")";
-
 }

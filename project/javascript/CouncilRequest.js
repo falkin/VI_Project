@@ -9,9 +9,9 @@ function Council() {
 
 	var monthNames = new Array("janvier", "février", "mars", "avril", "mai", "juin", "juillet", "aout", "septembre", "octobre", "novembre", "décembre");
 	var ar = new Array();
-	var conc = new Array();	
+	var conc = new Array();
 	var idLevels;
-	
+
 	conc['CN'] = "Conseil national";
 	conc['BR'] = "Conseil fédéral";
 	conc['BR*'] = "Conseil fédéral";
@@ -82,9 +82,13 @@ function Council() {
 		return this;
 	};
 
-	this.cantonfilter = function(canton) {
-		selectedcouncil = council.filter(function(council) {
-			return council.canton.abbreviation == canton;
+	this.cantonFilter = function(cantonArray) {
+		var selectedCantonsCouncil = council.filter(function(council) {
+			$.each(cantonArray, function(index, value) {
+				if (value == council.canton.abbreviation)
+					return true;
+			});
+			return false;
 		});
 		return this;
 	}
@@ -227,16 +231,16 @@ function Council() {
 		alert("coucou")
 	}
 
-	this.updateMoreInformations = function(idCouncil,idLevel) {
+	this.updateMoreInformations = function(idCouncil, idLevel) {
 		//$(".profileBase").css("opacity",0);
 		idLevels = idLevel;
 		//	searchImage(selectedcouncil[idCouncil].lastName+"+"+selectedcouncil[idCouncil].firstName+"+"+selectedcouncil[idCouncil].party.abbreviation,this);
-		var dateBir= selectedcouncil[idCouncil].birthDate.toString().split("T")[0].split("-");
-		var entry= selectedcouncil[idCouncil].membership.entryDate.toString().split("T")[0].split("-");
-		
-		$(".moreInformation"+idLevel+" .titleName").text(selectedcouncil[idCouncil].lastName+" "+selectedcouncil[idCouncil].firstName);
-		$(".moreInformation"+idLevel+" .birthDate").text(dateBir[2]+" "+monthNames[dateBir[1].replace("0","")-1]+" "+dateBir[0]);
-		if(selectedcouncil[idCouncil].dateOfDeath){
+		var dateBir = selectedcouncil[idCouncil].birthDate.toString().split("T")[0].split("-");
+		var entry = selectedcouncil[idCouncil].membership.entryDate.toString().split("T")[0].split("-");
+
+		$(".moreInformation" + idLevel + " .titleName").text(selectedcouncil[idCouncil].lastName + " " + selectedcouncil[idCouncil].firstName);
+		$(".moreInformation" + idLevel + " .birthDate").text(dateBir[2] + " " + monthNames[dateBir[1].replace("0", "") - 1] + " " + dateBir[0]);
+		if (selectedcouncil[idCouncil].dateOfDeath) {
 
 			var dateDeath = selectedcouncil[idCouncil].birthDate.toString().split("T")[0].split("-");
 			$(".moreInformation" + idLevel + " .dateOfDeath").text(dateDeath[2] + " " + monthNames[dateDeath[1].replace("0", "") - 1] + " " + dateDeath[0]);
@@ -301,7 +305,6 @@ function Council() {
 				newOption.insertAfter('#selectParty option:last-child');
 			}
 		});
-
 	}
 }
 
