@@ -7,6 +7,13 @@ google.load('visualization', '1', {
 // colors for map
 var HUE = 0.5;
 var SATURATION = 0.5;
+var HUE_COMPARE1 = 0.3;
+var SATURATION_COMPARE1 = 0.5;
+var HUE_COMPARE2 = 0.05;
+var SATURATION_COMPARE2 = 0.5;
+
+var compareMode = false;
+var compareData;
 
 var filterListSearch = false;
 var table = null;
@@ -19,7 +26,6 @@ var lenghtTableSelection = 0;
 var tableSelectedListID = 0;
 var selectcouncillers = null;
 var selectedCanton;
-
 
 function displayInstead(tableSelection, data) {
 
@@ -93,20 +99,21 @@ function addLocation(position, nameSelected, data) {
 }
 
 function drawTable(array, refresh) {
-	
+
 	var data = new google.visualization.DataTable();
 
 	data.addColumn('string', '');
 	data.addColumn('string', '');
 	data.addColumn('number', '');
 
+	$(".typeTotal .value").text(array.length + " personnes");
 	var val = new Array();
 	var valSplit = $(".inputePeopleLong").val().split(" ");
 	for (var x = 0; x < valSplit.length; x++) {
 		if (valSplit[x] != "")
 			val[x] = new RegExp(valSplit[x], "i");
 	}
-	if(selectedCanton != null && selectedCanton.length>0){
+	if (selectedCanton != null && selectedCanton.length > 0) {
 		var selectedcouncilarray = new Array();
 		var b = 0;
 		for (var i = 0; i < array.length; i++) {
@@ -119,10 +126,10 @@ function drawTable(array, refresh) {
 				}
 			}
 		}
-		array=selectedcouncilarray;
+		array = selectedcouncilarray;
 		//data.addRows(selectedcouncilarray);
 	}
-	
+
 	if (filterListSearch && $(".inputePeopleLong").val() != "") {
 		var selectedcouncilarray = new Array();
 		var b = 0;
@@ -136,23 +143,21 @@ function drawTable(array, refresh) {
 				}
 			}
 		}
-		//$(".typeTotal .value").text(selectedcouncilarray.length + " personnes");
+
 		//data.addRows(selectedcouncilarray);
-		array=selectedcouncilarray;
+		array = selectedcouncilarray;
 	}
-	singlePersonArray=new Array();
+	singlePersonArray = new Array();
 	$.each(array, function(index, value) {
-		if (index>0 && value[0] == singlePersonArray[singlePersonArray.length-1][0] && value[1] == singlePersonArray[singlePersonArray.length-1][1])
-			singlePersonArray[singlePersonArray.length-1]=value;
-		else{
+		if (index > 0 && value[0] == singlePersonArray[singlePersonArray.length-1][0] && value[1] == singlePersonArray[singlePersonArray.length-1][1])
+			singlePersonArray[singlePersonArray.length - 1] = value;
+		else {
 			singlePersonArray.push(value);
 		}
-	array=singlePersonArray;
+		array = singlePersonArray;
 	});
 	data.addRows(array);
-	if(!(filterListSearch && $(".inputePeopleLong").val() != "") && !(selectedCanton != null && selectedCanton.length>0)) {
-		$(".typeTotal .value").text(array.length + " personnes");
-	}
+
 	if (refresh == 0) {
 		table = new google.visualization.Table(document.getElementById('informationList'));
 
@@ -267,59 +272,119 @@ $(function() {
 			}]
 		},
 		onRegionLabelShow : function(e, el, code) {
-			var region = code.substring(3, 7);
-			var nbpersonne = selectcouncillers[region];
+			var nbpersonne;
+			if (compareMode) {
+				nbpersonne = compareData[code][0];
+			} else {
+				var region = code.substring(3, 7);
+				nbpersonne = selectcouncillers[region];
+			}
 			el.html("<b>" + el.html() + "</b><br/>" + nbpersonne + " personne");
 			if (nbpersonne > 1)
 				el.html(el.html() + "s");
+			if (compareMode) {
+				for (key in compareData[code]) {
+					if (key != 0)
+						el.html(el.html() + "<br/>" + key + " - " + parseFloat(compareData[code][key] * 100).toFixed(1) + "%");
+				}
+			}
 		},
-		onRegionSelected : function(e,code,isSelected,selectedRegionCode){
+		onRegionSelected : function(e, code, isSelected, selectedRegionCode) {
 			$.each(selectedRegionCode, function(index, value) {
-				selectedRegionCode[index]=value.substring(3, 7);
+				selectedRegionCode[index] = value.substring(3, 7);
 			});
-			selectedCanton=selectedRegionCode;
+			selectedCanton = selectedRegionCode;
 			drawTable(councillers.toArray(), 1);
-	
+
 		}
 	});
 
 	function loadMap(countCanton) {
-		var max = 0;
-		$.each(countCanton, function(index, value) {
-			if (countCanton[index] > max)
-				max = countCanton[index];
-		});
-
-		var colors = {}, key;
-		for (key in map.regions) {
-			var region = key.substring(3, 7);
-			if (!( region in countCanton)) {
-				countCanton[region] = 0;
-			}
-			if (countCanton[region] == 0) {
-				var color = "rgb(200,200,200)";
-			}
-			if (countCanton[region] > 0) {
-				var x = ((-180 * countCanton[region] / max) + 220) / 255;
-				var color = hslToRgb(HUE, SATURATION, x);
-			}
-			colors[key] = color;
-		}
-		var maxcolor = hslToRgb(HUE, SATURATION, (40 / 255));
-		var mediumcolor;
-		if (max > 1)
-			mediumcolor = hslToRgb(HUE, SATURATION, ((-180 * 0.5) + 220) / 255);
-		else
-			mediumcolor = maxcolor;
-		var mincolor = hslToRgb(HUE, SATURATION, ((-180 * 1 / max) + 220) / 255);
-
-		map.series.regions[0].setValues(colors);
-
 		$('.jvectormap-container #legend').remove();
-		if (max > 0)
-			$('.jvectormap-container').append("<div id=\"legend\" style=\"height:50px;width:200px;position:absolute;right:0px;bottom:0px\"><svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\"><defs><linearGradient id=\"grad1\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"0%\"><stop offset=\"0%\" style=\"stop-color:" + mincolor + ";stop-opacity:1\" /><stop offset=\"10%\" style=\"stop-color:" + mincolor + ";stop-opacity:1\" /><stop offset=\"50%\" style=\"stop-color:" + mediumcolor + ";stop-opacity:1\" /><stop offset=\"90%\" style=\"stop-color:" + maxcolor + ";stop-opacity:1\"/><stop offset=\"100%\" style=\"stop-color:" + maxcolor + ";stop-opacity:1\"/></linearGradient></defs><text style=\"text-anchor:middle\" fill=\"black\" font-size=\"8\" font-family=\"Verdana\" x=\"90\" y=\"10\">Nombre de personnes</text><rect width=\"180\" height=\"15\" fill=\"url(#grad1)\" x=\"2\" y=\"15\"/><text fill=\"black\" font-size=\"8\" font-family=\"Verdana\" y=\"40\">1</text><text style=\"text-anchor:middle\" fill=\"black\" font-size=\"8\" font-family=\"Verdana\" x=\"180\" y=\"40\">" + max + "</text></svg></div>");
-		//$('#map svg').append('<defs><linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" style="stop-color:rgb(202, 235, 237);stop-opacity:1" /><stop offset="100%" style="stop-color:rgb(19,57,60);stop-opacity:1"/></linearGradient></defs><rect width="200" height="15" fill="url(#grad1)" x="2"/><text fill="black" font-size="8" font-family="Verdana" y="25">1</text><text style="text-anchor:middle" fill="black" font-size="8" font-family="Verdana" x="200"y="25"></text>');
-	}
+
+		if (compareMode) {
+			compareData = {};
+			var colors = {}, key, color;
+			for (key in map.regions) {
+				compareData[key] = {};
+				var region = key.substring(3, 7);
+				var totalForRegion = 0;
+				if ( region in countCanton) {
+					var party;
+					for (party in countCanton[region]) {
+						totalForRegion += countCanton[region][party];
+					}
+					for (party in countCanton[region]) {
+						compareData[key][party] = countCanton[region][party] / totalForRegion;
+					}
+					var percent = countCanton[region][party] / totalForRegion;
+					if (percent == 0.5) {
+						color = "rgb(100,100,100)";
+					}
+					if (percent < 0.5) {
+						var x = ((360 * percent) + 40) / 255;
+						color = hslToRgb(HUE_COMPARE1, SATURATION_COMPARE1, x);
+					} else if (percent > 0.5) {
+						var x = ((360 * (1.0 - percent)) + 40) / 255;
+						color = hslToRgb(HUE_COMPARE2, SATURATION_COMPARE2, x);
+					}
+				} else {
+					color = "rgb(200,200,200)";
+				}
+				colors[key] = color;
+				compareData[key][0] = totalForRegion;
+			}
+			var key1 = council.getParty(0);
+			var key2 = council.getParty(1);
+			
+			var x = 40.0 / 255;
+			var mincolor=hslToRgb(HUE_COMPARE1, SATURATION_COMPARE1, 1 - x);
+			var mincolor2=hslToRgb(HUE_COMPARE2, SATURATION_COMPARE1, 1 - x);
+			x = 130.0 / 255;
+			var medcolor=hslToRgb(HUE_COMPARE1, SATURATION_COMPARE1, 1 - x);
+			var medcolor2=hslToRgb(HUE_COMPARE2, SATURATION_COMPARE1, 1 - x);
+			x = 220.0 / 255;
+			var maxcolor=hslToRgb(HUE_COMPARE1, SATURATION_COMPARE1, 1 - x);
+			var maxcolor2=hslToRgb(HUE_COMPARE2, SATURATION_COMPARE1, 1 - x);
+			var mediumcolor = 'rgb(100,100,100)';
+			$('.jvectormap-container').append("<div id=\"legend\" style=\"height:50px;width:210px;position:absolute;right:0px;bottom:-10px\"><svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\"><defs><linearGradient id=\"grad1\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"0%\"><stop offset=\"0%\" style=\"stop-color:" + maxcolor + ";stop-opacity:1\" /><stop offset=\"10%\" style=\"stop-color:" + maxcolor + ";stop-opacity:1\" /><stop offset=\"25%\" style=\"stop-color:" + medcolor + ";stop-opacity:1\" /><stop offset=\"49%\" style=\"stop-color:" + mincolor + ";stop-opacity:1\" /><stop offset=\"50%\" style=\"stop-color:" + mediumcolor + ";stop-opacity:1\" /><stop offset=\"51%\" style=\"stop-color:" + mincolor2 + ";stop-opacity:1\" /><stop offset=\"75%\" style=\"stop-color:" + medcolor2 + ";stop-opacity:1\" /><stop offset=\"90%\" style=\"stop-color:" + maxcolor2 + ";stop-opacity:1\"/><stop offset=\"100%\" style=\"stop-color:" + maxcolor2 + ";stop-opacity:1\"/></linearGradient></defs><rect width=\"180\" height=\"15\" fill=\"url(#grad1)\" x=\"12\" y=\"15\"/><text style=\"text-anchor:middle\" fill=\"black\" font-size=\"8\" font-family=\"Verdana\" x=\"16\" y=\"40\">"+"100%"+"</text><text style=\"text-anchor:middle\" fill=\"black\" font-size=\"8\" font-family=\"Verdana\" x=\"60\" y=\"40\">"+key1+"</text><text style=\"text-anchor:middle\" fill=\"black\" font-size=\"8\" font-family=\"Verdana\" x=\"103\" y=\"40\">"+"50%"+"</text><text style=\"text-anchor:middle\" fill=\"black\" font-size=\"8\" font-family=\"Verdana\" x=\"150\" y=\"40\">"+key2+"</text><text style=\"text-anchor:middle\" fill=\"black\" font-size=\"8\" font-family=\"Verdana\" x=\"196\" y=\"40\">"+"100%"+"</text></svg></div>");
+
+
+		} else {
+			var max = 0;
+			$.each(countCanton, function(index, value) {
+				if (countCanton[index] > max)
+					max = countCanton[index];
+			});
+
+			var colors = {}, key, color;
+			for (key in map.regions) {
+				var region = key.substring(3, 7);
+				if (!( region in countCanton)) {
+					countCanton[region] = 0;
+				}
+				if (countCanton[region] == 0) {
+					color = "rgb(200,200,200)";
+				}
+				if (countCanton[region] > 0) {
+					var x = ((-180 * countCanton[region] / max) + 220) / 255;
+					color = hslToRgb(HUE, SATURATION, x);
+				}
+				colors[key] = color;
+			}
+			var maxcolor = hslToRgb(HUE, SATURATION, (40 / 255));
+			var mediumcolor;
+			if (max > 1)
+				mediumcolor = hslToRgb(HUE, SATURATION, ((-180 * 0.5) + 220) / 255);
+			else
+				mediumcolor = maxcolor;
+			var mincolor = hslToRgb(HUE, SATURATION, ((-180 * 1 / max) + 220) / 255);
+			if (max > 0)
+			$('.jvectormap-container').append("<div id=\"legend\" style=\"height:50px;width:200px;position:absolute;right:0px;bottom:-10px\"><svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\"><defs><linearGradient id=\"grad1\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"0%\"><stop offset=\"0%\" style=\"stop-color:" + mincolor + ";stop-opacity:1\" /><stop offset=\"10%\" style=\"stop-color:" + mincolor + ";stop-opacity:1\" /><stop offset=\"50%\" style=\"stop-color:" + mediumcolor + ";stop-opacity:1\" /><stop offset=\"90%\" style=\"stop-color:" + maxcolor + ";stop-opacity:1\"/><stop offset=\"100%\" style=\"stop-color:" + maxcolor + ";stop-opacity:1\"/></linearGradient></defs><text style=\"text-anchor:middle\" fill=\"black\" font-size=\"8\" font-family=\"Verdana\" x=\"90\" y=\"10\">Nombre de personnes</text><rect width=\"180\" height=\"15\" fill=\"url(#grad1)\" x=\"2\" y=\"15\"/><text fill=\"black\" font-size=\"8\" font-family=\"Verdana\" y=\"40\">1</text><text style=\"text-anchor:middle\" fill=\"black\" font-size=\"8\" font-family=\"Verdana\" x=\"180\" y=\"40\">" + max + "</text></svg></div>");
+		
+		}
+		map.series.regions[0].setValues(colors);
+		}
 
 	function loadcouncil(councillers, refresh) {
 		var textInfoCouncil = "-";
@@ -366,16 +431,15 @@ $(function() {
 			textInfoCouncil = "Tous";
 		}
 		$(".councilInfo .value").text(textInfoCouncil);
+
 		selectcouncillers = councillers.setCouncil(councilstring).byCanton();
 		drawTable(councillers.toArray(), refresh);
 		loadMap(selectcouncillers);
-
 	}
 
 
 	$("#check").button();
 	$("#format").buttonset();
-	$("#udclogo").load('../img/UDC_fr_pant_5f.svg');
 	council = new Council();
 	var councillers = council.getCouncillers().datefilter();
 	var countCanton = councillers.byCanton();
@@ -408,6 +472,10 @@ $(function() {
 	//selection du parti
 	$(".chzn-select").chosen().change(function() {
 		var str = "-";
+		if ($(".result-selected").children().length > 1)
+			compareMode = true;
+		else
+			compareMode = false;
 		$(".result-selected").each(function() {
 			var parti = $(this).text().split("-");
 			if (str != "-") {
@@ -455,8 +523,6 @@ $(function() {
 	});
 
 });
-
-
 
 /**
  * Converts an HSL color value to RGB. Conversion formula

@@ -164,15 +164,35 @@ function Council() {
 
 	this.byCanton = function() {
 		var countCanton = {};
-		$.each(selectedcouncil, function(index, value) {
+		if (partiarray.length > 1) {
+			$.each(selectedcouncil, function(index, value) {
 			if (value.canton.abbreviation in countCanton)
-				countCanton[value.canton.abbreviation]++;
-			else
-				countCanton[value.canton.abbreviation] = 1;
+				countCanton[value.canton.abbreviation][value.party.abbreviation]++;
+			else{
+				if(!(value.canton.abbreviation in countCanton)){
+					countCanton[value.canton.abbreviation]={};
+					$.each(partiarray,function(index,val){
+						countCanton[value.canton.abbreviation][val]=0;
+					});
+				}
+				countCanton[value.canton.abbreviation][value.party.abbreviation] = 1;	
+			}
 		});
+		} else {
+			$.each(selectedcouncil, function(index, value) {
+				if (value.canton.abbreviation in countCanton)
+					countCanton[value.canton.abbreviation]++;
+				else
+					countCanton[value.canton.abbreviation] = 1;
+			});
+		}
 		return countCanton;
 	}
 
+	this.getParty = function(index){
+		return partiarray[index];
+	}
+	
 	this.WomanProportion = function() {
 		var countWomen = {};
 		var countMen = {};
