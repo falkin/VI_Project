@@ -61,6 +61,10 @@ html{
 	vertical-align: top;
 }
 
+#partyGraphe{
+		height:350px;
+}
+
 .resize {
 	  height:-moz-calc(100% - 100px);
 	  height:-webkit-calc(100% - 100px);

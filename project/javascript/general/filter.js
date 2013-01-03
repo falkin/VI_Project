@@ -174,6 +174,7 @@ function initFilter() {
 	$("#Slider1").slider("value","2000","2012");
 	$(".chzn-select").val('').trigger('liszt:updated');
 	$(".partyInfo .value").text("-");
+	initDisplay();
 }
 
 

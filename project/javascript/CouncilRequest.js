@@ -144,6 +144,7 @@ function Council() {
 	}
 
 	this.reload = function() {
+		this.partiarray = {};
 		this.getCouncillers();
 		this.datefilter();
 		this.councilfilter()
@@ -153,10 +154,11 @@ function Council() {
 
 	this.datefilter = function() {
 		selectedcouncil = selectedcouncil.filter(function(council) {
-			if (council.membership.leavingDate == null && dateEnd >= 2012) {
-				return true;
-			}
-			yearE = parseInt(council.membership.leavingDate.substring(0, 4));
+
+			if (council.membership.leavingDate != null)
+				yearE = parseInt(council.membership.leavingDate.substring(0, 4));
+			else
+				yearE = 2012;
 			return yearE >= dateBegin && yearE <= dateEnd;
 		});
 		return this;
@@ -166,18 +168,18 @@ function Council() {
 		var countCanton = {};
 		if (partiarray.length > 1) {
 			$.each(selectedcouncil, function(index, value) {
-			if (value.canton.abbreviation in countCanton)
-				countCanton[value.canton.abbreviation][value.party.abbreviation]++;
-			else{
-				if(!(value.canton.abbreviation in countCanton)){
-					countCanton[value.canton.abbreviation]={};
-					$.each(partiarray,function(index,val){
-						countCanton[value.canton.abbreviation][val]=0;
-					});
+				if (value.canton.abbreviation in countCanton)
+					countCanton[value.canton.abbreviation][value.party.abbreviation]++;
+				else {
+					if (!(value.canton.abbreviation in countCanton)) {
+						countCanton[value.canton.abbreviation] = {};
+						$.each(partiarray, function(index, val) {
+							countCanton[value.canton.abbreviation][val] = 0;
+						});
+					}
+					countCanton[value.canton.abbreviation][value.party.abbreviation] = 1;
 				}
-				countCanton[value.canton.abbreviation][value.party.abbreviation] = 1;	
-			}
-		});
+			});
 		} else {
 			$.each(selectedcouncil, function(index, value) {
 				if (value.canton.abbreviation in countCanton)
@@ -189,25 +191,83 @@ function Council() {
 		return countCanton;
 	}
 
-	this.getParty = function(index){
+	this.getParty = function(index) {
 		return partiarray[index];
 	}
-	
+
+	this.getDateBegin = function() {
+		return dateBegin;
+	}
+
+	this.getDateEnd = function() {
+		return dateEnd;
+	}
+
 	this.WomanProportion = function() {
 		var countWomen = {};
-		var countMen = {};
-
-		$.each(selectedcouncil, function(index, value) {
-			var countTab = value.gender == 'f' ? countWomen : countMen;
-			if (value.canton.abbreviation in countTab)
-				countTab[value.canton.abbreviation]++;
-			else
-				countTab[value.canton.abbreviation] = 1;
+		if (partiarray.length == 0){
+			partiarray={};
+			partiarray[0]="-";
+		}
+		$.each(partiarray, function(index, val) {
+			countWomen[val] = {};
 		});
+		for (var i = dateBegin; i <= dateEnd; i++) {
+			$.each(partiarray, function(index, val) {
+				countWomen[val][i] = {};
+				countWomen[val][i]["Women"] = 0;
+				countWomen[val][i]["Men"] = 0;
+			});
+		}
+		if (partiarray.length > 0 && partiarray[0] != "-") {
+			$.each(selectedcouncil, function(index, value) {
+				var yearE = parseInt(value.membership.entryDate.substring(0, 4));
+				var yearL;
+				if (value.membership.leavingDate != null)
+					yearL = parseInt(value.membership.leavingDate.substring(0, 4));
+				else
+					yearL = 2012;
+				for (var i = yearE; i <= yearL; i++) {
+					if (i < dateBegin)
+						continue;
+					if (value.gender == 'f')
+						countWomen[value.party.abbreviation][i]["Women"]++;
+					else
+						countWomen[value.party.abbreviation][i]["Men"]++;
+				}
+			});
+		}
+		else{
+				$.each(selectedcouncil, function(index, value) {
+				var yearE = parseInt(value.membership.entryDate.substring(0, 4));
+				var yearL;
+				if (value.membership.leavingDate != null)
+					yearL = parseInt(value.membership.leavingDate.substring(0, 4));
+				else
+					yearL = 2012;
+				for (var i = yearE; i <= yearL; i++) {
+					if (i < dateBegin)
+						continue;
+					if (value.gender == 'f')
+						countWomen["-"][i]["Women"]++;
+					else
+						countWomen["-"][i]["Men"]++;
+				}
+			});
+		}
+		for (var i = dateBegin; i <= dateEnd; i++) {
 
-		$.each(countWomen, function(index, value) {
-			countWomen[index] = countWomen[index] / countMen[index];
-		});
+			$.each(partiarray, function(index, val) {
+				if (countWomen[val][i]["Men"] == 0) {
+					if (countWomen[val][i]["Women"] == 0)
+						countWomen[val][i] = 0;
+					else
+						countWomen[val][i] = 1;
+				} else
+					countWomen[val][i] = countWomen[val][i]["Women"] / (countWomen[val][i]["Women"] + countWomen[val][i]["Men"]);
+			});
+		}
+
 		return countWomen;
 	}
 
