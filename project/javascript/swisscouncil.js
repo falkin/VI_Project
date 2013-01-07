@@ -12,12 +12,14 @@ function drawChart() {
 		var max = 0;
 		var tab = council.WomanProportion();
 		var chartArray = new Array();
-		chartArray.push(['Année']);
+		var data = new google.visualization.DataTable();
+		data.addColumn('number', 'Année');
 		for (party in tab) {
 			if (party == "-")
-				chartArray[0].push("Tous les partis");
+				data.addColumn('number', 'Tous les partis');
 			else
-				chartArray[0].push(party);
+				data.addColumn('number', party);
+			data.addColumn({type:'string', role:'tooltip'});	
 		}
 		var dateBegin = council.getDateBegin();
 		if (dateBegin < VOTEFEMME)
@@ -31,10 +33,13 @@ function drawChart() {
 				if (value > max)
 					max = value;
 				subTab.push(value);
+				subTab.push(i+" - "+parseFloat(value*100).toFixed(2)+"% de femmes");
 			}
 			chartArray.push(subTab);
 		}
-		var data = google.visualization.arrayToDataTable(chartArray);
+		data.addRows(chartArray);
+		
+		//var data = google.visualization.arrayToDataTable(d);
 		var colorarray = new Array();
 		if (compareMode) {
 			colorarray.push(hslToRgb(HUE_COMPARE1, SATURATION_COMPARE1, 1 - (220.0 / 255)));
@@ -62,6 +67,7 @@ function drawChart() {
 			vAxis : {
 				format : '###,##%',
 				title : "pourcentage [%]",
+				minValue : 0,
 				maxValue : max > 0.4 ? max : 0.4
 			}
 		};
@@ -570,6 +576,12 @@ $(function() {
 					str = parti[0].slice(0, -1);
 				}
 			});
+			if($(".result-selected").children().length == 2)
+			$('.typeInfo .value').text("Comparaison de partis");
+			else if($(".result-selected").children().length == 1)
+				$('.typeInfo .value').text("Statistiques du parti");
+			else if($(".result-selected").children().length == 0)
+				$('.typeInfo .value').text("Statistiques de tous les partis");
 			$(".partyInfo .value").text(str);
 			selectcouncillers = councillers.setParty(str).byCanton();
 			drawTable(councillers.toArray(), 1);
